@@ -4,7 +4,13 @@ module.exports.list = async (req, res) => {
   const tourList = await Tour.find({});
 
   res.render("client/pages/tour-list", {
-    pageTitle: "Danh sach tour",
+    pageTitle: "Danh sách Tour",
     tourList: tourList,
+  });
+}
+
+module.exports.detail = async (req, res) => {
+  res.render("client/pages/tour-detail", {
+    pageTitle: "Chi tiết Tour",
   });
 }

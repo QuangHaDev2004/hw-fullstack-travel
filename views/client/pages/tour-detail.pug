@@ -1,0 +1,311 @@
+extends ../layouts/default.pug
+include ../mixins/box-breadcumb.pug
+
+block main
+  // Box Breadcumb
+  +box-breadcumb()
+  // End Box Breadcumb
+
+  // Section 10
+  .section-10
+    .container
+      .inner-wrap
+        .inner-left
+          .box-images(
+            data-aos-delay="200" 
+            data-aos-duration="800" 
+            data-aos="fade-up"
+            )
+            .inner-image-main
+              .swiper.swiper-box-images-main
+                .swiper-wrapper
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/vinh-ha-long.jpg"
+                        )
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/dao-phu-quoc.jpg"
+                        )
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/vinh-ha-long-2.jpg"
+                        )
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/vung-tau-2.jpeg"
+                        )
+            .inner-image-thumb
+              .swiper.swiper-box-images-thumb
+                .swiper-wrapper
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/vinh-ha-long.jpg"
+                        )
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/dao-phu-quoc.jpg"
+                        )
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/vinh-ha-long-2.jpg"
+                        )
+                  .swiper-slide
+                    .inner-image
+                      img(
+                        alt="" 
+                        src="/assets/images/vung-tau-2.jpeg"
+                        )
+          .box-tour-info(
+            data-aos-delay="400" 
+            data-aos-duration="800" 
+            data-aos="fade-up"
+            )
+            .inner-title Thông Tin Tour
+            .inner-content
+              p
+                | Nói về dịch vụ, chắc chắn rồi, với một tiêu chí của một khách sạn 5 sao đẳng cấp, mình tin rằng
+                |   Indochine Palace đủ để cho bạn đánh giá 6 sao. Từ nhà hàng, cà phê, đến trung tâm thể dục thể thao hiện
+                |   đại đến Spa, xông hơi… tất tần tật các dịch vụ mà bạn mong muốn đều có ở đây.. Từ nhà hàng, cà phê, đến
+                |   trung tâm thể dục thể thao hiện đại đến Spa, xông hơi… tất tần tật các dịch vụ mà bạn mong muốn đều có ở
+                |   đây. . Từ nhà hàng, cà phê, đến trung tâm thể dục thể thao hiện đại đến Spa, xông hơi…
+              img(
+                alt="" 
+                src="/assets/images/ho-guom.jpg"
+                )
+              p
+                | Không chỉ dừng lại ở đó, đội ngũ nhân viên cũng là một điểm cộng lớn – luôn tận tình, chuyên nghiệp và sẵn sàng hỗ trợ bạn 24/7. Dù là một lời chào buổi sáng hay một ly nước chanh mát lạnh sau khi tập gym, mọi thứ đều được chuẩn bị một cách chỉn chu khiến bạn cảm thấy mình thực sự được trân trọng.
+              p
+                | Nếu bạn đang tìm một nơi vừa để nghỉ dưỡng, vừa để tận hưởng trọn vẹn những khoảnh khắc thư thái và đẳng cấp, thì Indochine Palace chắc chắn là một lựa chọn không thể hoàn hảo hơn.
+            .inner-read-more
+              button.button-outline Xem tất cả
+          .box-tour-schedule(
+            data-aos-delay="600" 
+            data-aos-duration="800" 
+            data-aos="fade-up"
+            )
+            .inner-title-main Lịch Trình Tour
+            .inner-list
+              .inner-line
+              .inner-item
+                .inner-dot
+                .inner-title NGÀY 1 | TP.HCM – THỦ ĐÔ HÀ NỘI
+                .inner-content
+                  p
+                    b Sáng
+                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
+                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
+                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
+                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
+                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
+                    br
+                    b Chiều
+                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
+                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
+                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
+                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
+                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
+                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
+                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
+                    |   Di sản Tư liệu Thế giới.
+                  img(
+                    alt="" 
+                    src="/assets/images/lang-bac.jpg"
+                    )
+                  p
+                    b Tối
+                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
+                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
+                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
+                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
+              .inner-item
+                .inner-dot
+                .inner-title NGÀY 2 | TP.HCM – THỦ ĐÔ HÀ NỘI
+                .inner-content
+                  p
+                    b Sáng
+                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
+                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
+                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
+                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
+                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
+                    br
+                    b Chiều
+                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
+                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
+                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
+                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
+                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
+                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
+                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
+                    |   Di sản Tư liệu Thế giới.
+                  img(
+                    alt="" 
+                    src="/assets/images/thai-nguyen.jpg"
+                    )
+                  p
+                    b Tối
+                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
+                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
+                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
+                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
+              .inner-item
+                .inner-dot
+                .inner-title NGÀY 3 | TP.HCM – THỦ ĐÔ HÀ NỘI
+                .inner-content
+                  p
+                    b Sáng
+                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
+                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
+                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
+                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
+                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
+                    br
+                    b Chiều
+                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
+                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
+                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
+                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
+                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
+                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
+                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
+                    |   Di sản Tư liệu Thế giới.
+                  img(
+                    alt="" 
+                    src="/assets/images/hai-phong.jpg"
+                    )
+                  p
+                    b Tối
+                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
+                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
+                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
+                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
+              .inner-item
+                .inner-dot
+                .inner-title NGÀY 4 | TP.HCM – THỦ ĐÔ HÀ NỘI
+                .inner-content
+                  p
+                    b Sáng
+                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
+                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
+                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
+                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
+                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
+                    br
+                    b Chiều
+                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
+                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
+                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
+                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
+                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
+                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
+                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
+                    |   Di sản Tư liệu Thế giới.
+                  img(
+                    alt="" 
+                    src="/assets/images/cao-bang.jpg"
+                    )
+                  p
+                    b Tối
+                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
+                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
+                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
+                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
+        .inner-right(
+          data-aos-delay="450" 
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          )
+          .box-tour-detail
+            .inner-title-main Chuyến Đi Của Bạn
+            .inner-product
+              .inner-image
+                img(
+                  alt="" 
+                  src="/assets/images/image-s10.jpg"
+                  )
+              .inner-info
+                .inner-title Hà Nội - Ninh Bình - Hạ Long - Yên Tử - Sapa | 6N5D
+                .inner-rating
+                  .inner-stars
+                    i.fa-solid.fa-star
+                    i.fa-solid.fa-star
+                    i.fa-solid.fa-star
+                    i.fa-solid.fa-star
+                    i.fa-regular.fa-star
+                  .inner-number 500 lượt đánh giá
+            .inner-meta
+              .inner-item
+                i.fa-solid.fa-ticket-simple
+                span Mã Tour:
+                b 28T00001
+              .inner-item
+                i.fa-solid.fa-calendar-days
+                span Thời gian:
+                b 6 ngày 5 dêm
+              .inner-item
+                i.fa-solid.fa-car
+                span Phương tiện:
+                b Ô tô 45 chỗ
+              .inner-item
+                i.fa-solid.fa-calendar-days
+                span Ngày khởi hành:
+                b 17/03/2025
+            .inner-group
+              label.inner-label(for="#inner-label") Khởi Hành Tại:
+              select(
+                id="#inner-label" 
+                name=""
+                )
+                option(value="") Hà Nội
+                option(value="") Đà Nẵng
+                option(value="") Nha Trang
+            .inner-group
+              label.inner-label Số Lượng Hành Khách
+              .inner-list
+                .inner-item
+                  .inner-item-label Người lớn:
+                  input(
+                    value="1" 
+                    type="number"
+                    )
+                  .inner-price
+                    | 1 x
+                    span 10.000.000
+                .inner-item
+                  .inner-item-label Trẻ em:
+                  input(
+                    value="0" 
+                    type="number"
+                    )
+                  .inner-price
+                    | 0 x
+                    span 7.990.000
+                .inner-item
+                  .inner-item-label Em bé:
+                  input(
+                    value="0" 
+                    type="number"
+                    )
+                  .inner-price
+                    | 0 x
+                    span 5.990.000
+            .inner-total
+              .inner-label Tổng cộng:
+              .inner-price 10.000.000 đ
+            button.inner-button-add-cart Thêm Vào Giỏ Hàng
+  // End Section 10

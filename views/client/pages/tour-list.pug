@@ -1,8 +1,140 @@
 extends ../layouts/default.pug
+include ../mixins/box-breadcumb.pug
+include ../mixins/product-item.pug
 
 block main 
-  h1 #{pageTitle}
+  // Box Breadcumb
+  +box-breadcumb()
+  // End Box Breadcumb
 
-  ul 
-    each item in tourList
-      li #{item.name}, Phương tiện: #{item.vehicle}
+  // Section 9
+  .section-9
+    .container
+      .inner-wrap
+        .inner-left(
+          data-aos-delay="200" 
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          )
+          .box-filter
+            .inner-head
+              .inner-title Bộ Lọc
+              i.fa-solid.fa-filter
+            .inner-body
+              .inner-group
+                .inner-label Điểm đi
+                select(name="")
+                  option(value="") -- Chọn điểm đi --
+                  option(value="") Hà Nội
+                  option(value="") Đà Nẵng
+                  option(value="") Nha Trang
+              .inner-group
+                .inner-label Điểm đến
+                select(name="")
+                  option(value="") -- Chọn điểm đến --
+                  option(value="") Hà Nội
+                  option(value="") Đà Nẵng
+                  option(value="") Nha Trang
+              .inner-group
+                .inner-label Ngày khởi hành
+                input(
+                  name="" 
+                  type="date"
+                  )
+              .inner-group
+                .inner-label Số Lượng Hành Khách
+                .inner-input-list
+                  .inner-input-item
+                    .inner-label Người lớn:
+                    input(
+                      value="0" 
+                      type="number"
+                      )
+                  .inner-input-item
+                    .inner-label Trẻ em:
+                    input(
+                      value="0" 
+                      type="number"
+                      )
+                  .inner-input-item
+                    .inner-label Em bé:
+                    input(
+                      value="0" 
+                      type="number"
+                      )
+              .inner-group
+                .inner-label Mức giá
+                select(name="")
+                  option(value="") -- Chọn khoảng giá --
+                  option(value="") Dưới 1tr
+                  option(value="") Từ 1tr đến 3tr
+                  option(value="") Từ 3tr đến 6tr
+                  option(value="") Từ 6tr đến 10tr
+                  option(value="") Trên 10tr
+              .inner-group
+                button.button-filter Áp Dụng
+          .inner-overlay
+        .inner-right
+          .inner-info(
+            data-aos-delay="200" 
+            data-aos-duration="800" 
+            data-aos="fade-up"
+            )
+            h2.inner-title Tour Nước Ngoài
+            p.inner-desc
+              | Du lịch Châu Á: là châu lục lớn và đông dân nhất thế giới. Châu Á cũng có nhiều danh
+              |   lam thắng cảnh đẹp tại một số quốc gia như Hàn Quốc, Nhật Bản, Trung Quốc, Việt Nam,... và VK Travel là
+              |   nhà tổ chức du lịch chuyên nghiệp hàng đầu Châu Á, đã 5 lần liên tiếp nhận giải TTG Travel Awards. Hãy
+              |   cùng 28.Travel du lịch Châu Á để tận hưởng những dịch vụ tốt nhất.
+          .inner-info-2(
+            data-aos-delay="400" 
+            data-aos-duration="800" 
+            data-aos="fade-up"
+            )
+            .inner-sort
+              .inner-label Sắp xếp :
+              button.inner-button
+                | Giá tăng dần
+                i.fa-solid.fa-square-caret-up
+              button.inner-button
+                | Giá giảm dần
+                i.fa-solid.fa-square-caret-down
+              button.inner-button.active
+                | Khuyến mãi hot
+                i.fa-solid.fa-tag
+              button.inner-button
+                | Xem nhiều
+                i.fa-solid.fa-eye
+            .inner-total
+              | Tất cả:
+              b 101 Tour
+            .inner-filter-mobile
+              .inner-title Bộ lọc
+              i.fa-solid.fa-filter
+          .inner-list-tour(
+            data-aos-delay="600" 
+            data-aos-duration="800" 
+            data-aos="fade-up"
+            )
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+            +product-item()
+          .box-pagination
+            button
+              i.fa-solid.fa-angles-left
+            button.active 1
+            button 2
+            button 3
+            button 4
+            button
+              i.fa-solid.fa-angles-right
+  // Section 9

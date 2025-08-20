@@ -1,5 +1,5 @@
 module.exports.home = (req, res) => {
   res.render("client/pages/home", {
-    pageTitle: "Trang chu",
+    pageTitle: "28Travel - Trang chủ",
   });
 };
