@@ -1,4 +1,394 @@
 extends ../layouts/default.pug
+include ../mixins/product-item.pug
 
 block main 
-  h1 #{pageTitle}
+  // Section 1
+  .section-1
+    .container
+      .inner-wrap
+        h1.inner-title(
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          ) Du lịch Châu Á - Khám phá Mỹ, Úc, Âu Đi nơi đâu bạn muốn
+        p.inner-desc(
+          data-aos-delay="200" 
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          )
+          | "Tận hưởng những hành trình tuyệt vời, khám phá nền văn hóa đa dạng,
+          |   thắng cảnh hùng vĩ và ẩm thực đặc sắc tại mọi điểm đến trên thế
+          |   giới!"
+        form.inner-form(action="")
+          .inner-box.inner-address
+            .inner-input-group
+              img.inner-icon(
+                alt="" 
+                src="/assets/images/address.svg"
+                )
+              input.inner-input(
+                placeholder="Bạn muốn đi đâu?" 
+                type="text"
+                )
+              i.fa-solid.fa-angle-down.inner-down
+            .inner-suggest
+              .inner-suggest-title
+                i.fa-solid.fa-location-dot
+                | Địa Điểm Hot
+              .inner-suggest-list
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-1.jpg"
+                      )
+                  .inner-content
+                    .inner-title Nhật Bản
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-2.jpg"
+                      )
+                  .inner-content
+                    .inner-title Phú Quốc
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-3.jpg"
+                      )
+                  .inner-content
+                    .inner-title Singapore
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-4.jpg"
+                      )
+                  .inner-content
+                    .inner-title Hà Nội
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-5.jpg"
+                      )
+                  .inner-content
+                    .inner-title Thái Lan
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-6.jpg"
+                      )
+                  .inner-content
+                    .inner-title Sapa
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-7.jpg"
+                      )
+                  .inner-content
+                    .inner-title Bali
+                    .inner-tour 50 tours
+                .inner-item
+                  .inner-image
+                    img(
+                      alt="" 
+                      src="/assets/images/suggest-8.jpg"
+                      )
+                  .inner-content
+                    .inner-title Nha Trang
+                    .inner-tour 50 tours
+          .inner-box.inner-user
+            .inner-input-group
+              img.inner-icon(
+                alt="" 
+                src="/assets/images/user.svg"
+                )
+              input.inner-input(
+                placeholder="Số lượng" 
+                type="text"
+                )
+              i.fa-solid.fa-angle-down.inner-down
+            .inner-quantity
+              .inner-item
+                .inner-label Người lớn
+                .inner-count
+                  span.inner-down -
+                  span.inner-number 1
+                  span.inner-up +
+              .inner-item
+                .inner-label Trẻ em
+                .inner-count
+                  span.inner-down -
+                  span.inner-number 1
+                  span.inner-up +
+              .inner-item
+                .inner-label Em bé
+                .inner-count
+                  span.inner-down -
+                  span.inner-number 1
+                  span.inner-up +
+          .inner-box.inner-calendar
+            .inner-input-group
+              img.inner-icon(
+                alt="" 
+                src="/assets/images/calendar.svg"
+                )
+              input.inner-input(
+                placeholder="Lịch khởi hành" 
+                type="text"
+                )
+              i.fa-solid.fa-angle-down.inner-down
+          button.inner-button
+            i.fa-solid.fa-magnifying-glass
+            | Tìm Kiếm
+  // End Section 1
+  // Section 2
+  .section-2(
+    data-aos-delay="200" 
+    data-aos-duration="800" 
+    data-aos="fade-up"
+    )
+    .container
+      .inner-wrap
+        .inner-info
+          h2.inner-title ƯU ĐÃI 2025 TOUR GIỜ CHÓT
+          p.inner-desc
+            | Cơ hội săn vé giá rẻ, khám phá thế giới với mức giá ưu đãi chưa
+            |   từng có!
+          .inner-clock-title Kết thúc sau
+          .inner-clock-number(clock-expire="2025-12-01T00:00:00")
+            .inner-item
+              .inner-number 00
+              .inner-label Ngày
+            .inner-item
+              .inner-number 00
+              .inner-label Giờ
+            .inner-item
+              .inner-number 00
+              .inner-label Phút
+            .inner-item
+              .inner-number 00
+              .inner-label Giây
+          .inner-discount-title GIẢM ĐẾN
+          .inner-discount-price
+            | 990.000
+            span.inner-unit đ
+        .inner-list
+          .swiper.swiper-section-2
+            .swiper-wrapper
+              .swiper-slide
+                +product-item()
+              .swiper-slide
+                +product-item()
+              .swiper-slide
+                +product-item()
+              .swiper-slide
+                +product-item()
+              .swiper-slide
+                +product-item()
+              .swiper-slide
+                +product-item()
+  // End Section 2
+  // Section 3
+  .section-3
+    .container
+      h2.box-title(
+        data-aos-delay="200" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Khuyến Mại Bùng Nổ - Đánh Tan Nóng Bức
+      .inner-wrap(
+        data-aos-delay="400" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        .swiper.swiper-section-3
+          .swiper-wrapper
+            .swiper-slide
+              .inner-item
+                a(href="")
+                  img(
+                    alt="" 
+                    src="/assets/images/section-3-1.jpg"
+                    )
+            .swiper-slide
+              .inner-item
+                a(href="")
+                  img(
+                    alt="" 
+                    src="/assets/images/section-3-2.jpg"
+                    )
+            .swiper-slide
+              .inner-item
+                a(href="")
+                  img(
+                    alt="" 
+                    src="/assets/images/section-3-3.jpg"
+                    )
+            .swiper-slide
+              .inner-item
+                a(href="")
+                  img(
+                    alt="" 
+                    src="/assets/images/section-3-4.webp"
+                    )
+          .swiper-pagination
+  // End Section 3
+  // Section 4
+  .section-4
+    .container
+      h2.box-title(
+        data-aos-delay="200" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Tour Trong Nước
+      .inner-wrap(
+        data-aos-delay="400" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+      .inner-button
+        a.button-outline(href="danh-sach-tour.html") Xem tất cả
+  // End Section 4
+  // Section 5
+  .section-5(
+    data-aos-delay="200" 
+    data-aos-duration="800" 
+    data-aos="fade-up"
+    )
+    .container
+      .inner-image
+        a(href="")
+          img(
+            alt="" 
+            src="/assets/images/section-5.jpg"
+            )
+  // End Section 5
+  // Section 4
+  .section-4
+    .container
+      h2.box-title(
+        data-aos-delay="200" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Tour Nước Ngoài
+      .inner-wrap(
+        data-aos-delay="400" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+        +product-item()
+      .inner-button
+        a.button-outline(href="danh-sach-tour.html") Xem tất cả
+  // End Section 4
+  // Section 5
+  .section-5(
+    data-aos-delay="200" 
+    data-aos-duration="800" 
+    data-aos="fade-up"
+    )
+    .container
+      .inner-image
+        a(href="")
+          img(
+            alt="" 
+            src="/assets/images/section-7.jpg"
+            )
+  // End Section 5
+  // Section 8
+  .section-8
+    .container
+      h2.box-title(
+        data-aos-delay="200" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Tin Tức Mới
+      .inner-wrap(
+        data-aos-delay="400" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        .blog-item
+          a(href="")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/section-8-1.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2025
+              h3.inner-title Homestay “cổ tích” giữa Đà Lạt mộng mơ
+        .blog-item-2
+          a(href="")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/section-8-main.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2025
+              h3.inner-title Top 5 điểm check in độc đáo tại Singapore
+              p.inner-desc
+                | Nếu bạn nghĩ du lịch Singapore rất nhàm chán vì chỉ mãi quanh
+                |   quẩn trong những khối bê tông vô cảm thì bạn “chắc chưa?”. Tuy
+                |   đảo quốc Sư Tử không phải là một quốc gia rộng lớn nhưng các
+                |   địa điểm du lịch tại Singapore chưa từng đánh mất sức hút đối
+                |   với cộng đồng xê dịch quốc tế.
+        .blog-item
+          a(href="")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/section-8-2.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2025
+              h3.inner-title Đặc sản không thể bỏ qua khi đến với Đà Nẵng – Hội An
+        .blog-item
+          a(href="")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/section-8-3.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2025
+              h3.inner-title Đảo Phú Quý Bình Thuận hot trend năm 2025
+        .blog-item
+          a(href="")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/section-8-4.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2025
+              h3.inner-title
+                | Trekking cắm trại tại Đà Lạt- Cảm nhận Đà Lạt qua từng bước
+                |   chân
+  // End Section 8

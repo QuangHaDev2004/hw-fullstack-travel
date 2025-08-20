@@ -1,8 +1,43 @@
 doctype html 
 html
   head 
+    meta(charset="UTF-8")
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    link(
+      href="assets/images/airplane.png" 
+      type="image/x-icon" 
+      rel="icon"
+      )
+    link(
+      referrerpolicy="no-referrer" 
+      crossorigin="anonymous" 
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+      rel="stylesheet"
+      )
+    link(
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" 
+      rel="stylesheet"
+      )
+    link(
+      referrerpolicy="no-referrer" 
+      crossorigin="anonymous" 
+      integrity="sha512-vRbASHFS0JiM4xwX/iqr9mrD/pXGnOP2CLdmXSSNAjLdgQVFyt4qI+BIoUW7/81uSuKRj0cWv3Dov8vVQOTHLw==" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.css" 
+      rel="stylesheet"
+      )
+    link(
+      rel="stylesheet" 
+      href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+      )
+    link(
+      href="/assets/css/style.css" 
+      rel="stylesheet"
+      )
     title #{pageTitle}
-    link(rel="stylesheet", href="/assets/css/style.css")
 
   body 
     include ../partials/header.pug
@@ -11,4 +46,15 @@ html
 
     include ../partials/footer.pug
 
-    script(src="/assets/js/script.js") 
+    include ../partials/box-socials.pug
+
+    script(src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js")
+    script(src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js")
+    script(
+      referrerpolicy="no-referrer" 
+      crossorigin="anonymous" 
+      integrity="sha512-lZD0JiwhtP4UkFD1mc96NiTZ14L7MjyX5Khk8PMxJszXMLvu7kjq1sp4bb0tcL6MY+/4sIuiUxubOqoueHrW4w==" 
+      src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.js"
+      )
+    script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
+    script(src="/assets/js/script.js")
