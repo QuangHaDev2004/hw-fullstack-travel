@@ -1,0 +1,42 @@
+extends ../layouts/default.pug
+
+block main 
+  h2.box-title Tạo nhóm quyền
+
+  //- Section 8
+  .section-8 
+    form(action="" id="role-create-form")
+      .inner-group 
+        label(for="name" class="inner-label") Tên nhóm quyền
+        input(type="text" id="name" name="name")
+      .inner-group 
+        label(for="description" class="inner-label") Mô tả ngắn
+        input(type="text" id="description" name="description")
+      .inner-group 
+        label(class="inner-label") Phân quyền
+        .inner-checkbox-list 
+          .inner-checkbox-item 
+            input(type="checkbox" class="custom-check" id="location1" name="locations")
+            label(for="location1" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+            label(for="location1" class="inner-locations") Xem trang Tổng quan
+          .inner-checkbox-item 
+            input(type="checkbox" class="custom-check" id="location2" name="locations")
+            label(for="location2" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+            label(for="location2" class="inner-locations") Xem danh mục
+          .inner-checkbox-item 
+            input(type="checkbox" class="custom-check" id="location3" name="locations")
+            label(for="location3" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+            label(for="location3" class="inner-locations") Tạo danh mục
+          .inner-checkbox-item 
+            input(type="checkbox" class="custom-check" id="location4" name="locations")
+            label(for="location4" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+            label(for="location4" class="inner-locations") Sửa danh mục
+          .inner-checkbox-item 
+            input(type="checkbox" class="custom-check" id="location5" name="locations")
+            label(for="location5" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+            label(for="location5" class="inner-locations") Xóa danh mục
+      .inner-button-2.inner-two-col 
+        button Tạo mới
+    .inner-back
+      a(href=`/${pathAdmin}/setting/role/list`) Quay lại danh sách 
+  //- End Section 8
