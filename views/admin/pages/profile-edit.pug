@@ -1,0 +1,31 @@
+extends ../layouts/default.pug
+
+block main 
+  h2.box-title Thông tin cá nhân
+
+  //- Section 8
+  .section-8 
+    form(action="" id="profile-edit-form")
+      .inner-group 
+        label(for="name" class="inner-label") Họ tên
+        input(type="text" id="name" name="name")
+      .inner-group 
+        label(for="email" class="inner-label") Email
+        input(type="email" id="email" name="email")
+      .inner-group 
+        label(for="phone" class="inner-label") Số điện thoại
+        input(type="text" id="phone" name="phone")
+      .inner-group 
+        label(for="position" class="inner-label") Chức vụ
+        input(type="text" id="position" name="position")
+      .inner-group 
+        label(for="role" class="inner-label") Nhóm quyền
+        input(type="text" id="role" name="role")
+      .inner-group.inner-two-col
+        label(for="avatar" class="inner-label") Ảnh đại diện
+        input(type="file" id="avatar" accept="image/*" filepond-image)
+      .inner-button-2.inner-two-col 
+        button Cập nhật
+    .inner-back
+      a(href=`/${pathAdmin}/profile/change-password`) Đổi mật khẩu
+  //- End Section 8
