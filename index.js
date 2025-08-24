@@ -18,6 +18,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.locals.pathAdmin = variableConfig.pathAdmin;
 
+// Cho phép gửi dữ liệu lên dạng JSON
+app.use(express.json())
+
 app.use(`/${variableConfig.pathAdmin}`, adminRoutes);
 app.use("/", clientRoutes);
 

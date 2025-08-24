@@ -7,22 +7,22 @@ if (loginForm) {
     .addField("#email", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập email của bạn!"
+        errorMessage: "Vui lòng nhập email của bạn!",
       },
       {
         rule: "email",
-        errorMessage: "Email không đúng định dạng!"
-      }
+        errorMessage: "Email không đúng định dạng!",
+      },
     ])
-    .addField('#password', [
+    .addField("#password", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập mật khẩu!"
+        errorMessage: "Vui lòng nhập mật khẩu!",
       },
       {
         rule: "minLength",
         value: 8,
-        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!"
+        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!",
       },
       {
         validator: (value) => {
@@ -30,7 +30,7 @@ if (loginForm) {
           const result = !regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu không được chứa khoảng trắng!"
+        errorMessage: "Mật khẩu không được chứa khoảng trắng!",
       },
       {
         validator: (value) => {
@@ -38,7 +38,7 @@ if (loginForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!"
+        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!",
       },
       {
         validator: (value) => {
@@ -46,7 +46,7 @@ if (loginForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự viết thường!"
+        errorMessage: "Mật khẩu phải chứa ký tự viết thường!",
       },
       {
         validator: (value) => {
@@ -54,7 +54,7 @@ if (loginForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa chữ số!"
+        errorMessage: "Mật khẩu phải chứa chữ số!",
       },
       {
         validator: (value) => {
@@ -62,7 +62,7 @@ if (loginForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!"
+        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!",
       },
     ])
     .onSuccess((event) => {
@@ -72,51 +72,51 @@ if (loginForm) {
       console.log(email);
       console.log(password);
       console.log(rememberPassword);
-    })
+    });
 }
 // End Login Form
 
-// Register Form 
+// Register Form
 const registerForm = document.querySelector("#register-form");
 if (registerForm) {
   const validator = new JustValidate("#register-form");
 
   validator
-    .addField("#fullname", [
+    .addField("#fullName", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập họ tên!"
+        errorMessage: "Vui lòng nhập họ tên!",
       },
       {
-        rule: 'minLength',
+        rule: "minLength",
         value: 5,
-        errorMessage: "Họ tên phải có ít nhất 5 ký tự!"
+        errorMessage: "Họ tên phải có ít nhất 5 ký tự!",
       },
       {
-        rule: 'maxLength',
+        rule: "maxLength",
         value: 50,
-        errorMessage: "Họ tên không được vượt quá 50 ký tự!"
+        errorMessage: "Họ tên không được vượt quá 50 ký tự!",
       },
     ])
     .addField("#email", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập email của bạn!"
+        errorMessage: "Vui lòng nhập email của bạn!",
       },
       {
         rule: "email",
-        errorMessage: "Email không đúng định dạng!"
-      }
+        errorMessage: "Email không đúng định dạng!",
+      },
     ])
-    .addField('#password', [
+    .addField("#password", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập mật khẩu!"
+        errorMessage: "Vui lòng nhập mật khẩu!",
       },
       {
         rule: "minLength",
         value: 8,
-        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!"
+        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!",
       },
       {
         validator: (value) => {
@@ -124,7 +124,7 @@ if (registerForm) {
           const result = !regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu không được chứa khoảng trắng!"
+        errorMessage: "Mật khẩu không được chứa khoảng trắng!",
       },
       {
         validator: (value) => {
@@ -132,7 +132,7 @@ if (registerForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!"
+        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!",
       },
       {
         validator: (value) => {
@@ -140,7 +140,7 @@ if (registerForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự viết thường!"
+        errorMessage: "Mật khẩu phải chứa ký tự viết thường!",
       },
       {
         validator: (value) => {
@@ -148,7 +148,7 @@ if (registerForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa chữ số!"
+        errorMessage: "Mật khẩu phải chứa chữ số!",
       },
       {
         validator: (value) => {
@@ -156,27 +156,47 @@ if (registerForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!"
+        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!",
       },
     ])
     .addField("#agree", [
       {
         rule: "required",
-        errorMessage: "Bạn phải đồng ý với các điều khoản và điều kiện!"
-      }
+        errorMessage: "Bạn phải đồng ý với các điều khoản và điều kiện!",
+      },
     ])
     .onSuccess((event) => {
-      const fullname = event.target.fullname.value;
+      const fullName = event.target.fullName.value;
       const email = event.target.email.value;
       const password = event.target.password.value;
-      const agree = event.target.agree.checked;
-      console.log(fullname);
-      console.log(email);
-      console.log(password);
-      console.log(agree);
-    })
+
+      const dataFinal = {
+        fullName: fullName,
+        email: email,
+        password: password,
+      };
+
+      fetch(`/${pathAdmin}/account/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.href = `/${pathAdmin}/account/register-initial`;
+          }
+        });
+    });
 }
-// End Register Form 
+// End Register Form
 
 // Forgot Password Form
 const forgotPasswordForm = document.querySelector("#forgot-password-form");
@@ -187,54 +207,54 @@ if (forgotPasswordForm) {
     .addField("#email", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập email của bạn!"
+        errorMessage: "Vui lòng nhập email của bạn!",
       },
       {
         rule: "email",
-        errorMessage: "Email không đúng định dạng!"
-      }
+        errorMessage: "Email không đúng định dạng!",
+      },
     ])
     .onSuccess((event) => {
       const email = event.target.email.value;
       console.log(email);
-    })
+    });
 }
 // End Forgot Password Form
 
 // OTP Password Form
 const otpPasswordForm = document.querySelector("#otp-password-form");
-if(otpPasswordForm) {
+if (otpPasswordForm) {
   const validator = new JustValidate("#otp-password-form");
 
   validator
     .addField("#otp", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập mã OTP!"
-      }
+        errorMessage: "Vui lòng nhập mã OTP!",
+      },
     ])
     .onSuccess((event) => {
       const otp = event.target.otp.value;
       console.log(otp);
-    })
+    });
 }
 // End OTP Password Form
 
 // Reset Password Form
 const resetPasswordForm = document.querySelector("#reset-password-form");
-if(resetPasswordForm) {
+if (resetPasswordForm) {
   const validator = new JustValidate("#reset-password-form");
 
   validator
-    .addField('#password', [
+    .addField("#password", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập mật khẩu!"
+        errorMessage: "Vui lòng nhập mật khẩu!",
       },
       {
         rule: "minLength",
         value: 8,
-        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!"
+        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!",
       },
       {
         validator: (value) => {
@@ -242,7 +262,7 @@ if(resetPasswordForm) {
           const result = !regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu không được chứa khoảng trắng!"
+        errorMessage: "Mật khẩu không được chứa khoảng trắng!",
       },
       {
         validator: (value) => {
@@ -250,7 +270,7 @@ if(resetPasswordForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!"
+        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!",
       },
       {
         validator: (value) => {
@@ -258,7 +278,7 @@ if(resetPasswordForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự viết thường!"
+        errorMessage: "Mật khẩu phải chứa ký tự viết thường!",
       },
       {
         validator: (value) => {
@@ -266,7 +286,7 @@ if(resetPasswordForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa chữ số!"
+        errorMessage: "Mật khẩu phải chứa chữ số!",
       },
       {
         validator: (value) => {
@@ -274,25 +294,25 @@ if(resetPasswordForm) {
           const result = regex.test(value);
           return result;
         },
-        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!"
+        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!",
       },
     ])
     .addField("#confirmPassword", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập mật khẩu xác nhận!"
+        errorMessage: "Vui lòng nhập mật khẩu xác nhận!",
       },
       {
         validator: (value, field) => {
           const password = field["#password"].elem.value;
-          return value == password
+          return value == password;
         },
-        errorMessage: "Mật khẩu xác nhận không khớp!"
-      }
+        errorMessage: "Mật khẩu xác nhận không khớp!",
+      },
     ])
     .onSuccess((event) => {
       const password = event.target.password.value;
       console.log(password);
-    })
-} 
-// End Reset Password Form 
+    });
+}
+// End Reset Password Form
