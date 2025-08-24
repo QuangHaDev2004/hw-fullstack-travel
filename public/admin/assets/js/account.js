@@ -19,59 +19,35 @@ if (loginForm) {
         rule: "required",
         errorMessage: "Vui lòng nhập mật khẩu!",
       },
-      {
-        rule: "minLength",
-        value: 8,
-        errorMessage: "Mật khẩu phải chứa ít nhất 8 ký tự!",
-      },
-      {
-        validator: (value) => {
-          const regex = /[\s]/;
-          const result = !regex.test(value);
-          return result;
-        },
-        errorMessage: "Mật khẩu không được chứa khoảng trắng!",
-      },
-      {
-        validator: (value) => {
-          const regex = /[A-Z]/;
-          const result = regex.test(value);
-          return result;
-        },
-        errorMessage: "Mật khẩu phải chứa ký tự viết hoa!",
-      },
-      {
-        validator: (value) => {
-          const regex = /[a-z]/;
-          const result = regex.test(value);
-          return result;
-        },
-        errorMessage: "Mật khẩu phải chứa ký tự viết thường!",
-      },
-      {
-        validator: (value) => {
-          const regex = /[0-9]/;
-          const result = regex.test(value);
-          return result;
-        },
-        errorMessage: "Mật khẩu phải chứa chữ số!",
-      },
-      {
-        validator: (value) => {
-          const regex = /[^a-zA-Z0-9\s]/;
-          const result = regex.test(value);
-          return result;
-        },
-        errorMessage: "Mật khẩu phải chứa ký tự đặc biệt!",
-      },
     ])
     .onSuccess((event) => {
       const email = event.target.email.value;
       const password = event.target.password.value;
       const rememberPassword = event.target.rememberPassword.checked;
-      console.log(email);
-      console.log(password);
-      console.log(rememberPassword);
+
+      const dataFinal = {
+        email: email,
+        password: password
+      }
+      
+      fetch(`/${pathAdmin}/account/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.href = `/${pathAdmin}/dashboard`;
+          }
+        });
     });
 }
 // End Login Form
