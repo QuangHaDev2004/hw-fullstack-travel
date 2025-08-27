@@ -54,8 +54,8 @@ module.exports.loginPost = async (req, res) => {
   res.cookie("token", token, {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "strict"
-  })
+    sameSite: "strict",
+  });
 
   res.json({
     code: "success",
@@ -118,5 +118,13 @@ module.exports.otpPassword = (req, res) => {
 module.exports.resetPassword = (req, res) => {
   res.render("admin/pages/reset-password", {
     pageTitle: "Đổi mật khẩu",
+  });
+};
+
+module.exports.logoutPost = (req, res) => {
+  res.clearCookie("token");
+  res.json({
+    code: "success",
+    message: "Đã đăng xuất!",
   });
 };

@@ -528,9 +528,35 @@ if (sider) {
   const menuList = document.querySelectorAll("a");
   menuList.forEach((item) => {
     const splitHref = item.getAttribute("href").split("/");
-    if (splitPathNameCurrent[1] == splitHref[1] && splitPathNameCurrent[2] == splitHref[2]) {
+    if (
+      splitPathNameCurrent[1] == splitHref[1] &&
+      splitPathNameCurrent[2] == splitHref[2]
+    ) {
       item.classList.add("active");
     }
   });
 }
 // End sider
+
+// Logout
+const buttonLogout = document.querySelector(".sider .inner-logout");
+if (buttonLogout) {
+  buttonLogout.addEventListener("click", () => {
+    fetch(`/${pathAdmin}/account/logout`, {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code == "error") {
+          notyf.error(data.message);
+        }
+
+        if (data.code == "success") {
+          drawNotify(data.code, data.message);
+          window.location.href = `/${pathAdmin}/account/login`;
+        }
+      });
+  });
+}
+
+// End logout
