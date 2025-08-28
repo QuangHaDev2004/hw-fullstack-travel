@@ -27,9 +27,10 @@ if (loginForm) {
 
       const dataFinal = {
         email: email,
-        password: password
-      }
-      
+        password: password,
+        rememberPassword: rememberPassword,
+      };
+
       fetch(`/${pathAdmin}/account/login`, {
         method: "POST",
         headers: {

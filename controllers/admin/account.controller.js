@@ -9,7 +9,7 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.loginPost = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, rememberPassword } = req.body;
 
   const existAccount = await AccountAdmin.findOne({
     email: email,
@@ -47,12 +47,12 @@ module.exports.loginPost = async (req, res) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1d",
+      expiresIn: rememberPassword ? "7d" : "1d",
     }
   );
 
   res.cookie("token", token, {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: rememberPassword ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     httpOnly: true,
     sameSite: "strict",
   });

@@ -86,6 +86,7 @@ module.exports.loginPost = async (req, res, next) => {
       .messages({
         "string.empty": "Vui lòng nhập mật khẩu!",
       }),
+    rememberPassword: Joi.boolean()
   });
 
   const { error } = schema.validate(req.body);
