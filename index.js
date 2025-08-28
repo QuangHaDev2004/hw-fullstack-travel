@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const databaseConfig = require("./config/database.config");
 const variableConfig = require("./config/variable.config");
@@ -16,10 +17,17 @@ app.set("view engine", "pug");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// Biến toàn cục cho các file PUG
 app.locals.pathAdmin = variableConfig.pathAdmin;
 
+// Biến toàn cục cho các file js backend
+global.pathAdmin = variableConfig.pathAdmin;
+
 // Cho phép gửi dữ liệu lên dạng JSON
-app.use(express.json())
+app.use(express.json());
+
+// Lấy được cookie
+app.use(cookieParser());
 
 app.use(`/${variableConfig.pathAdmin}`, adminRoutes);
 app.use("/", clientRoutes);
