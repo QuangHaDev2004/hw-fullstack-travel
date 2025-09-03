@@ -1,6 +1,9 @@
 const AccountAdmin = require("../../models/account-admin.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const generateHelper = require("../../helpers/generate.helper");
+const mailHelper = require("../../helpers/mail.helper");
+const ForgotPassword = require("../../models/forgot-password.mode");
 
 module.exports.login = (req, res) => {
   res.render("admin/pages/login", {
@@ -106,6 +109,68 @@ module.exports.registerInitial = (req, res) => {
 module.exports.forgotPassword = (req, res) => {
   res.render("admin/pages/forgot-password", {
     pageTitle: "Quên mật khẩu",
+  });
+};
+
+module.exports.forgotPasswordPost = async (req, res) => {
+  const { email } = req.body;
+
+  const existAccount = await AccountAdmin.findOne({
+    email: email,
+    status: "active",
+  });
+
+  if (!existAccount) {
+    res.json({
+      code: "error",
+      message: "Email không tồn tại trong hệ thống!",
+    });
+    return;
+  }
+
+  // Kiểm tra email tồn tại trong Forgot Password chưa
+  const existEmailInForgotPassword = await ForgotPassword.findOne({
+    email: email,
+  });
+
+  if (existEmailInForgotPassword) {
+    res.json({
+      code: "error",
+      message: "Vui lòng gửi lại yêu cầu sau 5 phút",
+    });
+    return;
+  }
+
+  // Tạo OTP
+  const otp = generateHelper.generateRandomNumber(6);
+
+  // Lưu vào CSDL bản ghi mới: OTP và Email
+  const record = new ForgotPassword({
+    email: email,
+    otp: otp,
+    expireAt: Date.now() + 5 * 60 * 1000,
+  });
+  await record.save();
+
+  // Gửi OTP tự động
+  const title = "Mã OTP lấy lại mật khẩu";
+  const content = `
+    <p>Xin chào ${existAccount.fullName || "bạn"},</p>
+    <p>Bạn vừa yêu cầu đặt lại mật khẩu cho tài khoản có email: <strong>${email}</strong>.</p>
+    <p>Mã xác thực (OTP) của bạn là:</p>
+    <h2 style="color:#2F67F6;letter-spacing:3px">${otp}</h2>
+    <p>Mã OTP này chỉ có hiệu lực trong <strong>5 phút</strong>. 
+    Vui lòng không chia sẻ mã này với bất kỳ ai để đảm bảo an toàn tài khoản của bạn.</p>
+    <p>Nếu bạn không yêu cầu quên mật khẩu, vui lòng bỏ qua email này.</p>
+    <br/>
+    <p>Trân trọng,</p>
+    <p><strong>Đội ngũ Hỗ trợ</strong></p>
+  `;
+  mailHelper.sendMail(email, title, content);
+
+  res.json({
+    code: "success",
+    message: "Đã gửi mã OTP qua email!",
   });
 };
 
