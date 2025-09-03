@@ -25,6 +25,9 @@ module.exports.verifyToken = async (req, res, next) => {
       return;
     }
 
+    // req trong controller sẽ dùng được req.account
+    req.account = existAccount;
+
     next();
   } catch (error) {
     res.clearCookie("token");
