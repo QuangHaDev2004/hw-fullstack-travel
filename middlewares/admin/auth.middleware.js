@@ -28,6 +28,9 @@ module.exports.verifyToken = async (req, res, next) => {
     // req trong controller sẽ dùng được req.account
     req.account = existAccount;
 
+    // Trả về biến toàn cục (account) cho các file PUG
+    res.locals.account = existAccount;
+
     next();
   } catch (error) {
     res.clearCookie("token");
