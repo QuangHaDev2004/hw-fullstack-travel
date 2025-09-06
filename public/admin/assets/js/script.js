@@ -190,9 +190,8 @@ if (categoryCreateForm) {
           }
 
           if (data.code == "success") {
-            notyf.success(data.message);
-            // drawNotify(data.code, data.message);
-            // window.location.reload();
+            drawNotify(data.code, data.message);
+            window.location.reload();
           }
         });
     });
