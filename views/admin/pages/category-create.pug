@@ -21,12 +21,11 @@ block main
       .inner-group 
         label(for="status" class="inner-label") Trạng thái
         select(name="status" id="status") 
-          option(value="") Hoạt động
-          option(value="") Dừng hoạt động
-          option(value="") Đã hủy
+          option(value="active") Hoạt động
+          option(value="inactive") Dừng hoạt động
       .inner-group.inner-two-col
         label(for="avatar" class="inner-label") Ảnh đại diện
-        input(type="file" id="avatar" accept="image/*" filepond-image)
+        input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
       .inner-group.inner-two-col
         label(for="description" class="inner-label") Mô tả
         textarea(name="description" id="description" textarea-mce) 

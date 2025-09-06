@@ -77,16 +77,17 @@ if (listSchedule) {
 
 // Filepond
 const listFilePondImage = document.querySelectorAll("[filepond-image]");
+let filePond = {};
 if (listFilePondImage.length > 0) {
-  listFilePondImage.forEach((FilePondImage) => {
-    FilePond.registerPlugin(
-      FilePondPluginFileValidateType,
-      FilePondPluginImagePreview,
-      FilePondPluginImageCrop,
-      FilePondPluginImageResize
-    );
+  FilePond.registerPlugin(
+    FilePondPluginFileValidateType,
+    FilePondPluginImagePreview,
+    FilePondPluginImageCrop,
+    FilePondPluginImageResize
+  );
 
-    FilePond.create(FilePondImage, {
+  listFilePondImage.forEach((FilePondImage) => {
+    filePond[FilePondImage.name] = FilePond.create(FilePondImage, {
       labelIdle: "+",
       imageCropAspectRatio: "1:1",
       imageResizeTargetWidth: 150,
@@ -160,7 +161,40 @@ if (categoryCreateForm) {
     ])
     .onSuccess((event) => {
       const name = event.target.name.value;
-      console.log(name);
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if (avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+      const description = tinymce.get("description").getContent();
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+
+      fetch(`/${pathAdmin}/category/create`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            notyf.success(data.message);
+            // drawNotify(data.code, data.message);
+            // window.location.reload();
+          }
+        });
     });
 }
 // End Category Create Form
