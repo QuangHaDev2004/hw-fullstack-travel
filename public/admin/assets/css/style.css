@@ -1281,7 +1281,8 @@ input, select, textarea {
   border-radius: 8px;
 }
 
-.table-2 table tbody tr td .inner-buttons a {
+.table-2 table tbody tr td .inner-buttons a,
+.table-2 table tbody tr td .inner-buttons button {
   display: inline-block;
   padding: 8.5px 16.5px;
   border-right: 1px solid #D5D5D5;
@@ -1299,6 +1300,9 @@ input, select, textarea {
 
 .table-2 table tbody tr td .inner-buttons .inner-remove {
   color: #EF3826;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .table-2 .inner-code {
