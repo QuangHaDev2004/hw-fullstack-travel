@@ -49,46 +49,32 @@ block main
             th Cập nhật bởi
             th Hành động
         tbody 
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check2")
-              label(for="check2" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Danh mục 1
-            td.inner-center
-              img(src="/admin/assets/images/image-1.jpg")
-            td.inner-center 1
-            td.inner-center
-              .badge.badge-green Hoạt động
-            td
-              div Lê Văn A
-              span 16:30 - 20/10/2025
-            td
-              div Lê Văn A
-              span 16:30 - 20/10/2025
-            td
-              .inner-buttons
-                a(href="category-create.html" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check3")
-              label(for="check3" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Danh mục 2
-            td.inner-center
-              img(src="/admin/assets/images/image-1.jpg")
-            td.inner-center 1
-            td.inner-center
-              .badge.badge-red Tạm dừng
-            td
-              div Lê Văn B
-              span 16:30 - 20/10/2025
-            td
-              div Lê Văn B
-              span 16:30 - 20/10/2025
-            td
-              .inner-buttons
-                a(href="category-create.html" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
+          each item in categoryList
+            tr 
+              td 
+                input(type="checkbox" class="custom-check" id=item.id)
+                label(for=item.id class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+              td #{item.name}
+              td.inner-center
+                img(src=item.avatar)
+              td.inner-center #{item.position}
+              td.inner-center
+                if (item.status == "active")
+                  .badge.badge-green Hoạt động
+                else if (item.status == "inactive")
+                  .badge.badge-red Dừng hoạt động
+              td
+                div #{item.createdByFullName}
+                span #{item.createdAtFormat}
+              td
+                div #{item.updatedByFullName}
+                span #{item.updatedAtFormat}
+              td
+                .inner-buttons
+                  a(href="category-create.html" class="inner-edit") 
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                  button(class="inner-remove") 
+                    <i class="fa-solid fa-trash-can"></i>
   //- End Section 6
 
   //- Pagination

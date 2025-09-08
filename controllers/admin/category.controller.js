@@ -1,9 +1,44 @@
 const Category = require("../../models/category.model");
 const categoryHelper = require("../../helpers/category.helper");
+const AccountAdmin = require("../../models/account-admin.model");
 
-module.exports.list = (req, res) => {
+const moment = require('moment');
+
+module.exports.list = async (req, res) => {
+  const categoryList = await Category.find({
+    deleted: false,
+  }).sort({
+    position: "desc",
+  });
+
+  for (const item of categoryList) {
+    if (item.createdBy) {
+      const infoAccount = await AccountAdmin.findOne({
+        _id: item.createdBy,
+      });
+
+      if (infoAccount) {
+        item.createdByFullName = infoAccount.fullName;
+      }
+    }
+
+    if (item.updatedBy) {
+      const infoAccount = await AccountAdmin.findOne({
+        _id: item.updatedBy,
+      });
+
+      if (infoAccount) {
+        item.updatedByFullName = infoAccount.fullName;
+      }
+    }
+
+    item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY"); 
+    item.updatedAtFormat = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY"); 
+  }
+
   res.render("admin/pages/category-list", {
     pageTitle: "Quản lý danh mục",
+    categoryList: categoryList,
   });
 };
 
@@ -14,11 +49,9 @@ module.exports.create = async (req, res) => {
 
   const categoryTree = categoryHelper.buildCategoryTree(categoryList, "");
 
-  console.log(categoryTree);
-
   res.render("admin/pages/category-create", {
     pageTitle: "Tạo danh mục",
-    categoryList: categoryTree
+    categoryList: categoryTree,
   });
 };
 
