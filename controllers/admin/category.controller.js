@@ -2,7 +2,7 @@ const Category = require("../../models/category.model");
 const categoryHelper = require("../../helpers/category.helper");
 const AccountAdmin = require("../../models/account-admin.model");
 
-const moment = require('moment');
+const moment = require("moment");
 
 module.exports.list = async (req, res) => {
   const categoryList = await Category.find({
@@ -32,8 +32,8 @@ module.exports.list = async (req, res) => {
       }
     }
 
-    item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY"); 
-    item.updatedAtFormat = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY"); 
+    item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");
+    item.updatedAtFormat = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY");
   }
 
   res.render("admin/pages/category-list", {
@@ -74,4 +74,69 @@ module.exports.createPost = async (req, res) => {
     code: "success",
     message: "Tạo danh mục thành công!",
   });
+};
+
+module.exports.edit = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const categoryDetail = await Category.findOne({
+      _id: id,
+      deleted: false,
+    });
+
+    console.log(categoryDetail);
+
+    const categoryList = await Category.find({
+      deleted: false,
+    });
+
+    const categoryTree = categoryHelper.buildCategoryTree(categoryList, "");
+
+    res.render("admin/pages/category-edit", {
+      pageTitle: "Chỉnh sửa danh mục",
+      categoryList: categoryTree,
+      categoryDetail: categoryDetail,
+    });
+  } catch (error) {
+    res.redirect(`/${pathAdmin}/category/list`);
+  }
+};
+
+module.exports.editPatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (req.body.position) {
+      req.body.position = parseInt(req.body.position);
+    } else {
+      const totalRecord = await Category.countDocuments({});
+      req.body.position = totalRecord + 1;
+    }
+
+    req.body.updatedBy = req.account.id;
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    } else {
+      delete req.body.avatar;
+    }
+
+    await Category.updateOne(
+      {
+        _id: id,
+        deleted: false,
+      },
+      req.body
+    );
+
+    res.json({
+      code: "success",
+      message: "Cập nhật danh mục thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
 };
