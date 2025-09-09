@@ -71,7 +71,7 @@ block main
                 span #{item.updatedAtFormat}
               td
                 .inner-buttons
-                  a(href="category-create.html" class="inner-edit") 
+                  a(href=`/${pathAdmin}/category/edit/${item.id}` class="inner-edit") 
                     <i class="fa-solid fa-pen-to-square"></i> 
                   button(class="inner-remove") 
                     <i class="fa-solid fa-trash-can"></i>
