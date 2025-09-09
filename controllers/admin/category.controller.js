@@ -140,3 +140,30 @@ module.exports.editPatch = async (req, res) => {
     });
   }
 };
+
+module.exports.deletePatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Category.updateOne(
+      {
+        _id: id,
+      },
+      {
+        deleted: true,
+        deletedBy: req.account.id,
+        deletedAt: Date.now(),
+      }
+    );
+
+    res.json({
+      code: "success",
+      message: "Xóa danh mục thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
