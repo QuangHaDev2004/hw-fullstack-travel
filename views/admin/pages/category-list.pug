@@ -8,12 +8,12 @@ block main
     .inner-item.inner-label 
       <i class="fa-solid fa-filter"></i> Bộ lọc
     .inner-item 
-      select(name="") 
+      select(filter-status) 
         option(value="") Trạng thái 
-        option(value="") Hoạt động
-        option(value="") Tạm dừng
+        option(value="active") Hoạt động
+        option(value="inactive") Tạm dừng
     .inner-item 
-      select(name="") 
+      select() 
         option(value="") Người tạo
         option(value="") Lê Văn A
         option(value="") Lê Văn B
@@ -62,7 +62,7 @@ block main
                 if (item.status == "active")
                   .badge.badge-green Hoạt động
                 else if (item.status == "inactive")
-                  .badge.badge-red Dừng hoạt động
+                  .badge.badge-red Tạm dừng
               td
                 div #{item.createdByFullName}
                 span #{item.createdAtFormat}
