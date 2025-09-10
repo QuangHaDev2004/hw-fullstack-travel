@@ -19,6 +19,20 @@ module.exports.list = async (req, res) => {
     find.createdBy = req.query.createdBy;
   }
 
+  // Lọc theo ngày tạo
+  const dateFilter = {};
+  if (req.query.startDate) {
+    const startDate = moment(req.query.startDate).toDate();
+    dateFilter.$gte = startDate;
+  }
+  if (req.query.endDate) {
+    const endDate = moment(req.query.endDate).toDate();
+    dateFilter.$lte = endDate;
+  }
+  if (Object.keys(dateFilter).length > 0) {
+    find.createdAt = dateFilter;
+  }
+
   const categoryList = await Category.find(find).sort({
     position: "desc",
   });
@@ -54,7 +68,7 @@ module.exports.list = async (req, res) => {
   res.render("admin/pages/category-list", {
     pageTitle: "Quản lý danh mục",
     categoryList: categoryList,
-    accountAdminList: accountAdminList
+    accountAdminList: accountAdminList,
   });
 };
 
