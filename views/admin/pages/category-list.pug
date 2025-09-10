@@ -39,7 +39,7 @@ block main
         thead 
           tr 
             th 
-              input(type="checkbox" class="custom-check" id="check1")
+              input(type="checkbox" class="custom-check" id="check1" check-all)
               label(for="check1" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
             th Tên danh mục
             th.inner-center Ảnh đại diện
@@ -52,7 +52,7 @@ block main
           each item in categoryList
             tr 
               td 
-                input(type="checkbox" class="custom-check" id=item.id)
+                input(type="checkbox" class="custom-check" id=item.id check-item=item.id)
                 label(for=item.id class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
               td #{item.name}
               td.inner-center
