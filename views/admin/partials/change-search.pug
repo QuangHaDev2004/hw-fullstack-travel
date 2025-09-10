@@ -1,10 +1,13 @@
-.inner-change-status
-  .inner-item 
+.inner-change-status(
+  change-multi
+  data-api=`/${pathAdmin}/category/change-multi`
+)
+  .inner-item
     select(name="")
       option(value="") -- Hành động -- 
-      option(value="") Hoạt động   
-      option(value="") Tạm dừng
-      option(value="") Xóa
+      option(value="active") Hoạt động   
+      option(value="inactive") Tạm dừng
+      option(value="delete") Xóa
   .inner-item 
     button Áp dụng
 .inner-search 

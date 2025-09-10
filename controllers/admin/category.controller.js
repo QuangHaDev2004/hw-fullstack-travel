@@ -197,3 +197,56 @@ module.exports.deletePatch = async (req, res) => {
     });
   }
 };
+
+module.exports.changeMultiPatch = async (req, res) => {
+  try {
+    const { option, ids } = req.body;
+
+    switch (option) {
+      case "active":
+      case "inactive":
+        await Category.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            status: option,
+          }
+        );
+        res.json({
+          code: "success",
+          message: "Cập nhật trạng thái thành công!",
+        });
+        break;
+
+      case "delete":
+        await Category.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            deleted: true,
+            deletedBy: req.account.id,
+            deletedAt: Date.now(),
+          }
+        );
+        res.json({
+          code: "success",
+          message: "Đã xóa thành công!",
+        });
+        break;
+
+      default:
+        res.json({
+          code: "error",
+          message: "Hành động không hợp lệ!",
+        });
+        break;
+    }
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
