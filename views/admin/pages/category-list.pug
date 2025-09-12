@@ -82,5 +82,11 @@ block main
   //- End Section 6
 
   //- Pagination
-  include ../partials/pagination.pug
+  //- include ../partials/pagination.pug
+  .pagination 
+    span.inner-label 
+      | Hiển thị #{pagination.skip + 1} - #{pagination.skip + categoryList.length} của #{pagination.totalRecord}
+    select(name="" class="inner-pagination" box-pagination)
+      - for (let i = 1; i <= pagination.totalPage; i++)
+        option(value=i) Trang #{i} 
   //- End Pagination
