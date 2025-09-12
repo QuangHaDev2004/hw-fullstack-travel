@@ -1420,6 +1420,12 @@ input, select, textarea {
   text-align: center;
 }
 
+.inner-button-2 button[type="button"] {
+  background-color: #d5d5d5;
+  color: #202224;
+  cursor: not-allowed;
+}
+
 .inner-button-2 button {
   height: 56px;
   width: 274px;
