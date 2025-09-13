@@ -6,4 +6,4 @@ mixin options(list, level = 0, currentId = "")
       selected=(item.id == currentId ? true : false)
     ) #{prefix} #{item.name}
     if(item.children && item.children.length > 0)
-      +options(item.children, level + 1)
+      +options(item.children, level + 1, currentId)

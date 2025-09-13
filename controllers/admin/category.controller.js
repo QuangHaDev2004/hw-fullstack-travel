@@ -143,8 +143,6 @@ module.exports.edit = async (req, res) => {
       deleted: false,
     });
 
-    console.log(categoryDetail);
-
     const categoryList = await Category.find({
       deleted: false,
     });
