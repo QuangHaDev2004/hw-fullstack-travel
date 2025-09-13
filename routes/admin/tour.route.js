@@ -18,6 +18,15 @@ router.post(
   tourController.createPost
 );
 
+router.get("/edit/:id", tourController.edit);
+
+router.patch(
+  "/edit/:id",
+  upload.single("avatar"),
+  tourValidate.createPost,
+  tourController.editPatch
+);
+
 router.get("/trash", tourController.trash);
 
 router.patch("/change-multi", tourController.changeMultiPatch);
