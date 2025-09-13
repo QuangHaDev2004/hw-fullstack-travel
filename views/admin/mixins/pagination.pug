@@ -1,0 +1,7 @@
+mixin pagination(skip, length, totalRecord, totalPage)
+  .pagination 
+    span.inner-label 
+      | Hiển thị #{skip + 1} - #{skip + length} của #{totalRecord}
+    select(name="" class="inner-pagination" box-pagination)
+      - for (let i = 1; i <= totalPage; i++)
+        option(value=i) Trang #{i}

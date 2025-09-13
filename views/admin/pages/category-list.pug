@@ -1,4 +1,6 @@
 extends ../layouts/default.pug 
+include ../mixins/change-search.pug
+include ../mixins/pagination.pug
 
 block main 
   h2.box-title Quản lý danh mục
@@ -27,7 +29,7 @@ block main
 
   //- Section 5
   .section-5
-    include ../partials/change-search.pug
+    +change-search(`/${pathAdmin}/category/change-multi`)
     .inner-button-create 
       a(href=`/${pathAdmin}/category/create`) + Tạo mới
   //- End Section 5
@@ -82,11 +84,5 @@ block main
   //- End Section 6
 
   //- Pagination
-  //- include ../partials/pagination.pug
-  .pagination 
-    span.inner-label 
-      | Hiển thị #{pagination.skip + 1} - #{pagination.skip + categoryList.length} của #{pagination.totalRecord}
-    select(name="" class="inner-pagination" box-pagination)
-      - for (let i = 1; i <= pagination.totalPage; i++)
-        option(value=i) Trang #{i} 
+  +pagination(pagination.skip, categoryList.length, pagination.totalRecord, pagination.totalPage)
   //- End Pagination
