@@ -27,6 +27,8 @@ router.patch(
   tourController.editPatch
 );
 
+router.patch("/delete/:id", tourController.deletePatch);
+
 router.get("/trash", tourController.trash);
 
 router.patch("/change-multi", tourController.changeMultiPatch);
