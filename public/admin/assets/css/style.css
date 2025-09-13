@@ -1250,6 +1250,13 @@ input, select, textarea {
   text-align: center;
 }
 
+.table-2 table .inner-name {
+  max-width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .table-2 table tbody tr td {
   padding: 10px 15px;
   border-bottom: 1px solid #D5D5D5;

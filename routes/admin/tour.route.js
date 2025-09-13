@@ -20,4 +20,6 @@ router.post(
 
 router.get("/trash", tourController.trash);
 
+router.patch("/change-multi", tourController.changeMultiPatch);
+
 module.exports = router;

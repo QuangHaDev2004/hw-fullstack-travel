@@ -1,0 +1,16 @@
+mixin change-search(api)
+  .inner-change-status(
+    change-multi
+    data-api=api
+  )
+    .inner-item
+      select(name="")
+        option(value="") -- Hành động -- 
+        option(value="active") Hoạt động   
+        option(value="inactive") Tạm dừng
+        option(value="delete") Xóa
+    .inner-item 
+      button Áp dụng
+  .inner-search 
+    <i class="fa-solid fa-magnifying-glass"></i>
+    input(type="text" placeholder="Tìm kiếm..." search)
