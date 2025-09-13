@@ -302,10 +302,143 @@ module.exports.deletePatch = async (req, res) => {
   }
 };
 
-module.exports.trash = (req, res) => {
+module.exports.trash = async (req, res) => {
+  const find = {
+    deleted: true,
+  };
+
+  // Lọc theo trạng thái
+  if (req.query.status) {
+    find.status = req.query.status;
+  }
+
+  // Lọc theo người tạo
+  if (req.query.createdBy) {
+    find.createdBy = req.query.createdBy;
+  }
+
+  // Lọc theo ngày tạo
+  const dateFilter = {};
+  if (req.query.startDate) {
+    const startDate = moment(req.query.startDate).toDate();
+    dateFilter.$gte = startDate;
+  }
+  if (req.query.endDate) {
+    const endDate = moment(req.query.endDate).toDate();
+    dateFilter.$lte = endDate;
+  }
+  if (Object.keys(dateFilter).length > 0) {
+    find.createdAt = dateFilter;
+  }
+
+  // Tìm kiếm
+  if (req.query.keyword) {
+    const keyword = slugify(req.query.keyword);
+    const keywordRegex = new RegExp(keyword, "i");
+    find.slug = keywordRegex;
+  }
+
+  // Phân trang
+  const limitItems = 4;
+  let page = 1;
+  if (req.query.page && parseInt(req.query.page) > 0) {
+    page = parseInt(req.query.page);
+  }
+  const skip = (page - 1) * limitItems;
+  const totalRecord = await Tour.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+  };
+
+  const tourList = await Tour.find(find)
+    .sort({
+      position: "desc",
+    })
+    .limit(limitItems)
+    .skip(skip);
+
+  for (const item of tourList) {
+    if (item.createdBy) {
+      const infoAccount = await AccountAdmin.findOne({
+        _id: item.createdBy,
+      });
+
+      if (infoAccount) {
+        item.createdByFullName = infoAccount.fullName;
+      }
+    }
+
+    if (item.deletedBy) {
+      const infoAccount = await AccountAdmin.findOne({
+        _id: item.deletedBy,
+      });
+
+      if (infoAccount) {
+        item.deletedByFullName = infoAccount.fullName;
+      }
+    }
+
+    item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");
+    item.deletedAtFormat = moment(item.deletedAt).format("HH:mm - DD/MM/YYYY");
+  }
+
+  // Danh sách tài khoản quản trị
+  const accountAdminList = await AccountAdmin.find({});
+
   res.render("admin/pages/tour-trash", {
     pageTitle: "Thùng rác tour",
+    tourList: tourList,
+    accountAdminList: accountAdminList,
+    pagination: pagination,
   });
+};
+
+module.exports.undoPatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Tour.updateOne(
+      {
+        _id: id,
+      },
+      {
+        deleted: false,
+      }
+    );
+
+    res.json({
+      code: "success",
+      message: "Khôi phục tour thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
+module.exports.destroyDelete = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Tour.deleteOne({
+      _id: id,
+    });
+
+    res.json({
+      code: "success",
+      message: "Đã xóa vĩnh viễn!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
 };
 
 module.exports.changeMultiPatch = async (req, res) => {
@@ -329,6 +462,21 @@ module.exports.changeMultiPatch = async (req, res) => {
         });
         break;
 
+      case "undo":
+        await Tour.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            deleted: false,
+          }
+        );
+        res.json({
+          code: "success",
+          message: "Khôi phục tour thành công!",
+        });
+        break;
+
       case "delete":
         await Tour.updateMany(
           {
@@ -343,6 +491,18 @@ module.exports.changeMultiPatch = async (req, res) => {
         res.json({
           code: "success",
           message: "Đã xóa thành công!",
+        });
+        break;
+
+      case "destroy":
+        await Tour.deleteMany(
+          {
+            _id: { $in: ids },
+          },
+        );
+        res.json({
+          code: "success",
+          message: "Đã xóa vĩnh viễn!!",
         });
         break;
 
