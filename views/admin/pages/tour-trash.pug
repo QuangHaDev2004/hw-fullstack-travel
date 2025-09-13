@@ -1,11 +1,25 @@
 extends ../layouts/default.pug 
+include ../mixins/pagination.pug
 
 block main 
   h2.box-title Thùng rác tour
 
   //- Section 5
   .section-5
-    include ../partials/change-search.pug
+    .inner-change-status(
+      change-multi
+      data-api=`/${pathAdmin}/tour/change-multi`
+    )
+      .inner-item
+        select(name="")
+          option(value="") -- Hành động -- 
+          option(value="undo") Khôi phục 
+          option(value="destroy") Xóa vĩnh viễn
+      .inner-item 
+        button Áp dụng
+    .inner-search 
+      <i class="fa-solid fa-magnifying-glass"></i>
+      input(type="text" placeholder="Tìm kiếm..." search)
   //- End Section 5
 
   //- Section 6
@@ -15,7 +29,7 @@ block main
         thead 
           tr 
             th 
-              input(type="checkbox" class="custom-check" id="check1")
+              input(type="checkbox" class="custom-check" id="check1" check-all)
               label(for="check1" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
             th Tên tour
             th.inner-center Ảnh đại diện
@@ -27,64 +41,50 @@ block main
             th Xóa bởi
             th Hành động
         tbody 
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check2")
-              label(for="check2" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Tour Hạ Long
-            td.inner-center
-              img(src="/admin/assets/images/image-1.jpg")
-            td 
-              div NL: 1.900.000đ
-              div TE: 1.600.000đ
-              div EB: 1.000.000đ
-            td 
-              div NL: 30
-              div TE: 20
-              div EB: 10
-            td.inner-center 1
-            td.inner-center
-              .badge.badge-green Hoạt động
-            td
-              div Lê Văn A
-              span 16:30 - 20/10/2025
-            td
-              div Lê Văn A
-              span 16:30 - 20/10/2025
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-rotate-left"></i>
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check3")
-              label(for="check3" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Tour Hạ Long
-            td.inner-center
-              img(src="/admin/assets/images/image-1.jpg")
-            td 
-              div NL: 1.900.000đ
-              div TE: 1.600.000đ
-              div EB: 1.000.000đ
-            td 
-              div NL: 30
-              div TE: 20
-              div EB: 10
-            td.inner-center 1
-            td.inner-center
-              .badge.badge-red Tạm dừng
-            td
-              div Lê Văn B
-              span 16:30 - 20/10/2025
-            td
-              div Lê Văn B
-              span 16:30 - 20/10/2025
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-rotate-left"></i>
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
+          each item in tourList
+            tr 
+              td 
+                input(type="checkbox" class="custom-check" id=item.id check-item=item.id)
+                label(for=item.id class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+              td.inner-name #{item.name}
+              td.inner-center
+                img(src=item.avatar)
+              td 
+                div NL: #{item.priceNewAdult.toLocaleString("vi-VN")}đ
+                div TE: #{item.priceNewChildren.toLocaleString("vi-VN")}đ
+                div EB: #{item.priceNewBaby.toLocaleString("vi-VN")}đ
+              td 
+                div NL: #{item.stockAdult}
+                div TE: #{item.stockChildren}
+                div EB: #{item.stockBaby}
+              td.inner-center #{item.position}
+              td.inner-center
+                if (item.status == "active")
+                  .badge.badge-green Hoạt động
+                else if (item.status == "inactive")
+                  .badge.badge-red Tạm dừng
+              td
+                div #{item.createdByFullName}
+                span #{item.createdAtFormat}
+              td
+                div #{item.deletedByFullName}
+                span #{item.deletedAtFormat}
+              td
+                .inner-buttons
+                  button(
+                    class="inner-undo"
+                    button-undo
+                    data-api=`/${pathAdmin}/tour/undo/${item.id}`
+                  ) 
+                    <i class="fa-solid fa-rotate-left"></i>
+                  button(
+                    class="inner-remove"
+                    button-destroy
+                    data-api=`/${pathAdmin}/tour/destroy/${item.id}`
+                  ) 
+                    <i class="fa-solid fa-trash-can"></i>
   //- End Section 6
 
   //- Pagination
-  include ../partials/pagination.pug
+  +pagination(pagination.skip, tourList.length, pagination.totalRecord, pagination.totalPage)
   //- End Pagination

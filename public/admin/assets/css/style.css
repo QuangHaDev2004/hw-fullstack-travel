@@ -26,6 +26,10 @@ input, select, textarea {
   outline: none;
 }
 
+button {
+  border: 0
+}
+
 /* Page Account */
 .page-account {
   background-image: url("../images/bg-account-image.jpg");
@@ -1296,7 +1300,13 @@ input, select, textarea {
   font-size: 15px;
 }
 
-.table-2 table tbody tr td .inner-buttons a:last-child {
+.table-2 table tbody tr td .inner-buttons button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.table-2 table tbody tr td .inner-buttons a:last-child,
+.table-2 table tbody tr td .inner-buttons button:last-child {
   border: 0;
 }
 
@@ -1307,9 +1317,6 @@ input, select, textarea {
 
 .table-2 table tbody tr td .inner-buttons .inner-remove {
   color: #EF3826;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
 }
 
 .table-2 .inner-code {
