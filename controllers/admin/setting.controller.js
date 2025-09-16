@@ -3,6 +3,8 @@ const Role = require("../../models/role.model");
 
 const { permissionList } = require("../../config/variable.config");
 
+const slugify = require("slugify");
+
 module.exports.list = (req, res) => {
   res.render("admin/pages/setting-list", {
     pageTitle: "Cài đặt chung",
@@ -58,9 +60,25 @@ module.exports.accountAdminCreate = (req, res) => {
   });
 };
 
-module.exports.roleList = (req, res) => {
+module.exports.roleList = async (req, res) => {
+  const find = {
+    deleted: false,
+  };
+
+  // Tìm kiếm
+  if (req.query.keyword) {
+    const keyword = slugify(req.query.keyword);
+    const keywordRegex = new RegExp(keyword, "i");
+    find.slug = keywordRegex;
+  }
+
+  const roleList = await Role.find(find).sort({
+    createdAt: "desc",
+  });
+
   res.render("admin/pages/role-list", {
     pageTitle: "Nhóm quyền",
+    roleList: roleList,
   });
 };
 
@@ -83,6 +101,63 @@ module.exports.roleCreatePost = async (req, res) => {
       code: "success",
       message: "Tạo nhóm quyền thành công!",
     });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
+module.exports.deletePatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Role.updateOne(
+      {
+        _id: id,
+      },
+      {
+        deleted: true,
+        deletedBy: req.account.id,
+        deletedAt: Date.now(),
+      }
+    );
+
+    res.json({
+      code: "success",
+      message: "Xóa nhóm quyền thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
+module.exports.changeMultiPatch = async (req, res) => {
+  try {
+    const { option, ids } = req.body;
+
+    switch (option) {
+      case "delete":
+        await Role.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            deleted: true,
+            deletedBy: req.account.id,
+            deletedAt: Date.now(),
+          }
+        );
+        res.json({
+          code: "success",
+          message: "Đã xóa thành công!",
+        });
+        break;
+    }
   } catch (error) {
     res.json({
       code: "error",

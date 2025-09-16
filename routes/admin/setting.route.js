@@ -34,4 +34,8 @@ router.post(
   settingController.roleCreatePost
 );
 
+router.patch("/role/delete/:id", settingController.deletePatch);
+
+router.patch("/role/change-multi", settingController.changeMultiPatch);
+
 module.exports = router;
