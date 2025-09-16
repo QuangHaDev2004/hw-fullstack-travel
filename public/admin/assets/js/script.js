@@ -773,6 +773,62 @@ if (roleCreateForm) {
 }
 // End Role Create Form
 
+// Role Edit Form
+const roleEditForm = document.querySelector("#role-edit-form");
+if (roleEditForm) {
+  const validator = new JustValidate("#role-edit-form");
+
+  validator
+    .addField("#name", [
+      {
+        rule: "required",
+        errorMessage: "Vui lòng nhập nhóm quyền!",
+      },
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const description = event.target.description.value;
+      const permissions = [];
+
+      const listPermission = roleEditForm.querySelectorAll(
+        'input[name="permissions"]:checked'
+      );
+      listPermission.forEach((input) => {
+        permissions.push(input.value);
+      });
+
+      const dataFinal = {
+        name: name,
+        description: description,
+        permissions: permissions,
+      };
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/setting/role/edit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            notyf.success(data.message);
+          }
+        });
+    });
+}
+// End Role Edit Form
+
 // Profile Edit Form
 const profileEditForm = document.querySelector("#profile-edit-form");
 if (profileEditForm) {

@@ -109,6 +109,68 @@ module.exports.roleCreatePost = async (req, res) => {
   }
 };
 
+module.exports.roleEdit = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const roleDetail = await Role.findOne({
+      _id: id,
+      deleted: false,
+    });
+
+    if (!roleDetail) {
+      res.redirect(`/${pathAdmin}/setting/role/list`);
+    }
+
+    res.render("admin/pages/role-edit", {
+      pageTitle: "Chỉnh sửa nhóm quyền",
+      permissionList: permissionList,
+      roleDetail: roleDetail,
+    });
+  } catch (error) {
+    res.redirect(`/${pathAdmin}/setting/role/list`);
+  }
+};
+
+module.exports.roleEditPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const roleDetail = await Role.findOne({
+      _id: id,
+      deleted: false,
+    });
+
+    if (!roleDetail) {
+      res.json({
+        code: "error",
+        message: "Bản ghi không tồn tại!",
+      });
+      return;
+    }
+
+    req.body.updatedBy = req.account.id;
+
+    await Role.updateOne(
+      {
+        _id: id,
+        deleted: false,
+      },
+      req.body
+    );
+
+    res.json({
+      code: "success",
+      message: "Cập nhật nhóm quyền thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
 module.exports.deletePatch = async (req, res) => {
   try {
     const { id } = req.params;
