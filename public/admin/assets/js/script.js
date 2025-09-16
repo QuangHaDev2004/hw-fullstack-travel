@@ -731,7 +731,44 @@ if (roleCreateForm) {
     ])
     .onSuccess((event) => {
       const name = event.target.name.value;
-      console.log(name);
+      const description = event.target.description.value;
+      const permissions = [];
+
+      const listPermission = roleCreateForm.querySelectorAll(
+        'input[name="permissions"]:checked'
+      );
+      listPermission.forEach((input) => {
+        permissions.push(input.value);
+      });
+
+      const dataFinal = {
+        name: name,
+        description: description,
+        permissions: permissions,
+      };
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/setting/role/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.reload();
+          }
+        });
     });
 }
 // End Role Create Form

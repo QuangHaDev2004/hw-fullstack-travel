@@ -1,11 +1,12 @@
 extends ../layouts/default.pug 
+include ../mixins/change-search.pug
 
 block main 
   h2.box-title Nhóm quyền
 
   //- Section 5
   .section-5
-    include ../partials/change-search.pug
+    +change-search()
     .inner-button-create 
       a(href=`/${pathAdmin}/setting/role/create`) + Tạo mới
   //- End Section 5
