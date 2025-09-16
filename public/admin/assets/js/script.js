@@ -556,7 +556,46 @@ if (websiteInfoForm) {
     ])
     .onSuccess((event) => {
       const name = event.target.name.value;
-      console.log(name);
+      const phone = event.target.phone.value;
+      const email = event.target.email.value;
+      const address = event.target.address.value;
+      const logos = filePond.logo.getFiles();
+      let logo = null;
+      if (logos.length > 0) {
+        logo = logos[0].file;
+      }
+      const favicons = filePond.favicon.getFiles();
+      let favicon = null;
+      if (favicons.length > 0) {
+        favicon = favicons[0].file;
+      }
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("email", email);
+      formData.append("address", address);
+      formData.append("logo", logo);
+      formData.append("favicon", favicon);
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/setting/website-info`, {
+        method: "PATCH",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            notyf.success(data.message);
+          }
+        });
     });
 }
 // End Website Info Form
