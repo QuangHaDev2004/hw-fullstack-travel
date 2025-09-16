@@ -364,9 +364,9 @@ if (tourCreateForm) {
       })
         .then((res) => res.json())
         .then((data) => {
+          buttonSubmit.setAttribute("type", "");
           if (data.code == "error") {
             notyf.error(data.message);
-            submitBtn.setAttribute("type", "");
           }
 
           if (data.code == "success") {
@@ -645,7 +645,7 @@ if (accountAdminCreateForm) {
         errorMessage: "Số điện thoại không đúng định dạng!",
       },
     ])
-    .addField("#position", [
+    .addField("#positionCompany", [
       {
         rule: "required",
         errorMessage: "Vui lòng nhập chức vụ!",
@@ -706,13 +706,45 @@ if (accountAdminCreateForm) {
       const name = event.target.name.value;
       const email = event.target.email.value;
       const phone = event.target.phone.value;
-      const position = event.target.position.value;
+      const role = event.target.role.value;
+      const positionCompany = event.target.positionCompany.value;
+      const status = event.target.status.value;
       const password = event.target.password.value;
-      console.log(name);
-      console.log(email);
-      console.log(phone);
-      console.log(position);
-      console.log(password);
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if (avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("role", role);
+      formData.append("positionCompany", positionCompany);
+      formData.append("status", status);
+      formData.append("password", password);
+      formData.append("avatar", avatar);
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/setting/account-admin/create`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.reload();
+          }
+        });
     });
 }
 // End Account Admin Create Form

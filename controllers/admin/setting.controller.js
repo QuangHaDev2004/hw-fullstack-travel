@@ -1,9 +1,11 @@
 const SettingWebsiteInfo = require("../../models/setting-website-info.model");
 const Role = require("../../models/role.model");
+const bcrypt = require("bcryptjs");
 
 const { permissionList } = require("../../config/variable.config");
 
 const slugify = require("slugify");
+const AccountAdmin = require("../../models/account-admin.model");
 
 module.exports.list = (req, res) => {
   res.render("admin/pages/setting-list", {
@@ -54,10 +56,52 @@ module.exports.accountAdminList = (req, res) => {
   });
 };
 
-module.exports.accountAdminCreate = (req, res) => {
+module.exports.accountAdminCreate = async (req, res) => {
+  const roleList = await Role.find({
+    deleted: false,
+  });
+
   res.render("admin/pages/account-admin-create", {
     pageTitle: "Tạo tài khoản quản trị",
+    roleList: roleList,
   });
+};
+
+module.exports.accountAdminCreatePost = async (req, res) => {
+  try {
+    const existAccount = await AccountAdmin.findOne({
+      email: req.body.email,
+    });
+
+    if (existAccount) {
+      res.json({
+        code: "error",
+        message: "Email đã tồn tại trong hệ thống!",
+      });
+      return;
+    }
+
+    req.body.createdBy = req.account.id;
+    req.body.updatedBy = req.account.id;
+    req.body.avatar = req.file ? req.file.path : "";
+
+    // Mã hóa mật khẩu
+    const salt = await bcrypt.genSalt(10);
+    req.body.password = await bcrypt.hash(req.body.password, salt);
+
+    const newRecord = new AccountAdmin(req.body);
+    await newRecord.save();
+
+    res.json({
+      code: "success",
+      message: "Tạo tài khoản thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
 };
 
 module.exports.roleList = async (req, res) => {

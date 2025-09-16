@@ -1,14 +1,37 @@
 const mongoose = require("mongoose");
+const slug = require("mongoose-slug-updater");
+mongoose.plugin(slug);
 
-const AccountAdmin = mongoose.model(
-  "AccountAdmin",
+const schema = new mongoose.Schema(
   {
-    fullName: String,
+    name: String,
     email: String,
+    phone: Number,
+    role: String,
+    positionCompany: String,
+    status: String,
     password: String,
-    status: String, // initial, active, inactive
+    avatar: String,
+    createdBy: String,
+    updatedBy: String,
+    slug: {
+      type: String,
+      slug: "name",
+      unique: true,
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
+    deletedBy: String,
+    deletedAt: Date,
   },
-  "accounts-admin"
+  {
+    timestamps: true, //createdAt, updatedAt
+  }
 );
 
+const AccountAdmin = mongoose.model("AccountAdmin", schema, "accounts-admin");
+
 module.exports = AccountAdmin;
+

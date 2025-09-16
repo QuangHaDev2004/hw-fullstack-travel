@@ -18,24 +18,23 @@ block main
       .inner-group 
         label(for="role" class="inner-label") Nhóm quyền
         select(name="role" id="role") 
-          option(value="") Quản trị viên
-          option(value="") Quản lý tour
-          option(value="") Quản lý đơn hàng
+          each item in roleList
+            option(value=item.id) #{item.name}
       .inner-group 
-        label(for="position" class="inner-label") Chức vụ
-        input(type="text" id="position" name="position")
+        label(for="positionCompany" class="inner-label") Chức vụ
+        input(type="text" id="positionCompany" name="positionCompany")
       .inner-group 
         label(for="status" class="inner-label") Trạng thái
         select(name="status" id="status") 
-          option(value="") Hoạt động
-          option(value="") Dừng hoạt động
-          option(value="") Đã hủy
+          option(value="initial") Khởi tạo
+          option(value="active") Hoạt động
+          option(value="inactive") Tạm dừng
       .inner-group 
         label(for="password" class="inner-label") Mật khẩu
         input(type="text" id="password" name="password")
       .inner-group.inner-two-col
         label(for="avatar" class="inner-label") Ảnh đại diện
-        input(type="file" id="avatar" accept="image/*" filepond-image)
+        input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
       .inner-button-2.inner-two-col 
         button Tạo mới
     .inner-back
