@@ -1,12 +1,23 @@
 extends ../layouts/default.pug 
-include ../mixins/change-search.pug
 
 block main 
   h2.box-title Nhóm quyền
 
   //- Section 5
   .section-5
-    +change-search()
+    .inner-change-status(
+      change-multi
+      data-api=`/${pathAdmin}/setting/role/change-multi`
+    )
+      .inner-item
+        select(name="")
+          option(value="") -- Hành động -- 
+          option(value="delete") Xóa
+      .inner-item 
+        button Áp dụng
+    .inner-search 
+      <i class="fa-solid fa-magnifying-glass"></i>
+      input(type="text" placeholder="Tìm kiếm..." search)
     .inner-button-create 
       a(href=`/${pathAdmin}/setting/role/create`) + Tạo mới
   //- End Section 5
@@ -18,40 +29,30 @@ block main
         thead 
           tr 
             th 
-              input(type="checkbox" class="custom-check" id="check1")
+              input(type="checkbox" class="custom-check" id="check1" check-all)
               label(for="check1" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
             th Tên nhóm quyền
             th Mô tả ngắn
             th Hành động
         tbody 
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check2")
-              label(for="check2" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Quản trị viên
-            td Có đầy đủ các quyền
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check3")
-              label(for="check3" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Quản lý tour
-            td Có đầy đủ quyền liên quan đến tour
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check4")
-              label(for="check4" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Quản lý đơn hàng
-            td Có đầy đủ quyền liên quan đến đơn hàng
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
+          each item in roleList
+            tr 
+              td 
+                input(type="checkbox" class="custom-check" id=item.id check-item=item.id)
+                label(for=item.id class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+              td #{item.name}
+              td #{item.description}
+              td
+                .inner-buttons
+                  a(
+                    href=`/${pathAdmin}/setting/role/edit/${item.id}` 
+                    class="inner-edit"
+                  ) 
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                  button(
+                    class="inner-remove"
+                    button-delete
+                    data-api=`/${pathAdmin}/setting/role/delete/${item.id}`
+                  ) 
+                    <i class="fa-solid fa-trash-can"></i>
   //- End Section 6
