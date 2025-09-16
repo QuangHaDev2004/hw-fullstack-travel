@@ -4,7 +4,7 @@ mongoose.plugin(slug);
 
 const schema = new mongoose.Schema(
   {
-    name: String,
+    fullName: String,
     email: String,
     phone: Number,
     role: String,
@@ -16,7 +16,7 @@ const schema = new mongoose.Schema(
     updatedBy: String,
     slug: {
       type: String,
-      slug: "name",
+      slug: "fullName",
       unique: true,
     },
     deleted: {
