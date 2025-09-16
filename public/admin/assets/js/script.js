@@ -608,7 +608,7 @@ if (accountAdminCreateForm) {
   const validator = new JustValidate("#account-admin-create-form");
 
   validator
-    .addField("#name", [
+    .addField("#fullName", [
       {
         rule: "required",
         errorMessage: "Vui lòng nhập họ tên!",
@@ -703,7 +703,7 @@ if (accountAdminCreateForm) {
       },
     ])
     .onSuccess((event) => {
-      const name = event.target.name.value;
+      const fullName = event.target.fullName.value;
       const email = event.target.email.value;
       const phone = event.target.phone.value;
       const role = event.target.role.value;
@@ -717,7 +717,7 @@ if (accountAdminCreateForm) {
       }
 
       const formData = new FormData();
-      formData.append("name", name);
+      formData.append("fullName", fullName);
       formData.append("email", email);
       formData.append("phone", phone);
       formData.append("role", role);
