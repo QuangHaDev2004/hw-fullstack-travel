@@ -1,19 +1,7 @@
 const AccountAdmin = require("../../models/account-admin.model");
-const Role = require("../../models/role.model");
-
 const bcrypt = require("bcryptjs");
 
 module.exports.edit = async (req, res) => {
-  console.log(req.account);
-  if (req.account.role) {
-    const roleInfo = await Role.findOne({
-      _id: req.account.role,
-    });
-    if (roleInfo) {
-      req.account.roleName = roleInfo.name;
-    }
-  }
-
   res.render("admin/pages/profile-edit", {
     pageTitle: "Thông tin cá nhân",
     profileDetail: req.account,
