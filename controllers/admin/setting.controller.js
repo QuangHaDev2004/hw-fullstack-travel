@@ -1,11 +1,12 @@
 const SettingWebsiteInfo = require("../../models/setting-website-info.model");
 const Role = require("../../models/role.model");
-const bcrypt = require("bcryptjs");
+const AccountAdmin = require("../../models/account-admin.model");
 
 const { permissionList } = require("../../config/variable.config");
 
+const bcrypt = require("bcryptjs");
 const slugify = require("slugify");
-const AccountAdmin = require("../../models/account-admin.model");
+const moment = require("moment");
 
 module.exports.list = (req, res) => {
   res.render("admin/pages/setting-list", {
@@ -51,26 +52,56 @@ module.exports.websiteInfoPatch = async (req, res) => {
 };
 
 module.exports.accountAdminList = async (req, res) => {
-  const accountAdminList = await AccountAdmin.find({
+  const find = {
     deleted: false,
-  }).sort({
+  };
+
+  // Lọc theo trạng thái
+  if (req.query.status) {
+    find.status = req.query.status;
+  }
+
+  // Lọc theo ngày tạo
+  const dateFilter = {};
+  if (req.query.startDate) {
+    const startDate = moment(req.query.startDate).toDate();
+    dateFilter.$gte = startDate;
+  }
+  if (req.query.endDate) {
+    const endDate = moment(req.query.endDate).toDate();
+    dateFilter.$lte = endDate;
+  }
+  if (Object.keys(dateFilter).length > 0) {
+    find.createdAt = dateFilter;
+  }
+
+  // Lọc theo nhóm quyền
+  if (req.query.role) {
+    find.role = req.query.role;
+  }
+
+  const accountAdminList = await AccountAdmin.find(find).sort({
     createdAt: "desc",
   });
 
   for (const item of accountAdminList) {
-    if(item.role) {
+    if (item.role) {
       const roleInfo = await Role.findOne({
-        _id: item.role
-      })
-      if(roleInfo) {
+        _id: item.role,
+      });
+      if (roleInfo) {
         item.roleName = roleInfo.name;
       }
     }
   }
 
+  // Danh sách nhóm quyền
+  const roleList = await Role.find({});
+
   res.render("admin/pages/account-admin-list", {
     pageTitle: "Tài khoản quản trị",
-    accountAdminList: accountAdminList
+    accountAdminList: accountAdminList,
+    roleList: roleList,
   });
 };
 
