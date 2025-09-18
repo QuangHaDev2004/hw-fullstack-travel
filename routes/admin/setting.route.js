@@ -34,6 +34,11 @@ router.post(
   settingController.accountAdminCreatePost
 );
 
+router.patch(
+  "/account-admin/change-multi",
+  settingController.accountAdminChangeMultiPatch
+);
+
 router.get("/role/list", settingController.roleList);
 
 router.get("/role/create", settingController.roleCreate);
@@ -54,6 +59,6 @@ router.patch(
 
 router.patch("/role/delete/:id", settingController.deletePatch);
 
-router.patch("/role/change-multi", settingController.changeMultiPatch);
+router.patch("/role/change-multi", settingController.roleChangeMultiPatch);
 
 module.exports = router;
