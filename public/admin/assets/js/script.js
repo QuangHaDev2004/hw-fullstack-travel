@@ -978,7 +978,7 @@ if (profileEditForm) {
   const validator = new JustValidate("#profile-edit-form");
 
   validator
-    .addField("#name", [
+    .addField("#fullName", [
       {
         rule: "required",
         errorMessage: "Vui lòng nhập họ tên!",
@@ -1016,12 +1016,49 @@ if (profileEditForm) {
       },
     ])
     .onSuccess((event) => {
-      const name = event.target.name.value;
+      const fullName = event.target.fullName.value;
       const email = event.target.email.value;
       const phone = event.target.phone.value;
-      console.log(name);
-      console.log(email);
-      console.log(phone);
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if (avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault =
+          event.target.avatar.closest("[image-default]");
+        if (elementImageDefault) {
+          const imageDefault =
+            elementImageDefault.getAttribute("image-default");
+          if (imageDefault.includes(avatar.name)) {
+            avatar = undefined;
+          }
+        }
+      }
+
+      const formData = new FormData();
+      formData.append("fullName", fullName);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("avatar", avatar);
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/profile/edit`, {
+        method: "PATCH",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.reload();
+          }
+        });
     });
 }
 // End Profile Edit Form
