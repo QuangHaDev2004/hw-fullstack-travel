@@ -80,6 +80,13 @@ module.exports.accountAdminList = async (req, res) => {
     find.role = req.query.role;
   }
 
+  // Tìm kiếm
+  if (req.query.keyword) {
+    const keyword = slugify(req.query.keyword);
+    const keywordRegex = new RegExp(keyword, "i");
+    find.slug = keywordRegex;
+  }
+
   const accountAdminList = await AccountAdmin.find(find).sort({
     createdAt: "desc",
   });
@@ -145,6 +152,60 @@ module.exports.accountAdminCreatePost = async (req, res) => {
       code: "success",
       message: "Tạo tài khoản thành công!",
     });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
+module.exports.accountAdminChangeMultiPatch = async (req, res) => {
+  try {
+    const { option, ids } = req.body;
+
+    switch (option) {
+      case "initial":
+      case "active":
+      case "inactive":
+        await AccountAdmin.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            status: option,
+          }
+        );
+        res.json({
+          code: "success",
+          message: "Cập nhật trạng thái thành công!",
+        });
+        break;
+
+      case "delete":
+        await AccountAdmin.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            deleted: true,
+            deletedBy: req.account.id,
+            deletedAt: Date.now(),
+          }
+        );
+        res.json({
+          code: "success",
+          message: "Đã xóa thành công!",
+        });
+        break;
+
+      default:
+        res.json({
+          code: "error",
+          message: "Hành động không hợp lệ!",
+        });
+        break;
+    }
   } catch (error) {
     res.json({
       code: "error",
@@ -291,7 +352,7 @@ module.exports.deletePatch = async (req, res) => {
   }
 };
 
-module.exports.changeMultiPatch = async (req, res) => {
+module.exports.roleChangeMultiPatch = async (req, res) => {
   try {
     const { option, ids } = req.body;
 
@@ -310,6 +371,13 @@ module.exports.changeMultiPatch = async (req, res) => {
         res.json({
           code: "success",
           message: "Đã xóa thành công!",
+        });
+        break;
+
+      default:
+        res.json({
+          code: "error",
+          message: "Hành động không hợp lệ!",
         });
         break;
     }
