@@ -32,6 +32,8 @@ module.exports.verifyToken = async (req, res, next) => {
       });
       if (roleInfo) {
         existAccount.roleName = roleInfo.name;
+        res.locals.permissions = roleInfo.permissions;
+        req.permissions = roleInfo.permissions;
       }
     }
 
