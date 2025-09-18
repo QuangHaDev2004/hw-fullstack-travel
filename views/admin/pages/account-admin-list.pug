@@ -41,7 +41,7 @@ block main
         thead 
           tr 
             th 
-              input(type="checkbox" class="custom-check" id="check1")
+              input(type="checkbox" class="custom-check" id="check1" check-all)
               label(for="check1" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
             th Họ tên
             th.inner-center Ảnh đại diện
@@ -51,41 +51,36 @@ block main
             th Chức vụ
             th Trạng thái
             th Hành động
-        tbody 
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check2")
-              label(for="check2" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Lê Văn A
-            td.inner-center
-              img(src="/admin/assets/images/admin.jpg")
-            td levana@gmail.com
-            td 01234567890
-            td Quản trị viên
-            td Giám đốc
-            td
-              .badge.badge-green Hoạt động
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
-          tr 
-            td 
-              input(type="checkbox" class="custom-check" id="check3")
-              label(for="check3" class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
-            td Lê Văn A
-            td.inner-center
-              img(src="/admin/assets/images/admin.jpg")
-            td levana@gmail.com
-            td 01234567890
-            td Quản trị viên
-            td Giám đốc
-            td 
-              .badge.badge-red Tạm dừng
-            td
-              .inner-buttons
-                a(href="#" class="inner-edit") <i class="fa-solid fa-pen-to-square"></i> 
-                a(href="#" class="inner-remove") <i class="fa-solid fa-trash-can"></i>
+        tbody
+          each item in accountAdminList 
+            tr 
+              td 
+                input(type="checkbox" class="custom-check" id=item.id check-item=item.id)
+                label(for=item.id class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
+              td #{item.fullName}
+              td.inner-center
+                img(src=item.avatar)
+              td #{item.email}
+              td #{item.phone}
+              td #{item.roleName}
+              td #{item.positionCompany}
+              td
+                if (item.status == "initial")
+                  .badge.badge-orange Khởi tạo
+                else if (item.status == "active")
+                  .badge.badge-green Hoạt động
+                else if (item.status == "inactive")
+                  .badge.badge-red Tạm dừng
+              td
+                .inner-buttons
+                  a(href=`/${pathAdmin}/setting/account-admin/edit/${item.id}` class="inner-edit") 
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                  button(
+                    class="inner-remove"
+                    button-delete
+                    data-api=`/${pathAdmin}/setting/account-admin/delete/${item.id}`
+                  ) 
+                    <i class="fa-solid fa-trash-can"></i>
   //- End Section 6
 
   //- Pagination
