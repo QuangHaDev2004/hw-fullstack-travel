@@ -236,9 +236,12 @@ if (categoryEditForm) {
         avatar = avatars[0].file;
         const elementImageDefault =
           event.target.avatar.closest("[image-default]");
-        const imageDefault = elementImageDefault.getAttribute("image-default");
-        if (imageDefault.includes(avatar.name)) {
-          avatar = undefined;
+        if (elementImageDefault) {
+          const imageDefault =
+            elementImageDefault.getAttribute("image-default");
+          if (imageDefault.includes(avatar.name)) {
+            avatar = undefined;
+          }
         }
       }
       const description = tinymce.get("description").getContent();
@@ -402,9 +405,12 @@ if (tourEditForm) {
         avatar = avatars[0].file;
         const elementImageDefault =
           event.target.avatar.closest("[image-default]");
-        const imageDefault = elementImageDefault.getAttribute("image-default");
-        if (imageDefault.includes(avatar.name)) {
-          avatar = undefined;
+        if (elementImageDefault) {
+          const imageDefault =
+            elementImageDefault.getAttribute("image-default");
+          if (imageDefault.includes(avatar.name)) {
+            avatar = undefined;
+          }
         }
       }
       const priceAdult = event.target.priceAdult.value;
@@ -748,6 +754,111 @@ if (accountAdminCreateForm) {
     });
 }
 // End Account Admin Create Form
+
+// Account Admin Edit Form
+const accountAdminEditForm = document.querySelector("#account-admin-edit-form");
+if (accountAdminEditForm) {
+  const validator = new JustValidate("#account-admin-edit-form");
+
+  validator
+    .addField("#fullName", [
+      {
+        rule: "required",
+        errorMessage: "Vui lòng nhập họ tên!",
+      },
+      {
+        rule: "minLength",
+        value: 5,
+        errorMessage: "Họ tên phải có ít nhất 5 ký tự!",
+      },
+      {
+        rule: "maxLength",
+        value: 50,
+        errorMessage: "Họ tên không được vượt quá 50 ký tự!",
+      },
+    ])
+    .addField("#email", [
+      {
+        rule: "required",
+        errorMessage: "Vui lòng nhập email của bạn!",
+      },
+      {
+        rule: "email",
+        errorMessage: "Email không đúng định dạng!",
+      },
+    ])
+    .addField("#phone", [
+      {
+        rule: "required",
+        errorMessage: "Vui lòng nhập số điện thoại!",
+      },
+      {
+        rule: "customRegexp",
+        value: /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-6|8|9]|9[0-9])[0-9]{7}$/,
+        errorMessage: "Số điện thoại không đúng định dạng!",
+      },
+    ])
+    .addField("#positionCompany", [
+      {
+        rule: "required",
+        errorMessage: "Vui lòng nhập chức vụ!",
+      },
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const fullName = event.target.fullName.value;
+      const email = event.target.email.value;
+      const phone = event.target.phone.value;
+      const role = event.target.role.value;
+      const positionCompany = event.target.positionCompany.value;
+      const status = event.target.status.value;
+      const password = event.target.password.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if (avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault =
+          event.target.avatar.closest("[image-default]");
+        if (elementImageDefault) {
+          const imageDefault =
+            elementImageDefault.getAttribute("image-default");
+          if (imageDefault.includes(avatar.name)) {
+            avatar = undefined;
+          }
+        }
+      }
+
+      const formData = new FormData();
+      formData.append("fullName", fullName);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("role", role);
+      formData.append("positionCompany", positionCompany);
+      formData.append("status", status);
+      formData.append("password", password);
+      formData.append("avatar", avatar);
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/setting/account-admin/edit/${id}`, {
+        method: "PATCH",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            notyf.success(data.message);
+          }
+        });
+    });
+}
+// End Account Admin Edit Form
 
 // Role Create Form
 const roleCreateForm = document.querySelector("#role-create-form");

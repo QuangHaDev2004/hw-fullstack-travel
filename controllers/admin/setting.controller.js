@@ -179,6 +179,99 @@ module.exports.accountAdminCreatePost = async (req, res) => {
   }
 };
 
+module.exports.accountAdminEdit = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const accountDetail = await AccountAdmin.findOne({
+      _id: id,
+      deleted: false,
+    });
+
+    if (!accountDetail) {
+      res.redirect(`/${pathAdmin}/setting/account-admin/list`);
+      return;
+    }
+
+    const roleList = await Role.find({
+      deleted: false,
+    });
+
+    res.render("admin/pages/account-admin-edit", {
+      pageTitle: "Chỉnh sửa tài khoản quản trị",
+      roleList: roleList,
+      accountDetail: accountDetail,
+    });
+  } catch (error) {
+    res.redirect(`/${pathAdmin}/setting/account-admin/list`);
+  }
+};
+
+module.exports.accountAdminEditPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const accountDetail = await AccountAdmin.findOne({
+      _id: id,
+      deleted: false,
+    });
+
+    if (!accountDetail) {
+      res.json({
+        code: "error",
+        message: "Bản ghi không tồn tại!",
+      });
+      return;
+    }
+
+    const existEmail = await AccountAdmin.findOne({
+      _id: { $ne: id }, // loại trừ tài khoản đang cập nhật
+      email: req.body.email,
+    });
+
+    if (existEmail) {
+      res.json({
+        code: "error",
+        message: "Email đã tồn tại trong hệ thống!",
+      });
+      return;
+    }
+
+    if (req.body.password) {
+      // Mã hóa mật khẩu
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt);
+    } else {
+      delete req.body.password;
+    }
+
+    req.body.updatedBy = req.account.id;
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    } else {
+      delete req.body.avatar;
+    }
+
+    await AccountAdmin.updateOne(
+      {
+        _id: id,
+        deleted: false,
+      },
+      req.body
+    );
+
+    res.json({
+      code: "success",
+      message: "Cập nhật tài khoản thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
 module.exports.accountAdminChangeMultiPatch = async (req, res) => {
   try {
     const { option, ids } = req.body;
@@ -293,6 +386,7 @@ module.exports.roleEdit = async (req, res) => {
 
     if (!roleDetail) {
       res.redirect(`/${pathAdmin}/setting/role/list`);
+      return;
     }
 
     res.render("admin/pages/role-edit", {
