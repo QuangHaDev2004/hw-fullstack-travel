@@ -1,4 +1,5 @@
 extends ../layouts/default.pug 
+include ../mixins/pagination.pug
 
 block main 
   h2.box-title Tài khoản quản trị
@@ -98,5 +99,5 @@ block main
   //- End Section 6
 
   //- Pagination
-  include ../partials/pagination.pug
+  +pagination(pagination.skip, accountAdminList.length, pagination.totalRecord, pagination.totalPage)
   //- End Pagination

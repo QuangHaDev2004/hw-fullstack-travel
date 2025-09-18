@@ -87,9 +87,27 @@ module.exports.accountAdminList = async (req, res) => {
     find.slug = keywordRegex;
   }
 
-  const accountAdminList = await AccountAdmin.find(find).sort({
-    createdAt: "desc",
-  });
+  // Phân trang
+  const limitItems = 4;
+  let page = 1;
+  if (req.query.page && parseInt(req.query.page) > 0) {
+    page = parseInt(req.query.page);
+  }
+  const skip = (page - 1) * limitItems;
+  const totalRecord = await AccountAdmin.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+  };
+
+  const accountAdminList = await AccountAdmin.find(find)
+    .sort({
+      createdAt: "desc",
+    })
+    .limit(limitItems)
+    .skip(skip);
 
   for (const item of accountAdminList) {
     if (item.role) {
@@ -109,6 +127,7 @@ module.exports.accountAdminList = async (req, res) => {
     pageTitle: "Tài khoản quản trị",
     accountAdminList: accountAdminList,
     roleList: roleList,
+    pagination: pagination,
   });
 };
 
