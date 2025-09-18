@@ -1137,7 +1137,33 @@ if (profileChangePasswordForm) {
     ])
     .onSuccess((event) => {
       const password = event.target.password.value;
-      console.log(password);
+
+      const dataFinal = {
+        password: password,
+      };
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/profile/change-password`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.href = `/${pathAdmin}/profile/edit`;
+          }
+        });
     });
 }
 // End Profile Change Password Form
