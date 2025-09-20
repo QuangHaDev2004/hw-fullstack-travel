@@ -1,34 +1,34 @@
-mixin product-item()
+mixin product-item(item)
   .product-item
     .inner-image
-      a(href="chi-tiet-tour.html")
+      a(href=`/tour/detail/${item.slug}`)
         img(
-          alt="" 
-          src="/assets/images/sydney.svg"
+          alt=item.name
+          src=item.avatar
           )
     .inner-discount
       i.fa-solid.fa-bolt
-      | Giảm -30%
+      | Giảm -#{item.discount}%
     .inner-content
       h3.inner-title
-        a(href="chi-tiet-tour.html") Hà Nội – Lào Cai – SaPa 4N3Đ
+        a(href=`/tour/detail/${item.slug}`) #{item.name}
       .inner-price
         .inner-price-old
-          | 13.650.000
+          | #{item.priceAdult.toLocaleString("vi-VN")}
           span.inner-unit đ
         .inner-price-new
-          | 2.590.000
+          | #{item.priceNewAdult.toLocaleString("vi-VN")}
           span.inner-unit đ
       .inner-desc
         .inner-desc-item
-          | Mã Tour:
+          | Mã Tour: 
           b 123456789
         .inner-desc-item
-          | Ngày Khởi Hành:
-          b 22/07/2025
+          | Ngày Khởi Hành: 
+          b #{item.departureDateFormat}
         .inner-desc-item
-          | Thời Gian:
-          b 10 Ngày 9 Đêm
+          | Thời Gian: 
+          b #{item.time}
       .inner-meta
         .inner-rating
           .inner-stars
@@ -40,4 +40,4 @@ mixin product-item()
           .inner-star-number (5)
         .inner-stock
           .inner-label Số chỗ còn:
-          .inner-stock-number 10
+          .inner-stock-number #{item.stockAdult}
