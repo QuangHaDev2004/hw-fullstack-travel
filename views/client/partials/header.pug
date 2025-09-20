@@ -24,47 +24,32 @@ header.header
       .inner-logo
         a(href="/")
           img(
-            alt="Logo" 
-            src="/assets/images/Logo.svg"
+            alt=settingWebsiteInfo.name
+            src=settingWebsiteInfo.logo
             )
       nav.inner-menu
         ul
           li
-            a.active(href="#") Trang Chủ
-          li
-            a(href="#") Tour Trong Nước
-            i.fa-solid.fa-caret-down
-            ul
-              li
-                a.active(href="#") Tour Miền Bắc
-              li
-                a(href="#") Tour Miền Trung
-              li
-                a(href="#") Tour Miền Nam
-              li
-                a(href="#") Tour Xuyên Việt
-          li
-            a(href="#") Tour Nước Ngoài
-            i.fa-solid.fa-caret-down
-            ul
-              li
-                a(href="#") Tour Châu Á
-              li
-                a(href="#") Tour Châu Âu
-              li
-                a(href="#") Tour Châu Mỹ
-              li
-                a(href="#") Tour Châu Úc
+            a.active(href="/") Trang Chủ
+          each item in categoryList
+            li
+              a(href=`/category/${item.slug}`) #{item.name}
+              if (item.children && item.children.length > 0)
+                i.fa-solid.fa-caret-down
+                ul
+                  each itemChild in item.children
+                    li
+                      a(href=`/category/${itemChild.slug}`) #{itemChild.name}
           li
             a(href="#") Tin Tức
           li
             a(href="#") Liên Hệ
         .inner-overlay
       .inner-cart
-        a(href="gio-hang.html")
+        a(href="/cart")
           img(
-            alt="Icon cart" 
+            alt="Cart" 
             src="/assets/images/Icon.svg"
             )
-          span 1
+          span 0
 // End Header
