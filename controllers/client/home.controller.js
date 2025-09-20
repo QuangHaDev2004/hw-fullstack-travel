@@ -69,6 +69,9 @@ module.exports.home = async (req, res) => {
   }
   // End Section 4
 
+  // Section 6
+  // End Section 6
+
   res.render("client/pages/home", {
     pageTitle: "28Travel - Trang chủ",
     tourListSection2: tourListSection2,
