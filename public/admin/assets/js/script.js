@@ -275,6 +275,16 @@ if (categoryEditForm) {
 // Tour Create Form
 const tourCreateForm = document.querySelector("#tour-create-form");
 if (tourCreateForm) {
+  const autoNumericConfig = {
+    digitGroupSeparator: ".",
+    decimalCharacter: ",",
+    decimalPlaces: 0,
+  };
+
+  document.querySelectorAll(".auto-money").forEach((input) => {
+    new AutoNumeric(input, autoNumericConfig);
+  });
+
   const validator = new JustValidate("#tour-create-form");
 
   validator
@@ -294,12 +304,12 @@ if (tourCreateForm) {
       if (avatars.length > 0) {
         avatar = avatars[0].file;
       }
-      const priceAdult = event.target.priceAdult.value;
-      const priceChildren = event.target.priceChildren.value;
-      const priceBaby = event.target.priceBaby.value;
-      const priceNewAdult = event.target.priceNewAdult.value;
-      const priceNewChildren = event.target.priceNewChildren.value;
-      const priceNewBaby = event.target.priceNewBaby.value;
+      const priceAdult = AutoNumeric.getNumber("#priceAdult");
+      const priceChildren = AutoNumeric.getNumber("#priceChildren");
+      const priceBaby = AutoNumeric.getNumber("#priceBaby");
+      const priceNewAdult = AutoNumeric.getNumber("#priceNewAdult");
+      const priceNewChildren = AutoNumeric.getNumber("#priceNewChildren");
+      const priceNewBaby = AutoNumeric.getNumber("#priceNewBaby");
       const stockAdult = event.target.stockAdult.value;
       const stockChildren = event.target.stockChildren.value;
       const stockBaby = event.target.stockBaby.value;
@@ -384,6 +394,19 @@ if (tourCreateForm) {
 // Tour Edit Form
 const tourEditForm = document.querySelector("#tour-edit-form");
 if (tourEditForm) {
+  const autoNumericConfig = {
+    digitGroupSeparator: ".",
+    decimalCharacter: ",",
+    decimalPlaces: 0,
+  };
+
+  document.querySelectorAll(".auto-money").forEach((input) => {
+    const anElement = new AutoNumeric(input, autoNumericConfig);
+    if (input.value) {
+      anElement.set(input.value);
+    }
+  });
+
   const validator = new JustValidate("#tour-edit-form");
 
   validator
@@ -413,12 +436,12 @@ if (tourEditForm) {
           }
         }
       }
-      const priceAdult = event.target.priceAdult.value;
-      const priceChildren = event.target.priceChildren.value;
-      const priceBaby = event.target.priceBaby.value;
-      const priceNewAdult = event.target.priceNewAdult.value;
-      const priceNewChildren = event.target.priceNewChildren.value;
-      const priceNewBaby = event.target.priceNewBaby.value;
+      const priceAdult = AutoNumeric.getNumber("#priceAdult");
+      const priceChildren = AutoNumeric.getNumber("#priceChildren");
+      const priceBaby = AutoNumeric.getNumber("#priceBaby");
+      const priceNewAdult = AutoNumeric.getNumber("#priceNewAdult");
+      const priceNewChildren = AutoNumeric.getNumber("#priceNewChildren");
+      const priceNewBaby = AutoNumeric.getNumber("#priceNewBaby");
       const stockAdult = event.target.stockAdult.value;
       const stockChildren = event.target.stockChildren.value;
       const stockBaby = event.target.stockBaby.value;
@@ -1553,3 +1576,41 @@ if (filterRole) {
   }
 }
 // End Filter Role
+
+// Template Form
+const templateForm = document.querySelector("#template-form");
+if (templateForm) {
+  const validator = new JustValidate("#template-form");
+
+  validator.onSuccess((event) => {
+    const dataSection4 = event.target.dataSection4.value;
+
+    const dataFinal = {
+      dataSection4: dataSection4,
+    };
+
+    const buttonSubmit = document.querySelector(".inner-button-2 button");
+    buttonSubmit.setAttribute("type", "button");
+
+    fetch(`/${pathAdmin}/template/edit`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataFinal),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        buttonSubmit.setAttribute("type", "");
+        if (data.code == "error") {
+          notyf.error(data.message);
+        }
+
+        if (data.code == "success") {
+          drawNotify(data.code, data.message);
+          window.location.reload();
+        }
+      });
+  });
+}
+// End Template Form
