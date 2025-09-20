@@ -1,0 +1,17 @@
+extends ../layouts/default.pug
+include ../mixins/options.pug
+
+block main 
+  h2.box-title Cài đặt giao diện
+
+  //- Section 8
+  .section-8 
+    form(action="" id="template-form")
+      .inner-group 
+        label(for="dataSection4" class="inner-label") Dữ liệu Section 4
+        select(name="dataSection4" id="dataSection4") 
+          option(value="") -- Chọn danh mục --
+          +options(categoryList, 0, templateDetail.dataSection4)
+      .inner-button-2.inner-two-col 
+        button Cập nhật
+  //- End Section 8

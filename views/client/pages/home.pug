@@ -245,16 +245,16 @@ block main
         data-aos-delay="200" 
         data-aos-duration="800" 
         data-aos="fade-up"
-        ) Tour Trong Nước
+        ) #{categorySection4.name}
       .inner-wrap(
         data-aos-delay="400" 
         data-aos-duration="800" 
         data-aos="fade-up"
         )
-        //- +product-item()
-        //- +product-item()
+        each item in tourListSection4
+          +product-item(item)
       .inner-button
-        a.button-outline(href="danh-sach-tour.html") Xem tất cả
+        a.button-outline(href=`/category/${categorySection4.slug}`) Xem tất cả
   // End Section 4
 
   // Section 5
