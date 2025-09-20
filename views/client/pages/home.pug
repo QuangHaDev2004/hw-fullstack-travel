@@ -152,6 +152,7 @@ block main
             i.fa-solid.fa-magnifying-glass
             | Tìm Kiếm
   // End Section 1
+
   // Section 2
   .section-2(
     data-aos-delay="200" 
@@ -186,19 +187,11 @@ block main
         .inner-list
           .swiper.swiper-section-2
             .swiper-wrapper
-              .swiper-slide
-                +product-item()
-              .swiper-slide
-                +product-item()
-              .swiper-slide
-                +product-item()
-              .swiper-slide
-                +product-item()
-              .swiper-slide
-                +product-item()
-              .swiper-slide
-                +product-item()
+              each item in tourListSection2
+                .swiper-slide
+                  +product-item(item)
   // End Section 2
+
   // Section 3
   .section-3
     .container
@@ -244,6 +237,7 @@ block main
                     )
           .swiper-pagination
   // End Section 3
+
   // Section 4
   .section-4
     .container
@@ -257,17 +251,12 @@ block main
         data-aos-duration="800" 
         data-aos="fade-up"
         )
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
+        //- +product-item()
+        //- +product-item()
       .inner-button
         a.button-outline(href="danh-sach-tour.html") Xem tất cả
   // End Section 4
+
   // Section 5
   .section-5(
     data-aos-delay="200" 
@@ -282,7 +271,8 @@ block main
             src="/assets/images/section-5.jpg"
             )
   // End Section 5
-  // Section 4
+
+  // Section 6
   .section-4
     .container
       h2.box-title(
@@ -295,18 +285,13 @@ block main
         data-aos-duration="800" 
         data-aos="fade-up"
         )
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
-        +product-item()
+        //- +product-item()
+        //- +product-item()
       .inner-button
         a.button-outline(href="danh-sach-tour.html") Xem tất cả
-  // End Section 4
-  // Section 5
+  // End Section 6
+
+  // Section 7
   .section-5(
     data-aos-delay="200" 
     data-aos-duration="800" 
@@ -319,7 +304,8 @@ block main
             alt="" 
             src="/assets/images/section-7.jpg"
             )
-  // End Section 5
+  // End Section 7
+
   // Section 8
   .section-8
     .container
