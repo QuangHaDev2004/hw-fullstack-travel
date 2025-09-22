@@ -150,6 +150,18 @@ module.exports.createPost = async (req, res) => {
     ? parseInt(req.body.priceNewBaby)
     : req.body.priceBaby;
 
+  if (
+    req.body.priceAdult <= req.body.priceNewAdult ||
+    req.body.priceChildren <= req.body.priceNewChildren ||
+    req.body.priceBaby <= req.body.priceNewBaby
+  ) {
+    res.json({
+      code: "error",
+      message: "Giá mới phải nhỏ hơn giá cũ!",
+    });
+    return;
+  }
+
   req.body.stockAdult = req.body.stockAdult ? parseInt(req.body.stockAdult) : 0;
   req.body.stockChildren = req.body.stockChildren
     ? parseInt(req.body.stockChildren)
@@ -245,6 +257,18 @@ module.exports.editPatch = async (req, res) => {
     req.body.priceNewBaby = req.body.priceNewBaby
       ? parseInt(req.body.priceNewBaby)
       : req.body.priceBaby;
+
+    if (
+      req.body.priceAdult <= req.body.priceNewAdult ||
+      req.body.priceChildren <= req.body.priceNewChildren ||
+      req.body.priceBaby <= req.body.priceNewBaby
+    ) {
+      res.json({
+        code: "error",
+        message: "Giá mới phải nhỏ hơn giá cũ!",
+      });
+      return;
+    }
 
     req.body.stockAdult = req.body.stockAdult
       ? parseInt(req.body.stockAdult)

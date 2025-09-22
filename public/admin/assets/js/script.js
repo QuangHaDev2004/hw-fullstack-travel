@@ -193,6 +193,9 @@ if (categoryCreateForm) {
       formData.append("avatar", avatar);
       formData.append("description", description);
 
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
       fetch(`/${pathAdmin}/category/create`, {
         method: "POST",
         body: formData,
@@ -200,6 +203,7 @@ if (categoryCreateForm) {
         .then((res) => res.json())
         .then((data) => {
           if (data.code == "error") {
+            buttonSubmit.setAttribute("type", "");
             notyf.error(data.message);
           }
 
@@ -254,12 +258,16 @@ if (categoryEditForm) {
       formData.append("avatar", avatar);
       formData.append("description", description);
 
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
       fetch(`/${pathAdmin}/category/edit/${id}`, {
         method: "PATCH",
         body: formData,
       })
         .then((res) => res.json())
         .then((data) => {
+          buttonSubmit.setAttribute("type", "");
           if (data.code == "error") {
             notyf.error(data.message);
           }
