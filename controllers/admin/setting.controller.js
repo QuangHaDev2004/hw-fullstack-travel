@@ -326,6 +326,33 @@ module.exports.accountAdminChangeMultiPatch = async (req, res) => {
   }
 };
 
+module.exports.accountAdminDeletePatch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await AccountAdmin.updateOne(
+      {
+        _id: id,
+      },
+      {
+        deleted: true,
+        deletedBy: req.account.id,
+        deletedAt: Date.now(),
+      }
+    );
+
+    res.json({
+      code: "success",
+      message: "Xóa tài khoản thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Bản ghi không hợp lệ!",
+    });
+  }
+};
+
 module.exports.roleList = async (req, res) => {
   const find = {
     deleted: false,
