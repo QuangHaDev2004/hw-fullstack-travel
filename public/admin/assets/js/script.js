@@ -1584,9 +1584,11 @@ if (templateForm) {
 
   validator.onSuccess((event) => {
     const dataSection4 = event.target.dataSection4.value;
+    const dataSection6 = event.target.dataSection6.value;
 
     const dataFinal = {
       dataSection4: dataSection4,
+      dataSection6: dataSection6,
     };
 
     const buttonSubmit = document.querySelector(".inner-button-2 button");
@@ -1614,3 +1616,28 @@ if (templateForm) {
   });
 }
 // End Template Form
+
+// Button Copy Email
+const listButtonCopy = document.querySelectorAll("[copy-email]");
+if (listButtonCopy.length > 0) {
+  listButtonCopy.forEach((button) => {
+    button.addEventListener("click", () => {
+      const email = button.getAttribute("data-email");
+      navigator.clipboard.writeText(email).then(() => {
+        notyf.success("Copy email thành công!");
+      });
+
+      const icon = button.querySelector("i");
+      if (icon) {
+        icon.classList.remove("fa-clipboard");
+        icon.classList.add("fa-square-check");
+
+        setTimeout(() => {
+          icon.classList.remove("fa-square-check");
+          icon.classList.add("fa-clipboard");
+        }, 1000);
+      }
+    });
+  });
+}
+// End Button Copy Email

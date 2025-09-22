@@ -12,6 +12,11 @@ block main
         select(name="dataSection4" id="dataSection4") 
           option(value="") -- Chọn danh mục --
           +options(categoryList, 0, templateDetail.dataSection4)
+      .inner-group 
+        label(for="dataSection6" class="inner-label") Dữ liệu Section 6
+        select(name="dataSection6" id="dataSection6") 
+          option(value="") -- Chọn danh mục --
+          +options(categoryList, 0, templateDetail.dataSection6)
       .inner-button-2.inner-two-col 
         button Cập nhật
   //- End Section 8
