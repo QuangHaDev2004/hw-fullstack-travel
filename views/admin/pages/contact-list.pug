@@ -52,7 +52,11 @@ block main
                 input(type="checkbox" class="custom-check" id=item.id check-item=item.id)
                 label(for=item.id class="custom-icon-checkbox") <i class="fa-solid fa-check"></i>
               td 
-                <i class="fa-regular fa-clipboard" style="margin-right: 8px; font-size: 16px;"></i> 
+                button(
+                  copy-email
+                  data-email=item.email
+                )
+                  <i class="fa-regular fa-clipboard"></i> 
                 | #{item.email}
               td #{item.createdAtFormat}
               td.inner-center

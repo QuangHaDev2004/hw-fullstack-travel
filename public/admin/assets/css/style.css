@@ -1598,3 +1598,15 @@ button {
   display: none !important;
 }
 /* End Tiny MCE */
+
+button[copy-email] {
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 0;
+}
+
+button[copy-email] i {
+  font-size: 18px;
+  color: rgba(32, 34, 36, 0.7);
+}

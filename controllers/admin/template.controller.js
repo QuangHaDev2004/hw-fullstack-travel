@@ -14,7 +14,7 @@ module.exports.edit = async (req, res) => {
   res.render("admin/pages/template", {
     pageTitle: "Cài đặt giao diện",
     categoryList: categoryTree,
-    templateDetail: templateDetail
+    templateDetail: templateDetail,
   });
 };
 
