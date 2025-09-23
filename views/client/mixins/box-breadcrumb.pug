@@ -1,0 +1,22 @@
+mixin box-breadcrumb(list)
+  - const itemLast = list[list.length - 1];
+  .box-breadcrumb
+    .inner-image
+      img(
+        alt=itemLast.name
+        src=itemLast.avatar
+        )
+    .inner-content
+      .container
+        h1.inner-title(
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          ) #{itemLast.name}
+        nav.inner-list(
+          data-aos-delay="400" 
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          )
+          a(href="/") Trang Chủ
+          each item in list
+            a(href=`/category/${item.slug}`) #{item.name}

@@ -1,10 +1,10 @@
 extends ../layouts/default.pug
-include ../mixins/box-breadcumb.pug
+include ../mixins/box-breadcrumb.pug
 include ../mixins/product-item.pug
 
 block main 
   // Box Breadcumb
-  +box-breadcumb()
+  +box-breadcrumb(breadcrumb)
   // End Box Breadcumb
 
   // Section 9
@@ -116,18 +116,7 @@ block main
             data-aos-duration="800" 
             data-aos="fade-up"
             )
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
-            +product-item()
+            //- +product-item()
           .box-pagination
             button
               i.fa-solid.fa-angles-left
