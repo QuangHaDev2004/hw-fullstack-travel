@@ -71,7 +71,7 @@ module.exports.list = async (req, res) => {
   // Hết Danh sách Tour theo danh mục
 
   // Danh sách thành phố
-  const cityList = await City.find({})
+  const cityList = await City.find({}).sort({name: "asc"})
 
   res.render("client/pages/tour-list", {
     pageTitle: categoryDetail.name,
