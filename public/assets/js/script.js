@@ -414,6 +414,27 @@ if (boxFilter) {
 
     window.location.href = url.href;
   });
+
+  // Hiển thị giá trị mặc định
+  const urlCurrent = new URL(window.location.href);
+  for (const item of filterList) {
+    const valueCurrent = urlCurrent.searchParams.get(item);
+    if (valueCurrent) {
+      boxFilter.querySelector(`[name="${item}"]`).value = valueCurrent;
+    }
+  }
+
+  // Validate Input Number
+  const listInputNumber = boxFilter.querySelectorAll('[type="number"]');
+  if (listInputNumber.length > 0) {
+    listInputNumber.forEach((input) => {
+      input.addEventListener("input", () => {
+        if (input.value < 0) {
+          input.value = 0;
+        }
+      });
+    });
+  }
 }
 // End Box Filter
 
