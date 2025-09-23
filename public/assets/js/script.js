@@ -25,7 +25,9 @@ if (buttonMenuMobile) {
 // Hết Đóng mở Menu
 
 // Box address section 1
-const boxAddress = document.querySelector(".section-1 .inner-form .inner-address");
+const boxAddress = document.querySelector(
+  ".section-1 .inner-form .inner-address"
+);
 if (boxAddress) {
   // Ẩn hiện box suggest
   const input = boxAddress.querySelector(".inner-input");
@@ -38,8 +40,10 @@ if (boxAddress) {
   });
 
   // Click vào từng item
-  const listItem = boxAddress.querySelectorAll(".inner-suggest-list .inner-item");
-  listItem.forEach(item => {
+  const listItem = boxAddress.querySelectorAll(
+    ".inner-suggest-list .inner-item"
+  );
+  listItem.forEach((item) => {
     item.addEventListener("mousedown", () => {
       const title = item.querySelector(".inner-title").innerHTML.trim();
       input.value = title;
@@ -60,14 +64,14 @@ if (boxUser) {
   document.addEventListener("click", (event) => {
     if (!boxUser.contains(event.target)) {
       boxUser.classList.remove("active");
-    };
+    }
   });
 
   // Thêm số lượng vào ô input
   const updateQuantityInput = () => {
     const listBoxNumber = boxUser.querySelectorAll(".inner-number");
     const listNumber = [];
-    listBoxNumber.forEach(item => {
+    listBoxNumber.forEach((item) => {
       const number = item.innerHTML.trim();
       listNumber.push(number);
     });
@@ -78,7 +82,7 @@ if (boxUser) {
 
   // Sự kiện click up
   const listButtonUp = boxUser.querySelectorAll(".inner-up");
-  listButtonUp.forEach(button => {
+  listButtonUp.forEach((button) => {
     button.addEventListener("click", () => {
       const parent = button.closest(".inner-count");
       const boxNumber = parent.querySelector(".inner-number");
@@ -91,7 +95,7 @@ if (boxUser) {
 
   // Sự kiện click down
   const listButtonDown = boxUser.querySelectorAll(".inner-down");
-  listButtonDown.forEach(button => {
+  listButtonDown.forEach((button) => {
     button.addEventListener("click", () => {
       const parent = button.closest(".inner-count");
       const boxNumber = parent.querySelector(".inner-number");
@@ -99,7 +103,7 @@ if (boxUser) {
       if (number > 0) {
         const numberUpdate = number - 1;
         boxNumber.innerHTML = numberUpdate;
-      };
+      }
       updateQuantityInput();
     });
   });
@@ -129,7 +133,7 @@ if (clockExpire) {
       listBoxNumber[3].innerHTML = seconds >= 10 ? seconds : `0${seconds}`;
     } else {
       clearInterval(intervalClock);
-    };
+    }
   };
 
   const intervalClock = setInterval(updateClock, 1000);
@@ -143,16 +147,16 @@ if (swiperSection2) {
     slidesPerView: 1,
     spaceBetween: 20,
     autoplay: {
-      delay: 4000
+      delay: 4000,
     },
     loop: true,
     breakpoints: {
       992: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       1200: {
-        slidesPerView: 3
-      }
+        slidesPerView: 3,
+      },
     },
     mousewheel: true,
     keyboard: true,
@@ -172,16 +176,16 @@ if (swiperSection3) {
     },
     breakpoints: {
       576: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       992: {
-        slidesPerView: 3
-      }
+        slidesPerView: 3,
+      },
     },
     autoplay: {
-      delay: 4000
+      delay: 4000,
     },
-    loop: true
+    loop: true,
   });
 }
 // End Swiper Section 3
@@ -189,16 +193,16 @@ if (swiperSection3) {
 // Email Form
 const emailForm = document.querySelector("#email-form");
 if (emailForm) {
-  const validator = new JustValidate('#email-form');
+  const validator = new JustValidate("#email-form");
   validator
-    .addField('#email-input', [
+    .addField("#email-input", [
       {
-        rule: 'required',
-        errorMessage: "Vui lòng nhập email của bạn!"
+        rule: "required",
+        errorMessage: "Vui lòng nhập email của bạn!",
       },
       {
-        rule: 'email',
-        errorMessage: "Email không đúng định dạng!"
+        rule: "email",
+        errorMessage: "Email không đúng định dạng!",
       },
     ])
     .onSuccess((event) => {
@@ -239,7 +243,9 @@ if (buttonFilterMobile) {
     boxLeft.classList.add("active");
   });
 
-  const overlay = document.querySelector(".section-9 .inner-left .inner-overlay ");
+  const overlay = document.querySelector(
+    ".section-9 .inner-left .inner-overlay "
+  );
   overlay.addEventListener("click", () => {
     boxLeft.classList.remove("active");
   });
@@ -256,8 +262,8 @@ if (boxImages) {
     breakpoints: {
       576: {
         spaceBetween: 10,
-      }
-    }
+      },
+    },
   });
   const swiperBoxImagesMain = new Swiper(".swiper-box-images-main", {
     spaceBetween: 0,
@@ -291,13 +297,13 @@ if (couponForm) {
     .addField("#coupon-input", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập mã giảm giá!"
-      }
+        errorMessage: "Vui lòng nhập mã giảm giá!",
+      },
     ])
     .onSuccess((event) => {
       const coupon = event.target.coupon.value;
       console.log(coupon);
-    })
+    });
 }
 // End Coupon Form
 
@@ -310,28 +316,28 @@ if (orderForm) {
     .addField("#full-name-input", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập họ tên!"
+        errorMessage: "Vui lòng nhập họ tên!",
       },
       {
-        rule: 'minLength',
+        rule: "minLength",
         value: 5,
-        errorMessage: "Họ tên phải có ít nhất 5 ký tự!"
+        errorMessage: "Họ tên phải có ít nhất 5 ký tự!",
       },
       {
-        rule: 'maxLength',
+        rule: "maxLength",
         value: 50,
-        errorMessage: "Họ tên không được vượt quá 50 ký tự!"
+        errorMessage: "Họ tên không được vượt quá 50 ký tự!",
       },
     ])
     .addField("#phone-input", [
       {
         rule: "required",
-        errorMessage: "Vui lòng nhập số điện thoại!"
+        errorMessage: "Vui lòng nhập số điện thoại!",
       },
       {
-        rule: 'customRegexp',
+        rule: "customRegexp",
         value: /^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-6|8|9]|9[0-9])[0-9]{7}$/,
-        errorMessage: "Số điện thoại không đúng định dạng!"
+        errorMessage: "Số điện thoại không đúng định dạng!",
       },
     ])
     .onSuccess((event) => {
@@ -343,13 +349,15 @@ if (orderForm) {
       console.log(phone);
       console.log(note);
       console.log(method);
-    })
+    });
 
   // Chọn phương thức thanh toán
   const listInputMethod = orderForm.querySelectorAll("input[name='method']");
-  const elementInfoBank = orderForm.querySelector(".section-12 .inner-method .inner-info-bank");
+  const elementInfoBank = orderForm.querySelector(
+    ".section-12 .inner-method .inner-info-bank"
+  );
 
-  listInputMethod.forEach(input => {
+  listInputMethod.forEach((input) => {
     input.addEventListener("change", () => {
       const value = input.value;
       if (value == "bank") {
@@ -373,10 +381,41 @@ if (boxTourInfo) {
     } else {
       boxTourInfo.classList.add("active");
       buttonReadMore.innerHTML = "Ẩn bớt";
-    };
+    }
   });
 }
 // End Box Tour Info
+
+// Box Filter
+const boxFilter = document.querySelector(".box-filter");
+if (boxFilter) {
+  const url = new URL(`${window.location.origin}/search`);
+
+  const button = boxFilter.querySelector(".button-filter");
+  const filterList = [
+    "locationFrom",
+    "locationTo",
+    "departureDate",
+    "stockAdult",
+    "stockChildren",
+    "stockBaby",
+    "price",
+  ];
+
+  button.addEventListener("click", () => {
+    for (const item of filterList) {
+      const value = boxFilter.querySelector(`[name="${item}"]`).value;
+      if (value) {
+        url.searchParams.set(item, value);
+      } else {
+        url.searchParams.delete(item);
+      }
+    }
+
+    window.location.href = url.href;
+  });
+}
+// End Box Filter
 
 // Khởi tạo AOS
 AOS.init();
