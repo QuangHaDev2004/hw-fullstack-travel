@@ -18,7 +18,7 @@ block main
           | "Tận hưởng những hành trình tuyệt vời, khám phá nền văn hóa đa dạng,
           |   thắng cảnh hùng vĩ và ẩm thực đặc sắc tại mọi điểm đến trên thế
           |   giới!"
-        form.inner-form(action="")
+        form.inner-form(action="" form-search)
           .inner-box.inner-address
             .inner-input-group
               img.inner-icon(
@@ -28,6 +28,7 @@ block main
               input.inner-input(
                 placeholder="Bạn muốn đi đâu?" 
                 type="text"
+                name="locationTo"
                 )
               i.fa-solid.fa-angle-down.inner-down
             .inner-suggest
@@ -123,19 +124,19 @@ block main
                 .inner-label Người lớn
                 .inner-count
                   span.inner-down -
-                  span.inner-number 1
+                  span.inner-number(stockAdult) 1
                   span.inner-up +
               .inner-item
                 .inner-label Trẻ em
                 .inner-count
                   span.inner-down -
-                  span.inner-number 1
+                  span.inner-number(stockChildren) 0
                   span.inner-up +
               .inner-item
                 .inner-label Em bé
                 .inner-count
                   span.inner-down -
-                  span.inner-number 1
+                  span.inner-number(stockBaby) 0
                   span.inner-up +
           .inner-box.inner-calendar
             .inner-input-group
@@ -145,10 +146,10 @@ block main
                 )
               input.inner-input(
                 placeholder="Lịch khởi hành" 
-                type="text"
+                type="date"
+                name="departureDate"
                 )
-              i.fa-solid.fa-angle-down.inner-down
-          button.inner-button
+          button.inner-button(type="submit")
             i.fa-solid.fa-magnifying-glass
             | Tìm Kiếm
   // End Section 1
