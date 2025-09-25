@@ -13,6 +13,7 @@ function initTinyMCE(selector) {
       favs: { title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons' }
     },
     menubar: 'favs file edit view insert format tools table help',
+    images_upload_url: `/${pathAdmin}/upload/image`
   });
 }
 

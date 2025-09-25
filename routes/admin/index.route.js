@@ -9,6 +9,7 @@ const contactRoutes = require("./contact.route");
 const settingRoutes = require("./setting.route");
 const profileRoutes = require("./profile.route");
 const templateRoutes = require("./template.route");
+const uploadRoutes = require("./upload.route");
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
 
@@ -22,6 +23,7 @@ router.use("/contact", authMiddleware.verifyToken, contactRoutes);
 router.use("/setting", authMiddleware.verifyToken, settingRoutes);
 router.use("/profile", authMiddleware.verifyToken, profileRoutes);
 router.use("/template", authMiddleware.verifyToken, templateRoutes);
+router.use("/upload", authMiddleware.verifyToken, uploadRoutes);
 
 router.use(authMiddleware.verifyToken, (req, res) => {
   res.render("admin/pages/404", {
