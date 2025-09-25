@@ -20,11 +20,11 @@ block main
         input(type="text" id="address" name="address" value=settingWebsiteInfo.address  )
       .inner-group
         label(for="logo" class="inner-label") Logo
-        div(image-default=settingWebsiteInfo.logo)
+        div(class="inner-upload-image" image-default=settingWebsiteInfo.logo)
           input(type="file" id="logo" accept="image/*" filepond-image name="logo")
       .inner-group
         label(for="favicon" class="inner-label") Favicon
-        div(image-default=settingWebsiteInfo.favicon)
+        div(class="inner-upload-image" image-default=settingWebsiteInfo.favicon)
           input(type="file" id="favicon" accept="image/*" filepond-image name="favicon")
       .inner-button-2.inner-two-col 
         button Cập nhật

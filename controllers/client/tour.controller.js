@@ -39,11 +39,9 @@ module.exports.detail = async (req, res) => {
     avatar: tourDetail.avatar,
   });
 
-  console.log(breadcrumb);
-  
-
   res.render("client/pages/tour-detail", {
-    pageTitle: "Chi tiết Tour",
-    breadcrumb: breadcrumb
+    pageTitle: tourDetail.name,
+    breadcrumb: breadcrumb,
+    tourDetail: tourDetail
   });
 };

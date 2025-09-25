@@ -13,7 +13,11 @@ router.get("/create", tourController.create);
 
 router.post(
   "/create",
-  upload.single("avatar"),
+  // upload.single("avatar"),
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "images", maxCount: 10 },
+  ]),
   tourValidate.createPost,
   tourController.createPost
 );
@@ -22,7 +26,11 @@ router.get("/edit/:id", tourController.edit);
 
 router.patch(
   "/edit/:id",
-  upload.single("avatar"),
+  // upload.single("avatar"),
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "images", maxCount: 10 },
+  ]),
   tourValidate.createPost,
   tourController.editPatch
 );

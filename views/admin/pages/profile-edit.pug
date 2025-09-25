@@ -23,7 +23,7 @@ block main
         input(type="text" id="role" name="role" readonly value=profileDetail.roleName)
       .inner-group.inner-two-col
         label(for="avatar" class="inner-label") Ảnh đại diện
-        div(image-default=profileDetail.avatar)
+        div(class="inner-upload-image" image-default=profileDetail.avatar)
           input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
       .inner-button-2.inner-two-col 
         button Cập nhật
