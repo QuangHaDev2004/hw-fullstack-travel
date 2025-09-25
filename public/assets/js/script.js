@@ -389,7 +389,12 @@ if (boxTourInfo) {
 // Box Filter
 const boxFilter = document.querySelector(".box-filter");
 if (boxFilter) {
-  const url = new URL(`${window.location.origin}/search`);
+  let url;
+  if (window.location.pathname.includes("/search")) {
+    url = new URL(window.location.href);
+  } else {
+    url = new URL(`${window.location.origin}/search`);
+  }
 
   const button = boxFilter.querySelector(".button-filter");
   const filterList = [
@@ -478,6 +483,56 @@ if (formSearch) {
   });
 }
 // End Form Search
+
+// Button Reset Filter
+const buttonFilterReset = document.querySelector(".button-reset");
+if (buttonFilterReset) {
+  const url = new URL(window.location.href);
+
+  buttonFilterReset.addEventListener("click", () => {
+    url.search = "";
+    window.location.href = url.href;
+  });
+}
+// End Button Reset Filter
+
+// Sort
+const boxSort = document.querySelector("[sort]");
+if (boxSort) {
+  const url = new URL(window.location.href);
+  const listButtonSort = boxSort.querySelectorAll(".inner-button");
+
+  if (listButtonSort.length > 0) {
+    listButtonSort.forEach((button) => {
+      button.addEventListener("click", () => {
+        const dataSort = button.getAttribute("data-sort").split("-");
+        const [sortKey, sortValue] = dataSort;
+
+        url.searchParams.set("sortKey", sortKey);
+        url.searchParams.set("sortValue", sortValue);
+
+        window.location.href = url.href;
+      });
+    });
+  }
+
+  // Hiển thị active
+  const currentSortKey = url.searchParams.get("sortKey");
+  const currentSortValue = url.searchParams.get("sortValue");
+  if (currentSortKey && currentSortValue) {
+    listButtonSort.forEach((button) => {
+      const dataSort = button.getAttribute("data-sort").split("-");
+      const [sortKey, sortValue] = dataSort;
+
+      if (sortKey === currentSortKey && sortValue === currentSortValue) {
+        button.classList.add("active");
+      } else {
+        button.classList.remove("active");
+      }
+    });
+  }
+}
+// End Sort
 
 // Khởi tạo AOS
 AOS.init();

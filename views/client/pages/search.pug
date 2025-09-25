@@ -62,25 +62,27 @@ block main
                   option(value="10000000-1000000000") Trên 10tr
               .inner-group
                 button.button-filter Áp Dụng
+              .inner-group
+                button.button-reset Xóa bộ lọc
           .inner-overlay
         .inner-right
           .inner-info
             h2.inner-title #{pageTitle}
           .inner-info-2
-            .inner-sort
+            .inner-sort(sort)
               .inner-label Sắp xếp :
-              button.inner-button
+              button.inner-button(data-sort="priceNewAdult-asc")
                 | Giá tăng dần
                 i.fa-solid.fa-square-caret-up
-              button.inner-button
+              button.inner-button(data-sort="priceNewAdult-desc")
                 | Giá giảm dần
                 i.fa-solid.fa-square-caret-down
-              button.inner-button.active
-                | Khuyến mãi hot
-                i.fa-solid.fa-tag
-              button.inner-button
-                | Xem nhiều
-                i.fa-solid.fa-eye
+              //- button.inner-button.active(data-sort="discount-desc")
+              //-   | Khuyến mãi hot
+              //-   i.fa-solid.fa-tag
+              //- button.inner-button
+              //-   | Xem nhiều
+              //-   i.fa-solid.fa-eye
             .inner-total
               | Tất cả:
               b #{tourList.length} Tour
