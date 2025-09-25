@@ -111,6 +111,42 @@ if (listFilePondImage.length > 0) {
 }
 // End Filepond
 
+// Filepond Image Multi
+const listFilepondImageMulti = document.querySelectorAll(
+  "[filepond-image-multi]"
+);
+let filePondMulti = {};
+if (listFilepondImageMulti.length > 0) {
+  listFilepondImageMulti.forEach((filepondImage) => {
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+    FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+    let files = null;
+    const elementListImageDefault = filepondImage.closest(
+      "[list-image-default]"
+    );
+    if (elementListImageDefault) {
+      let listImageDefault =
+        elementListImageDefault.getAttribute("list-image-default");
+      if (listImageDefault) {
+        listImageDefault = JSON.parse(listImageDefault);
+        files = [];
+        listImageDefault.forEach((image) => {
+          files.push({
+            source: image,
+          });
+        });
+      }
+    }
+
+    filePondMulti[filepondImage.name] = FilePond.create(filepondImage, {
+      labelIdle: "+",
+      files: files
+    });
+  });
+}
+// End Filepond Image Multi
+
 // Chart 1
 const char1 = document.querySelector("#chart1");
 if (char1) {
@@ -376,6 +412,13 @@ if (tourCreateForm) {
       formData.append("information", information);
       formData.append("schedules", JSON.stringify(schedules));
 
+      // Images
+      if (filePondMulti.images.getFiles().length > 0) {
+        filePondMulti.images.getFiles().forEach((item) => {
+          formData.append("images", item.file);
+        });
+      }
+
       const buttonSubmit = document.querySelector(".inner-button-2 button");
       buttonSubmit.setAttribute("type", "button");
 
@@ -507,6 +550,13 @@ if (tourEditForm) {
       formData.append("departureDate", departureDate);
       formData.append("information", information);
       formData.append("schedules", JSON.stringify(schedules));
+
+      // Images
+      if (filePondMulti.images.getFiles().length > 0) {
+        filePondMulti.images.getFiles().forEach((item) => {
+          formData.append("images", item.file);
+        });
+      }
 
       const buttonSubmit = document.querySelector(".inner-button-2 button");
       buttonSubmit.setAttribute("type", "button");

@@ -50,7 +50,7 @@ block main
         input(type="text" id="password" name="password")
       .inner-group.inner-two-col
         label(for="avatar" class="inner-label") Ảnh đại diện
-        div(image-default=accountDetail.avatar)
+        div(class="inner-upload-image" image-default=accountDetail.avatar)
           input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
       .inner-button-2.inner-two-col 
         button Cập nhật

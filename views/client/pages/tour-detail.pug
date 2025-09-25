@@ -19,57 +19,23 @@ block main
             .inner-image-main
               .swiper.swiper-box-images-main
                 .swiper-wrapper
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/vinh-ha-long.jpg"
-                        )
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/dao-phu-quoc.jpg"
-                        )
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/vinh-ha-long-2.jpg"
-                        )
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/vung-tau-2.jpeg"
-                        )
+                  each image in tourDetail.images
+                    .swiper-slide
+                      .inner-image
+                        img(
+                          alt="" 
+                          src=image
+                          )
             .inner-image-thumb
               .swiper.swiper-box-images-thumb
                 .swiper-wrapper
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/vinh-ha-long.jpg"
-                        )
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/dao-phu-quoc.jpg"
-                        )
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/vinh-ha-long-2.jpg"
-                        )
-                  .swiper-slide
-                    .inner-image
-                      img(
-                        alt="" 
-                        src="/assets/images/vung-tau-2.jpeg"
-                        )
+                  each image in tourDetail.images
+                    .swiper-slide
+                      .inner-image
+                        img(
+                          alt="" 
+                          src=image
+                          )
           .box-tour-info(
             data-aos-delay="400" 
             data-aos-duration="800" 

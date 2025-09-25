@@ -34,7 +34,7 @@ block main
           ) Tạm dừng
       .inner-group.inner-two-col
         label(for="avatar" class="inner-label") Ảnh đại diện
-        div(image-default=categoryDetail.avatar)
+        div(class="inner-upload-image" image-default=categoryDetail.avatar)
           input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
       .inner-group.inner-two-col
         label(for="description" class="inner-label") Mô tả

@@ -11,5 +11,8 @@ mixin box-breadcrumb(list)
         h1.inner-title #{itemLast.name}
         nav.inner-list
           a(href="/") Trang Chủ
-          each item in list
-            a(href=`/category/${item.slug}`) #{item.name}
+          each item, i in list
+            if i !== list.length - 1
+              a(href=`/category/${item.slug}`) #{item.name}
+            else 
+              a(href=`javascript:;`) #{item.name}

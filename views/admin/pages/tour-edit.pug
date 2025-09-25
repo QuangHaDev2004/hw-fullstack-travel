@@ -35,8 +35,13 @@ block main
             ) Tạm dừng
         .inner-group.inner-two-col
           label(for="avatar" class="inner-label") Ảnh đại diện
-          div(image-default=tourDetail.avatar)
+          div(class="inner-upload-image" image-default=tourDetail.avatar)
             input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
+        .inner-group.inner-two-col
+          label(for="images" class="inner-label") Danh sách ảnh
+          div(class="inner-upload-image-multi" list-image-default=tourDetail.images)
+            input(type="file" multiple data-allow-reorder="true" 
+              id="images" accept="image/*" filepond-image-multi name="images")
         .inner-group 
           label(class="inner-label") Giá cũ
           .inner-input-list 

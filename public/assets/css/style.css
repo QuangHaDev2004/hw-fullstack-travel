@@ -1551,6 +1551,11 @@ img {
   display: none;
 }
 
+.box-breadcrumb .inner-content .inner-list a:last-child {
+  cursor: default;
+  font-weight: 600;
+}
+
 @media (max-width: 991.98px) {
   .box-breadcrumb .inner-content {
     padding-bottom: 15px;
