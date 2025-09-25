@@ -1853,7 +1853,8 @@ img {
   letter-spacing: 0.1px;
 }
 
-.box-filter .button-filter {
+.box-filter .button-filter,
+.box-filter .button-reset {
   width: 100%;
   text-align: center;
   height: 38px;
@@ -1865,6 +1866,12 @@ img {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+
+.box-filter .button-reset {
+  border: 1px solid #f9313d;
+  background-color: transparent;
+  color: #f9313d;
 }
 
 .box-filter .button-filter:hover {

@@ -60,9 +60,15 @@ module.exports.list = async (req, res) => {
       };
     }
 
-    const tourList = await Tour.find(find).sort({
-      position: "desc",
-    });
+    // Sắp xếp theo tiêu chí
+    let sort = {};
+    if (req.query.sortKey && req.query.sortValue) {
+      sort[req.query.sortKey] = req.query.sortValue;
+    } else {
+      sort.position = "desc";
+    }
+
+    const tourList = await Tour.find(find).sort(sort);
 
     for (const item of tourList) {
       item.discount = Math.floor(
