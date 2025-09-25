@@ -43,21 +43,7 @@ block main
             data-aos="fade-up"
             )
             .inner-title Thông Tin Tour
-            .inner-content
-              p
-                | Nói về dịch vụ, chắc chắn rồi, với một tiêu chí của một khách sạn 5 sao đẳng cấp, mình tin rằng
-                |   Indochine Palace đủ để cho bạn đánh giá 6 sao. Từ nhà hàng, cà phê, đến trung tâm thể dục thể thao hiện
-                |   đại đến Spa, xông hơi… tất tần tật các dịch vụ mà bạn mong muốn đều có ở đây.. Từ nhà hàng, cà phê, đến
-                |   trung tâm thể dục thể thao hiện đại đến Spa, xông hơi… tất tần tật các dịch vụ mà bạn mong muốn đều có ở
-                |   đây. . Từ nhà hàng, cà phê, đến trung tâm thể dục thể thao hiện đại đến Spa, xông hơi…
-              img(
-                alt="" 
-                src="/assets/images/ho-guom.jpg"
-                )
-              p
-                | Không chỉ dừng lại ở đó, đội ngũ nhân viên cũng là một điểm cộng lớn – luôn tận tình, chuyên nghiệp và sẵn sàng hỗ trợ bạn 24/7. Dù là một lời chào buổi sáng hay một ly nước chanh mát lạnh sau khi tập gym, mọi thứ đều được chuẩn bị một cách chỉn chu khiến bạn cảm thấy mình thực sự được trân trọng.
-              p
-                | Nếu bạn đang tìm một nơi vừa để nghỉ dưỡng, vừa để tận hưởng trọn vẹn những khoảnh khắc thư thái và đẳng cấp, thì Indochine Palace chắc chắn là một lựa chọn không thể hoàn hảo hơn.
+            .inner-content !{tourDetail.information}
             .inner-read-more
               button.button-outline Xem tất cả
           .box-tour-schedule(
@@ -68,130 +54,11 @@ block main
             .inner-title-main Lịch Trình Tour
             .inner-list
               .inner-line
-              .inner-item
-                .inner-dot
-                .inner-title NGÀY 1 | TP.HCM – THỦ ĐÔ HÀ NỘI
-                .inner-content
-                  p
-                    b Sáng
-                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
-                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
-                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
-                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
-                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
-                    br
-                    b Chiều
-                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
-                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
-                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
-                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
-                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
-                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
-                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
-                    |   Di sản Tư liệu Thế giới.
-                  img(
-                    alt="" 
-                    src="/assets/images/lang-bac.jpg"
-                    )
-                  p
-                    b Tối
-                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
-                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
-                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
-                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
-              .inner-item
-                .inner-dot
-                .inner-title NGÀY 2 | TP.HCM – THỦ ĐÔ HÀ NỘI
-                .inner-content
-                  p
-                    b Sáng
-                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
-                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
-                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
-                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
-                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
-                    br
-                    b Chiều
-                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
-                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
-                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
-                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
-                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
-                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
-                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
-                    |   Di sản Tư liệu Thế giới.
-                  img(
-                    alt="" 
-                    src="/assets/images/thai-nguyen.jpg"
-                    )
-                  p
-                    b Tối
-                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
-                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
-                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
-                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
-              .inner-item
-                .inner-dot
-                .inner-title NGÀY 3 | TP.HCM – THỦ ĐÔ HÀ NỘI
-                .inner-content
-                  p
-                    b Sáng
-                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
-                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
-                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
-                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
-                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
-                    br
-                    b Chiều
-                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
-                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
-                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
-                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
-                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
-                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
-                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
-                    |   Di sản Tư liệu Thế giới.
-                  img(
-                    alt="" 
-                    src="/assets/images/hai-phong.jpg"
-                    )
-                  p
-                    b Tối
-                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
-                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
-                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
-                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
-              .inner-item
-                .inner-dot
-                .inner-title NGÀY 4 | TP.HCM – THỦ ĐÔ HÀ NỘI
-                .inner-content
-                  p
-                    b Sáng
-                    | : HDV TOPTEN TRAVEL® đón Quý Khách tại sân bay Tân Sơn Nhất, làm thủ tục check-in cho
-                    |   đoàn đi Hà Nội (Quý Khách vui lòng có mặt tại sân bay trước 2 tiếng so với giờ bay). Đến sân bay Hà
-                    |   Nội – Xe và HDV địa phương đón đoàn, đưa về khách sạn nghỉ ngơi sau chặng bay. Trên đường đi, Quý
-                    |   Khách có dịp ngắm nhìn quang cảnh Thủ đô Hà Nội nhộn nhịp, pha trộn giữa nét cổ kính và hiện đại.
-                    |   Đoàn dùng bữa trưa tại nhà hàng địa phương với các món đặc sản miền Bắc.
-                    br
-                    b Chiều
-                    | : Đoàn bắt đầu hành trình tham quan thủ đô với điểm đến đầu tiên là Chùa Trấn Quốc –
-                    |   ngôi chùa cổ nhất Việt Nam, hơn 1.500 năm tuổi, tọa lạc trên bán đảo nhỏ giữa Hồ Tây, nổi bật với
-                    |   tháp bảo tồn nhiều xá lợi linh thiêng. Tiếp tục chương trình, đoàn đến Đền Ngọc Sơn, Cầu Thê Húc
-                    |   cong cong như dáng lưng tôm, nổi bật giữa Hồ Hoàn Kiếm thơ mộng – nơi gắn liền với truyền thuyết vua
-                    |   Lê trả gươm báu. Quý Khách có cơ hội tận mắt chiêm ngưỡng cụ Rùa nổi tiếng dài 2,1m, ngang 1,2m được
-                    |   lưu giữ tại đền Ngọc Sơn. Sau đó, đoàn tham quan Văn Miếu – Quốc Tử Giám – trường đại học đầu tiên
-                    |   của Việt Nam, biểu tượng của truyền thống hiếu học, với 82 tấm bia Tiến sĩ được UNESCO công nhận là
-                    |   Di sản Tư liệu Thế giới.
-                  img(
-                    alt="" 
-                    src="/assets/images/cao-bang.jpg"
-                    )
-                  p
-                    b Tối
-                    | : Đoàn dùng bữa tối tại nhà hàng với thực đơn đậm chất Hà Nội. Sau đó, Quý Khách tự do
-                    |   nghỉ ngơi hoặc tham gia chương trình khám phá phố cổ Hà Nội về đêm, tản bộ quanh Hồ Gươm lung linh
-                    |   ánh đèn, thưởng thức đặc sản như kem Tràng Tiền, cà phê trứng, hoặc mua sắm tại Chợ đêm Hà Nội sầm
-                    |   uất – nơi hội tụ các sản phẩm thủ công mỹ nghệ, quần áo thời trang và ẩm thực đường phố đặc sắc.
+              each item in tourDetail.schedules
+                .inner-item
+                  .inner-dot
+                  .inner-title #{item.title}
+                  .inner-content !{item.description}
         .inner-right(
           data-aos-delay="450" 
           data-aos-duration="800" 
