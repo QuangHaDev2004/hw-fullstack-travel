@@ -1,0 +1,39 @@
+mixin pagination(currentPage, totalPage)
+  .box-pagination
+    if (currentPage > 1)
+      button(button-pagination=currentPage - 1)
+        i.fa-solid.fa-angles-left
+
+    - const total = totalPage
+    - const current = currentPage
+    - let start = current - 2
+    - let end = current + 3
+
+    // nếu đầu nhỏ hơn 1 thì dồn sang phải
+    if (start < 1)
+      - end += (1 - start)
+      - start = 1
+
+    // nếu cuối vượt quá total thì dồn sang trái
+    if (end > total)
+      - start -= (end - total)
+      - end = total
+
+    // đảm bảo start >= 1
+    if (start < 1)
+      - start = 1
+
+    // đảm bảo tối đa 6 trang
+    if (end - start + 1 > 6)
+      - end = start + 5
+
+    // render dải trang
+    - for (let i = start; i <= end; i++)
+      button(
+        class=`${current === i ? "active" : ""}`
+        button-pagination=i
+      ) #{i}
+      
+    if (currentPage < totalPage)
+      button(button-pagination=currentPage + 1)
+        i.fa-solid.fa-angles-right

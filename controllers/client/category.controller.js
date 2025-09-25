@@ -43,20 +43,47 @@ module.exports.list = async (req, res) => {
     avatar: categoryDetail.avatar,
   });
 
+  // Sắp xếp theo tiêu chí
+  let sort = {};
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else {
+    sort.position = "desc";
+  }
+
   // Danh sách Tour theo danh mục
   const categoryId = categoryDetail.id;
   const categoryChild = await categoryHelper.getCategoryChild(categoryId);
   const categoryChildId = categoryChild.map((item) => item.id);
 
-  const tourList = await Tour.find({
+  let find = {
     category: {
       $in: [categoryId, ...categoryChildId],
     },
     deleted: false,
     status: "active",
-  }).sort({
-    position: "desc",
-  });
+  };
+
+  // Phân trang
+  const limitItems = 6;
+  let page = 1;
+  if (req.query.page && parseInt(req.query.page) > 0) {
+    page = parseInt(req.query.page);
+  }
+  const skip = (page - 1) * limitItems;
+  const totalRecord = await Tour.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+    currentPage: page,
+  };
+
+  const tourList = await Tour.find(find)
+    .sort(sort)
+    .limit(limitItems)
+    .skip(skip);
 
   for (const item of tourList) {
     item.discount = Math.floor(
@@ -71,13 +98,14 @@ module.exports.list = async (req, res) => {
   // Hết Danh sách Tour theo danh mục
 
   // Danh sách thành phố
-  const cityList = await City.find({}).sort({name: "asc"})
+  const cityList = await City.find({}).sort({ name: "asc" });
 
   res.render("client/pages/tour-list", {
     pageTitle: categoryDetail.name,
     breadcrumb: breadcrumb,
     categoryDetail: categoryDetail,
     tourList: tourList,
-    cityList: cityList
+    cityList: cityList,
+    pagination: pagination,
   });
 };

@@ -534,6 +534,29 @@ if (boxSort) {
 }
 // End Sort
 
+// Pagination
+const boxPagination = document.querySelector(".box-pagination");
+if (boxPagination) {
+  const url = new URL(window.location.href);
+  const listButtonPagination = boxPagination.querySelectorAll(
+    "[button-pagination]"
+  );
+
+  if (listButtonPagination.length > 0) {
+    listButtonPagination.forEach((button) => {
+      button.addEventListener("click", () => {
+        const page = button.getAttribute("button-pagination");
+        if (page) {
+          url.searchParams.set("page", page);
+        }
+
+        window.location.href = url.href;
+      });
+    });
+  }
+}
+// End Pagination
+
 // Khởi tạo AOS
 AOS.init();
 // Hết Khởi tạo AOS

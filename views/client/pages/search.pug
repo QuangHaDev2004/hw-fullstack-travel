@@ -1,5 +1,6 @@
 extends ../layouts/default.pug
 include ../mixins/product-item.pug
+include ../mixins/pagination.pug
 
 block main 
   // Section 9
@@ -85,7 +86,7 @@ block main
               //-   i.fa-solid.fa-eye
             .inner-total
               | Tất cả:
-              b #{tourList.length} Tour
+              b #{pagination.totalRecord} Tour
             .inner-filter-mobile
               .inner-title Bộ lọc
               i.fa-solid.fa-filter
@@ -93,15 +94,7 @@ block main
             .inner-list-tour
               each item in tourList
                 +product-item(item)
-            .box-pagination
-              button
-                i.fa-solid.fa-angles-left
-              button.active 1
-              button 2
-              button 3
-              button 4
-              button
-                i.fa-solid.fa-angles-right
+            +pagination(pagination.currentPage, pagination.totalPage)
           else 
             p Không tìm thấy Tour nào theo yêu cầu.
   // Section 9

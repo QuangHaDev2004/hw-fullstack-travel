@@ -68,7 +68,26 @@ module.exports.list = async (req, res) => {
       sort.position = "desc";
     }
 
-    const tourList = await Tour.find(find).sort(sort);
+    // Phân trang
+    const limitItems = 6;
+    let page = 1;
+    if (req.query.page && parseInt(req.query.page) > 0) {
+      page = parseInt(req.query.page);
+    }
+    const skip = (page - 1) * limitItems;
+    const totalRecord = await Tour.countDocuments(find);
+    const totalPage = Math.ceil(totalRecord / limitItems);
+    const pagination = {
+      skip: skip,
+      totalRecord: totalRecord,
+      totalPage: totalPage,
+      currentPage: page,
+    };
+
+    const tourList = await Tour.find(find)
+      .sort(sort)
+      .limit(limitItems)
+      .skip(skip);
 
     for (const item of tourList) {
       item.discount = Math.floor(
@@ -85,6 +104,7 @@ module.exports.list = async (req, res) => {
       pageTitle: "Kết quả tìm kiếm",
       cityList: cityList,
       tourList: tourList,
+      pagination: pagination,
     });
   } catch (error) {
     res.redirect("/");
