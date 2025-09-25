@@ -1,5 +1,8 @@
 const Category = require("../../models/category.model");
+const City = require("../../models/city.model");
 const Tour = require("../../models/tour.model");
+
+const moment = require("moment");
 
 module.exports.detail = async (req, res) => {
   const slug = req.params.slug;
@@ -39,9 +42,22 @@ module.exports.detail = async (req, res) => {
     avatar: tourDetail.avatar,
   });
 
+  // Format dữ liệu
+  if (tourDetail.departureDate) {
+    tourDetail.departureDateFormat = moment(tourDetail.departureDate).format(
+      "DD/MM/YYYY"
+    );
+  }
+
+  if (tourDetail.locations.length > 0) {
+    tourDetail.locationsDetail = await City.find({
+      _id: { $in: tourDetail.locations },
+    });
+  }
+
   res.render("client/pages/tour-detail", {
     pageTitle: tourDetail.name,
     breadcrumb: breadcrumb,
-    tourDetail: tourDetail
+    tourDetail: tourDetail,
   });
 };
