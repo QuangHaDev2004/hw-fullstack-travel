@@ -668,6 +668,14 @@ if (boxTourDetail) {
 }
 // End Box Tour Detail
 
+// Mini Cart
+const miniCart = document.querySelector("[mini-cart]");
+if (miniCart) {
+  const cart = JSON.parse(localStorage.getItem("cartTour"));
+  miniCart.innerHTML = cart.length;
+}
+// End Mini Cart
+
 // Khởi tạo AOS
 AOS.init();
 // Hết Khởi tạo AOS
