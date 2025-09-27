@@ -2,141 +2,15 @@ extends ../layouts/default.pug
 
 block main 
   // Section 11
-  .section-11(
-    data-aos-delay="200" 
-    data-aos-duration="800" 
-    data-aos="fade-up"
-    )
+  .section-11(page-cart)
     .container
       .inner-wrap
         .inner-head
           .inner-title Giỏ Hàng
-          a.inner-back(href="")
+          a.inner-back(href="/")
             | Quay lại mua hàng
             i.fa-solid.fa-chevron-right
-        .inner-tour-list
-          .inner-tour-item
-            .inner-actions
-              button.inner-delete
-                i.fa-solid.fa-xmark
-              input#check1.custom-check(
-                checked="" 
-                name="" 
-                type="checkbox"
-                )
-              label.custom-icon-checkbox(for="check1")
-                i.fa-solid.fa-check
-            .inner-product
-              .inner-image
-                a(href="")
-                  img(
-                    alt="" 
-                    src="/assets/images/Image-s11.jpg"
-                    )
-              .inner-content
-                .inner-title
-                  a(href="") Tour Châu Âu Đón Noel | 11N10D | Pháp – Thụy Sĩ – Ý
-                .inner-meta
-                  .inner-meta-item
-                    | Mã Tour:
-                    b 123456789
-                  .inner-meta-item
-                    | Ngày Khởi Hành:
-                    b 20/10/2025
-                  .inner-meta-item
-                    | Khởi Hành Tại:
-                    b Hà Nội
-            .inner-quantity
-              .inner-label Số Lượng Hành Khách
-              .inner-list
-                .inner-item
-                  .inner-item-label Người lớn:
-                  input(
-                    value="1" 
-                    type="number"
-                    )
-                  .inner-item-price
-                    | 1 x
-                    span 10.000.000
-                .inner-item
-                  .inner-item-label Trẻ em:
-                  input(
-                    value="0" 
-                    type="number"
-                    )
-                  .inner-item-price
-                    | 0 x
-                    span 7.990.000
-                .inner-item
-                  .inner-item-label Em bé:
-                  input(
-                    value="0" 
-                    type="number"
-                    )
-                  .inner-item-price
-                    | 0 x
-                    span 5.990.000
-          .inner-tour-item
-            .inner-actions
-              button.inner-delete
-                i.fa-solid.fa-xmark
-              input#check2.custom-check(
-                checked="" 
-                name="" 
-                type="checkbox"
-                )
-              label.custom-icon-checkbox(for="check2")
-                i.fa-solid.fa-check
-            .inner-product
-              .inner-image
-                a(href="")
-                  img(
-                    alt="" 
-                    src="/assets/images/Image-s11.jpg"
-                    )
-              .inner-content
-                .inner-title
-                  a(href="") Tour Châu Âu Đón Noel | 11N10D | Pháp – Thụy Sĩ – Ý
-                .inner-meta
-                  .inner-meta-item
-                    | Mã Tour:
-                    b 123456789
-                  .inner-meta-item
-                    | Ngày Khởi Hành:
-                    b 20/10/2025
-                  .inner-meta-item
-                    | Khởi Hành Tại:
-                    b Hà Nội
-            .inner-quantity
-              .inner-label Số Lượng Hành Khách
-              .inner-list
-                .inner-item
-                  .inner-item-label Người lớn:
-                  input(
-                    value="1" 
-                    type="number"
-                    )
-                  .inner-item-price
-                    | 1 x
-                    span 10.000.000
-                .inner-item
-                  .inner-item-label Trẻ em:
-                  input(
-                    value="0" 
-                    type="number"
-                    )
-                  .inner-item-price
-                    | 0 x
-                    span 7.990.000
-                .inner-item
-                  .inner-item-label Em bé:
-                  input(
-                    value="0" 
-                    type="number"
-                    )
-                  .inner-item-price
-                    | 0 x
-                    span 5.990.000
+        .inner-tour-list(cart-list)
         .inner-coupon
           form#coupon-form(action="")
             input#coupon-input(
@@ -147,21 +21,21 @@ block main
             button Dùng Mã
         .inner-list-price
           .inner-item
-            .inner-label Tổng tiền:
-            .inner-price 15.070.000 đ
+            .inner-label Tạm tính:
+            .inner-price 
+              span(cart-sub-total)
+              span đ
           .inner-item
             .inner-label Giảm:
-            .inner-price -5.070.000 đ
+            .inner-price -0 đ
           .inner-item
             .inner-label Tổng tiền:
-            .inner-price-highlight 17.070.000 đ
+            .inner-price-highlight
+              span(cart-total) 0
+              span đ
   // End Section 11
   // Section 12
-  .section-12(
-    data-aos-delay="400" 
-    data-aos-duration="800" 
-    data-aos="fade-up"
-    )
+  .section-12
     .container
       .inner-wrap
         form#order-form(action="")

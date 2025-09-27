@@ -2558,7 +2558,7 @@ img {
   color: #898b8d;
 }
 
-.section-11 .inner-quantity .inner-list .inner-item-price span {
+.section-11 .inner-quantity .inner-list .inner-item-price .inner-highlight {
   color: var(--color-primary);
 }
 
