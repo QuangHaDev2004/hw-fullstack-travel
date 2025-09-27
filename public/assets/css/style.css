@@ -2310,7 +2310,7 @@ img {
   color: #898b8d;
 }
 
-.box-tour-detail .inner-group .inner-item .inner-price span {
+.box-tour-detail .inner-group .inner-item .inner-price .inner-highlight {
   color: var(--color-primary);
 }
 
