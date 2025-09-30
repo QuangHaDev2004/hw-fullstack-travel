@@ -21,10 +21,6 @@ module.exports.detail = async (req, res) => {
         deleted: false,
       });
 
-      console.log(item);
-
-      console.log(tourInfo);
-
       if (tourInfo) {
         const cityInfo = await City.findOne({
           _id: item.locationFrom,
