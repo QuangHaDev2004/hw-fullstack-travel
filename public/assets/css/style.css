@@ -2454,13 +2454,19 @@ img {
   width: 21px;
   height: 21px;
   font-size: 16px;
-  color: #828282;
+  color: #ff3904;
 }
 
 .section-11 .inner-product {
   display: flex;
   gap: 15px;
   width: 59%;
+}
+
+.section-11 .inner-no-data {
+  text-align: center;
+  color: #ff3904;
+  margin-bottom: 25px;
 }
 
 .section-11 .inner-product .inner-image a {

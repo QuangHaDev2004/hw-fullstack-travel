@@ -691,120 +691,127 @@ const drawCart = () => {
     .then((data) => {
       if (data.code === "success") {
         let subTotal = 0;
+        let htmlArray = [];
 
-        const htmlArray = data.cart.map((item) => {
-          subTotal +=
-            item.priceNewAdult * item.quantityAdult +
-            item.priceNewChildren * item.quantityChildren +
-            item.priceNewBaby * item.quantityBaby;
+        if (data.cart.length > 0) {
+          htmlArray = data.cart.map((item) => {
+            subTotal +=
+              item.priceNewAdult * item.quantityAdult +
+              item.priceNewChildren * item.quantityChildren +
+              item.priceNewBaby * item.quantityBaby;
 
-          return `
-            <div class="inner-tour-item">
-              <div class="inner-actions">
-                <button class="inner-delete" type="button" aria-label="Xóa">
-                  <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                </button>
+            return `
+              <div class="inner-tour-item">
+                <div class="inner-actions">
+                  <button class="inner-delete" button-delete tour-id="${
+                    item.tourId
+                  }">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
 
-                <input class="custom-check" type="checkbox" id=${item.tourId} />
-                <label class="custom-icon-checkbox" for=${
-                  item.tourId
-                } aria-hidden="true">
-                  <i class="fa-solid fa-check"></i>
-                </label>
-              </div>
-
-              <div class="inner-product">
-                <div class="inner-image">
-                  <a href="/tour/detail/${item.slug}">
-                    <img
-                      alt="${item.name}"
-                      src="${item.avatar}"
-                    />
-                  </a>
+                  <input class="custom-check" type="checkbox" id=${item.tourId} />
+                  <label class="custom-icon-checkbox" for=${
+                    item.tourId
+                  } aria-hidden="true">
+                    <i class="fa-solid fa-check"></i>
+                  </label>
                 </div>
 
-                <div class="inner-content">
-                  <div class="inner-title">
-                    <a href="/tour/detail/${item.slug}">${item.name}</a>
+                <div class="inner-product">
+                  <div class="inner-image">
+                    <a href="/tour/detail/${item.slug}">
+                      <img
+                        alt="${item.name}"
+                        src="${item.avatar}"
+                      />
+                    </a>
                   </div>
 
-                  <div class="inner-meta">
-                    <div class="inner-meta-item">
-                      Ngày Khởi Hành: <b>${item.departureDate}</b>
+                  <div class="inner-content">
+                    <div class="inner-title">
+                      <a href="/tour/detail/${item.slug}">${item.name}</a>
                     </div>
-                    <div class="inner-meta-item">
-                      Khởi Hành Tại: <b>${item.cityName}</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div class="inner-quantity">
-                <div class="inner-label">Số Lượng Hành Khách</div>
-
-                <div class="inner-list">
-                  <div class="inner-item">
-                    <div class="inner-item-label">Người lớn:</div>
-                    <input 
-                      type="number" 
-                      value="${item.quantityAdult}" 
-                      min="0" 
-                      max="${item.stockAdult}" 
-                      input-quantity="quantityAdult" 
-                      tour-id="${item.tourId}" 
-                    />
-                    <div class="inner-item-price">
-                      <span>${item.quantityAdult}</span>
-                      <span>x</span>
-                      <span class="inner-highlight">${item.priceNewAdult.toLocaleString(
-                        "vi-VN"
-                      )}</span>
-                    </div>
-                  </div>
-
-                  <div class="inner-item">
-                    <div class="inner-item-label">Trẻ em:</div>
-                    <input 
-                      type="number" 
-                      value="${item.quantityChildren}" 
-                      min="0" 
-                      max="${item.stockChildren}" 
-                      input-quantity="quantityChildren" 
-                      tour-id="${item.tourId}"  
-                    />
-                    <div class="inner-item-price">
-                      <span>${item.quantityChildren}</span>
-                      <span>x</span>
-                      <span class="inner-highlight">${item.priceNewChildren.toLocaleString(
-                        "vi-VN"
-                      )}</span>
-                    </div>
-                  </div>
-
-                  <div class="inner-item">
-                    <div class="inner-item-label">Em bé:</div>
-                    <input 
-                      type="number" 
-                      value="${item.quantityBaby}" 
-                      min="0" 
-                      max="${item.stockBaby}" 
-                      input-quantity="quantityBaby" 
-                      tour-id="${item.tourId}"  
-                    />
-                    <div class="inner-item-price">
-                      <span>${item.quantityBaby}</span>
-                      <span>x</span>
-                      <span class="inner-highlight">${item.priceNewBaby.toLocaleString(
-                        "vi-VN"
-                      )}</span>
+                    <div class="inner-meta">
+                      <div class="inner-meta-item">
+                        Ngày Khởi Hành: <b>${item.departureDate}</b>
+                      </div>
+                      <div class="inner-meta-item">
+                        Khởi Hành Tại: <b>${item.cityName}</b>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          `;
-        });
 
+                <div class="inner-quantity">
+                  <div class="inner-label">Số Lượng Hành Khách</div>
+
+                  <div class="inner-list">
+                    <div class="inner-item">
+                      <div class="inner-item-label">Người lớn:</div>
+                      <input 
+                        type="number" 
+                        value="${item.quantityAdult}" 
+                        min="0" 
+                        max="${item.stockAdult}" 
+                        input-quantity="quantityAdult" 
+                        tour-id="${item.tourId}" 
+                      />
+                      <div class="inner-item-price">
+                        <span>${item.quantityAdult}</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewAdult.toLocaleString(
+                          "vi-VN"
+                        )}</span>
+                      </div>
+                    </div>
+
+                    <div class="inner-item">
+                      <div class="inner-item-label">Trẻ em:</div>
+                      <input 
+                        type="number" 
+                        value="${item.quantityChildren}" 
+                        min="0" 
+                        max="${item.stockChildren}" 
+                        input-quantity="quantityChildren" 
+                        tour-id="${item.tourId}"  
+                      />
+                      <div class="inner-item-price">
+                        <span>${item.quantityChildren}</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewChildren.toLocaleString(
+                          "vi-VN"
+                        )}</span>
+                      </div>
+                    </div>
+
+                    <div class="inner-item">
+                      <div class="inner-item-label">Em bé:</div>
+                      <input 
+                        type="number" 
+                        value="${item.quantityBaby}" 
+                        min="0" 
+                        max="${item.stockBaby}" 
+                        input-quantity="quantityBaby" 
+                        tour-id="${item.tourId}"  
+                      />
+                      <div class="inner-item-price">
+                        <span>${item.quantityBaby}</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewBaby.toLocaleString(
+                          "vi-VN"
+                        )}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          htmlArray = ["<div class='inner-no-data'>Không có Tour nào trong giỏ hàng</div>"]
+        }
+        
         let discount = 0;
         let total = subTotal - discount;
 
@@ -845,6 +852,19 @@ const drawCart = () => {
               localStorage.setItem("cartTour", JSON.stringify(cart));
               drawCart();
             }
+          });
+        });
+
+        // Xóa tour
+        const listButtonDelete = document.querySelectorAll("[button-delete]");
+        listButtonDelete.forEach((button) => {
+          button.addEventListener("click", () => {
+            const tourId = button.getAttribute("tour-id");
+            let cart = JSON.parse(localStorage.getItem("cartTour"));
+            cart = cart.filter((item) => item.tourId !== tourId);
+
+            localStorage.setItem("cartTour", JSON.stringify(cart));
+            drawCart();
           });
         });
       }
