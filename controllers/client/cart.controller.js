@@ -36,6 +36,7 @@ module.exports.detail = async (req, res) => {
           quantityAdult: item.quantityAdult,
           quantityChildren: item.quantityChildren,
           quantityBaby: item.quantityBaby,
+          checked: item.checked,
           avatar: tourInfo.avatar,
           name: tourInfo.name,
           departureDate: moment(tourInfo.departureDate).format("DD/MM/YYYY"),
