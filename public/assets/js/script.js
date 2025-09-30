@@ -341,14 +341,52 @@ if (orderForm) {
       },
     ])
     .onSuccess((event) => {
-      const fullName = event.target.fullname.value;
+      const fullName = event.target.fullName.value;
       const phone = event.target.phone.value;
       const note = event.target.note.value;
       const method = event.target.method.value;
-      console.log(fullName);
-      console.log(phone);
-      console.log(note);
-      console.log(method);
+      let cart = JSON.parse(localStorage.getItem("cartTour"));
+      cart = cart.filter((item) => {
+        return (
+          item.checked === true &&
+          item.quantityAdult + item.quantityChildren + item.quantityBaby > 0
+        );
+      });
+
+      if (cart.length > 0) {
+        const dataFinal = {
+          fullName: fullName,
+          phone: phone,
+          note: note,
+          paymentMethod: method,
+          items: cart,
+        };
+
+        fetch("/order/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataFinal),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.code === "error") {
+              notyf.error(data.message);
+            }
+
+            if (data.code === "success") {
+              let cart = JSON.parse(localStorage.getItem("cartTour"));
+              cart = cart.filter((item) => item.checked === false);
+              localStorage.setItem("cartTour", JSON.stringify(cart));
+
+              drawNotify(data.code, data.message);
+              window.location.href = `/order/success?orderCode=${data.orderCode}&phone=${phone}`;
+            }
+          });
+      } else {
+        notyf.error("Vui lòng chọn ít nhất 1 Tour!");
+      }
     });
 
   // Chọn phương thức thanh toán
