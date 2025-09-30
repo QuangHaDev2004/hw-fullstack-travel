@@ -571,7 +571,7 @@ const drawMiniCart = () => {
     const cart = JSON.parse(localStorage.getItem("cartTour"));
     miniCart.innerHTML = cart.length;
   }
-}
+};
 drawMiniCart();
 // End Mini Cart
 
@@ -661,6 +661,7 @@ if (boxTourDetail) {
         quantityAdult: quantityAdult,
         quantityChildren: quantityChildren,
         quantityBaby: quantityBaby,
+        checked: true,
       };
       const cart = JSON.parse(localStorage.getItem("cartTour"));
       const indexItemExist = cart.findIndex((item) => item.tourId === tourId);
@@ -699,10 +700,12 @@ const drawCart = () => {
 
         if (data.cart.length > 0) {
           htmlArray = data.cart.map((item) => {
-            subTotal +=
-              item.priceNewAdult * item.quantityAdult +
-              item.priceNewChildren * item.quantityChildren +
-              item.priceNewBaby * item.quantityBaby;
+            if (item.checked) {
+              subTotal +=
+                item.priceNewAdult * item.quantityAdult +
+                item.priceNewChildren * item.quantityChildren +
+                item.priceNewBaby * item.quantityBaby;
+            }
 
             return `
               <div class="inner-tour-item">
@@ -713,7 +716,14 @@ const drawCart = () => {
                     <i class="fa-solid fa-xmark"></i>
                   </button>
 
-                  <input class="custom-check" type="checkbox" id=${item.tourId} />
+                  <input 
+                    class="custom-check" 
+                    type="checkbox" 
+                    id=${item.tourId} 
+                    ${item.checked ? "checked" : ""} 
+                    input-check
+                    tour-id="${item.tourId}"
+                  />
                   <label class="custom-icon-checkbox" for=${
                     item.tourId
                   } aria-hidden="true">
@@ -813,9 +823,11 @@ const drawCart = () => {
             `;
           });
         } else {
-          htmlArray = ["<div class='inner-no-data'>Không có Tour nào trong giỏ hàng</div>"]
+          htmlArray = [
+            "<div class='inner-no-data'>Không có Tour nào trong giỏ hàng</div>",
+          ];
         }
-        
+
         let discount = 0;
         let total = subTotal - discount;
 
@@ -870,6 +882,22 @@ const drawCart = () => {
             localStorage.setItem("cartTour", JSON.stringify(cart));
             drawCart();
             drawMiniCart();
+          });
+        });
+
+        // Check tour
+        const listInputCheck = document.querySelectorAll("[input-check]");
+        listInputCheck.forEach((input) => {
+          input.addEventListener("change", () => {
+            const tourId = input.getAttribute("tour-id");
+            const checked = input.checked;
+            const cart = JSON.parse(localStorage.getItem("cartTour"));
+            const itemUpdate = cart.find((item) => item.tourId === tourId);
+            if (itemUpdate) {
+              itemUpdate["checked"] = checked;
+              localStorage.setItem("cartTour", JSON.stringify(cart));
+              drawCart();
+            }
           });
         });
       }
