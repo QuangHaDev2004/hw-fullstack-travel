@@ -745,9 +745,14 @@ const drawCart = () => {
                 <div class="inner-list">
                   <div class="inner-item">
                     <div class="inner-item-label">Người lớn:</div>
-                    <input type="number" value="${
-                      item.quantityAdult
-                    }" min="0" max="${item.stockAdult}" />
+                    <input 
+                      type="number" 
+                      value="${item.quantityAdult}" 
+                      min="0" 
+                      max="${item.stockAdult}" 
+                      input-quantity="quantityAdult" 
+                      tour-id="${item.tourId}" 
+                    />
                     <div class="inner-item-price">
                       <span>${item.quantityAdult}</span>
                       <span>x</span>
@@ -759,9 +764,14 @@ const drawCart = () => {
 
                   <div class="inner-item">
                     <div class="inner-item-label">Trẻ em:</div>
-                    <input type="number" value="${
-                      item.quantityChildren
-                    }" min="0" max="${item.stockChildren}" />
+                    <input 
+                      type="number" 
+                      value="${item.quantityChildren}" 
+                      min="0" 
+                      max="${item.stockChildren}" 
+                      input-quantity="quantityChildren" 
+                      tour-id="${item.tourId}"  
+                    />
                     <div class="inner-item-price">
                       <span>${item.quantityChildren}</span>
                       <span>x</span>
@@ -773,9 +783,14 @@ const drawCart = () => {
 
                   <div class="inner-item">
                     <div class="inner-item-label">Em bé:</div>
-                    <input type="number" value="${
-                      item.quantityBaby
-                    }" min="0" max="${item.stockBaby}" />
+                    <input 
+                      type="number" 
+                      value="${item.quantityBaby}" 
+                      min="0" 
+                      max="${item.stockBaby}" 
+                      input-quantity="quantityBaby" 
+                      tour-id="${item.tourId}"  
+                    />
                     <div class="inner-item-price">
                       <span>${item.quantityBaby}</span>
                       <span>x</span>
@@ -800,6 +815,38 @@ const drawCart = () => {
         const elementCartTotal = document.querySelector("[cart-total]");
         elementCartSubTotal.innerHTML = subTotal.toLocaleString("vi-VN");
         elementCartTotal.innerHTML = total.toLocaleString("vi-VN");
+
+        // Cập nhật số lượng
+        const listInputQuantity = document.querySelectorAll("[input-quantity]");
+        listInputQuantity.forEach((input) => {
+          input.addEventListener("change", () => {
+            const tourId = input.getAttribute("tour-id");
+            const fieldName = input.getAttribute("input-quantity");
+            let quantity = parseInt(input.value);
+            const min = parseInt(input.getAttribute("min"));
+            const max = parseInt(input.getAttribute("max"));
+
+            if (quantity < min) {
+              quantity = min;
+              input.value = min;
+              notyf.error(`Số lượng phải lớn >= ${min}`);
+            }
+
+            if (quantity > max) {
+              quantity = max;
+              input.value = max;
+              notyf.error(`Số lượng phải nhỏ >= ${max}`);
+            }
+
+            const cart = JSON.parse(localStorage.getItem("cartTour"));
+            const itemUpdate = cart.find((item) => item.tourId === tourId);
+            if (itemUpdate) {
+              itemUpdate[fieldName] = quantity;
+              localStorage.setItem("cartTour", JSON.stringify(cart));
+              drawCart();
+            }
+          });
+        });
       }
 
       if (data.code === "error") {
