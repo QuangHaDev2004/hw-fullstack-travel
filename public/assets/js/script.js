@@ -564,6 +564,17 @@ if (!cart) {
 }
 // End Initial Cart
 
+// Mini Cart
+const drawMiniCart = () => {
+  const miniCart = document.querySelector("[mini-cart]");
+  if (miniCart) {
+    const cart = JSON.parse(localStorage.getItem("cartTour"));
+    miniCart.innerHTML = cart.length;
+  }
+}
+drawMiniCart();
+// End Mini Cart
+
 // Box Tour Detail
 const boxTourDetail = document.querySelector(".box-tour-detail");
 if (boxTourDetail) {
@@ -661,20 +672,13 @@ if (boxTourDetail) {
 
       localStorage.setItem("cartTour", JSON.stringify(cart));
       notyf.success("Đã thêm tour vào giỏ hàng!");
+      drawMiniCart();
     } else {
       notyf.error("Số lượng phải >= 0");
     }
   });
 }
 // End Box Tour Detail
-
-// Mini Cart
-const miniCart = document.querySelector("[mini-cart]");
-if (miniCart) {
-  const cart = JSON.parse(localStorage.getItem("cartTour"));
-  miniCart.innerHTML = cart.length;
-}
-// End Mini Cart
 
 // Page Cart
 const drawCart = () => {
@@ -865,6 +869,7 @@ const drawCart = () => {
 
             localStorage.setItem("cartTour", JSON.stringify(cart));
             drawCart();
+            drawMiniCart();
           });
         });
       }
