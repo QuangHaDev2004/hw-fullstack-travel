@@ -1195,6 +1195,13 @@ button {
   gap: 10px;
 }
 
+.table-1 .inner-name {
+  max-width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .table-1 .inner-image {
   width: 76px;
   height: 76px;
