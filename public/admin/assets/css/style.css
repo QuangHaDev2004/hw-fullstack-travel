@@ -938,7 +938,7 @@ button {
 .section-8 .inner-order-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .section-8 .inner-order-item {
@@ -966,6 +966,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  flex: 1;
 }
 
 .section-8 .inner-order-name {

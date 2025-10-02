@@ -1,70 +1,72 @@
 extends ../layouts/default.pug
 
 block main 
-  h2.box-title Đơn hàng: OD000001
+  h2.box-title Đơn hàng: #{orderDetail.code}
 
   //- Section 8
   .section-8 
     form(action="" id="order-edit-form")
+      .inner-group(style="display: none;")
+        label(for="id" class="inner-label") Id
+        input(type="text" id="id" name="id" value=orderDetail.id)
       .inner-group 
-        label(for="name" class="inner-label") Tên khách hàng
-        input(type="text" id="name" name="name")
+        label(for="fullName" class="inner-label") Tên khách hàng
+        input(type="text" id="fullName" name="fullName" value=orderDetail.fullName)
       .inner-group 
         label(for="phone" class="inner-label") Số điện thoại
-        input(type="text" id="phone" name="phone")
+        input(type="text" id="phone" name="phone" value=orderDetail.phone)
       .inner-group.inner-two-col
         label(for="note" class="inner-label") Ghi chú
-        textarea(name="note" id="note" textarea-mce) 
+        textarea(name="note" id="note" textarea-mce) #{orderDetail.note}
       .inner-group 
-        label(for="payment" class="inner-label") Phương thức thanh toán
-        select(name="payment" id="payment")
-          option(value="") Ví Momo
-          option(value="") Tiền mặt
+        label(for="paymentMethod" class="inner-label") Phương thức thanh toán
+        select(name="paymentMethod" id="paymentMethod")
+          each item in paymentMethodList
+            option(
+              value=item.value
+              selected=(item.value === orderDetail.paymentMethod)
+            ) #{item.label}
       .inner-group 
-        label(for="statusPay" class="inner-label") Trạng thái thanh toán
-        select(name="statusPay" id="statusPay")
-          option(value="") Đã thanh toán
-          option(value="") Chưa thanh toán
-      .inner-group
-        label(for="createAt" class="inner-label") Ngày đặt
-        input(type="datetime-local" id="createAt" name="createAt" value="2025-04-14T10:30" readonly)
+        label(for="paymentStatus" class="inner-label") Trạng thái thanh toán
+        select(name="paymentStatus" id="paymentStatus")
+          each item in paymentStatusList
+            option(
+              value=item.value
+              selected=(item.value === orderDetail.paymentStatus)
+            ) #{item.label}
       .inner-group 
         label(for="status" class="inner-label") Trạng thái
         select(name="status" id="status")
-          option(value="") Khởi tạo
-          option(value="") Hoạt động
-          option(value="") Dừng hoạt động
+          each item in statusList
+            option(
+              value=item.value
+              selected=(item.value === orderDetail.status)
+            ) #{item.label}
+      .inner-group
+        label(for="createAt" class="inner-label") Ngày đặt
+        input(type="datetime-local" id="createAt" name="createAt" value=orderDetail.createdAtFormat readonly)
       .inner-group
         label(class="inner-label") Danh sách tour
         .inner-order-list 
-          .inner-order-item 
-            .inner-order-image 
-              img(src="/admin/assets/images/image-1.jpg")
-            .inner-order-content 
-              .inner-order-name Tour Hạ Long
-              .inner-order-text Người lớn: 3 x 1.500.000đ
-              .inner-order-text Trẻ em: 2 x 1.300.000đ
-              .inner-order-text Em bé: 2 x 1.000.000đ
-              .inner-order-text Ngày khởi hành: 20/10/2025
-              .inner-order-text Khởi hành tại: Hà Nội
-          .inner-order-item 
-            .inner-order-image 
-              img(src="/admin/assets/images/image-1.jpg")
-            .inner-order-content 
-              .inner-order-name Tour Hạ Long
-              .inner-order-text Người lớn: 3 x 1.500.000đ
-              .inner-order-text Trẻ em: 2 x 1.300.000đ
-              .inner-order-text Em bé: 2 x 1.000.000đ
-              .inner-order-text Ngày khởi hành: 20/10/2025
-              .inner-order-text Khởi hành tại: Hà Nội
+          each item in orderDetail.items
+            .inner-order-item 
+              .inner-order-image 
+                img(src=item.avatar)
+              .inner-order-content 
+                .inner-order-name #{item.name}
+                .inner-order-text Người lớn: #{item.quantityAdult} x #{item.priceNewAdult.toLocaleString("vi-VN")}đ
+                .inner-order-text Trẻ em: #{item.quantityChildren} x #{item.priceNewChildren.toLocaleString("vi-VN")}0đ
+                .inner-order-text Em bé: #{item.quantityBaby} x #{item.priceNewBaby.toLocaleString("vi-VN")}đ
+                .inner-order-text Ngày khởi hành: #{item.departureDateFormat}
+                .inner-order-text Khởi hành tại: #{item.cityName}
       .inner-group
         label(class="inner-label") Thanh toán
         .inner-order-total 
-          div Tổng tiền: 10.000.000đ
-          div Giảm: 400.000đ
-          div Mã giảm: TOURMUAHE2025
+          div Tạm tính: #{orderDetail.subTotal.toLocaleString("vi-VN")}đ
+          div Giảm: #{orderDetail.discount.toLocaleString("vi-VN")}đ
+          //- div Mã giảm: TOURMUAHE2025
           div Thanh toán:
-            span 9.600.000đ
+            span #{orderDetail.total.toLocaleString("vi-VN")}đ
       .inner-button-2.inner-two-col 
         button Cập nhật
     .inner-back
