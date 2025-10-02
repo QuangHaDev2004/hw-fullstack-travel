@@ -1699,3 +1699,51 @@ if (listButtonCopy.length > 0) {
   });
 }
 // End Button Copy Email
+
+// Filter Payment Method
+const filterPaymentMethod = document.querySelector("[filter-payment-method]");
+if (filterPaymentMethod) {
+  const url = new URL(window.location.href);
+
+  filterPaymentMethod.addEventListener("change", () => {
+    const value = filterPaymentMethod.value;
+    if (value) {
+      url.searchParams.set("paymentMethod", value);
+    } else {
+      url.searchParams.delete("paymentMethod");
+    }
+
+    window.location.href = url.href;
+  });
+
+  // Default Option
+  const valueCurrent = url.searchParams.get("paymentMethod");
+  if (valueCurrent) {
+    filterPaymentMethod.value = valueCurrent;
+  }
+}
+// End Filter Payment Method
+
+// Filter Payment Status
+const filterPaymentStatus = document.querySelector("[filter-payment-status]");
+if (filterPaymentStatus) {
+  const url = new URL(window.location.href);
+
+  filterPaymentStatus.addEventListener("change", () => {
+    const value = filterPaymentStatus.value;
+    if (value) {
+      url.searchParams.set("paymentStatus", value);
+    } else {
+      url.searchParams.delete("paymentStatus");
+    }
+
+    window.location.href = url.href;
+  });
+
+  // Default Option
+  const valueCurrent = url.searchParams.get("paymentStatus");
+  if (valueCurrent) {
+    filterPaymentStatus.value = valueCurrent;
+  }
+}
+// End Filter Payment Status
