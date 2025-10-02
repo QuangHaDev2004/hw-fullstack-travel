@@ -141,7 +141,7 @@ if (listFilepondImageMulti.length > 0) {
 
     filePondMulti[filepondImage.name] = FilePond.create(filepondImage, {
       labelIdle: "+",
-      files: files
+      files: files,
     });
   });
 }
@@ -587,7 +587,7 @@ if (orderEditForm) {
   const validator = new JustValidate("#order-edit-form");
 
   validator
-    .addField("#name", [
+    .addField("#fullName", [
       {
         rule: "required",
         errorMessage: "Vui lòng nhập họ tên!",
@@ -615,10 +615,44 @@ if (orderEditForm) {
       },
     ])
     .onSuccess((event) => {
-      const name = event.target.name.value;
+      const id = event.target.id.value;
+      const fullName = event.target.fullName.value;
       const phone = event.target.phone.value;
-      console.log(name);
-      console.log(phone);
+      const note = event.target.note.value;
+      const paymentMethod = event.target.paymentMethod.value;
+      const paymentStatus = event.target.paymentStatus.value;
+      const status = event.target.status.value;
+
+      const dataFinal = {
+        fullName: fullName,
+        phone: phone,
+        note: note,
+        paymentMethod: paymentMethod,
+        paymentStatus: paymentStatus,
+        status: status,
+      };
+
+      const buttonSubmit = document.querySelector(".inner-button-2 button");
+      buttonSubmit.setAttribute("type", "button");
+
+      fetch(`/${pathAdmin}/order/edit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          buttonSubmit.setAttribute("type", "");
+          if (data.code == "error") {
+            notyf.error(data.message);
+          }
+
+          if (data.code == "success") {
+            notyf.success(data.message);
+          }
+        });
     });
 }
 // End Order Edit Form
