@@ -714,6 +714,18 @@ button {
   padding: 24px 30px;
 }
 
+.section-5 .inner-reset {
+  display: inline-block;
+  padding: 24px 30px;
+  border-radius: 14px;
+  opacity: 0.9;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ef3726;
+  background-color: #d7645933;
+  cursor: pointer;
+}
+
 @media (max-width: 991.98px) {
   .section-5 .inner-change-status .inner-item,
   .section-5 .inner-search {
@@ -1597,7 +1609,9 @@ button {
   cursor: pointer;
 }
 
-.section-8 .inner-upload-image-multi .filepond--list-scroller::-webkit-scrollbar-thumb {
+.section-8
+  .inner-upload-image-multi
+  .filepond--list-scroller::-webkit-scrollbar-thumb {
   background-color: #ddd;
 }
 

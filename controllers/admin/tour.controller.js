@@ -37,6 +37,28 @@ module.exports.list = async (req, res) => {
     find.createdAt = dateFilter;
   }
 
+  // Lọc theo khoảng giá
+  if (req.query.price) {
+    const [priceMin, priceMax] = req.query.price
+      .split("-")
+      .map((item) => parseInt(item));
+    find.priceNewAdult = {
+      $gte: priceMin,
+      $lte: priceMax,
+    };
+  }
+
+  // Lọc theo danh mục
+  if (req.query.categoryId) {
+    const categoryId = req.query.categoryId;
+    const categoryChild = await categoryHelper.getCategoryChild(categoryId);
+    const categoryChildId = categoryChild.map((item) => item.id);
+
+    find.category = {
+      $in: [categoryId, ...categoryChildId],
+    };
+  }
+
   // Tìm kiếm
   if (req.query.keyword) {
     const keyword = slugify(req.query.keyword);
@@ -94,11 +116,19 @@ module.exports.list = async (req, res) => {
   // Danh sách tài khoản quản trị
   const accountAdminList = await AccountAdmin.find({});
 
+  // Danh sách danh mục
+  const categoryList = await Category.find({
+    deleted: false,
+  });
+
+  const categoryTree = categoryHelper.buildCategoryTree(categoryList, "");
+
   res.render("admin/pages/tour-list", {
     pageTitle: "Quản lý tour",
     tourList: tourList,
     accountAdminList: accountAdminList,
     pagination: pagination,
+    categoryList: categoryTree,
   });
 };
 
