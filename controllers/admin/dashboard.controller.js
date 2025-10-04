@@ -41,7 +41,7 @@ module.exports.dashboard = async (req, res) => {
     .sort({
       createdAt: "desc",
     })
-    .limit(5)
+    .limit(5);
 
   for (const orderDetail of orderNewList) {
     orderDetail.paymentMethodName = paymentMethodList.find(
@@ -75,6 +75,61 @@ module.exports.dashboard = async (req, res) => {
   res.render("admin/pages/index", {
     pageTitle: "Tổng quan",
     overview: overview,
-    orderNewList: orderNewList
+    orderNewList: orderNewList,
+  });
+};
+
+module.exports.revenueChartPost = async (req, res) => {
+  const { currentMonth, currentYear, previousMonth, previousYear, arrayDay } =
+    req.body;
+
+  // Truy vấn đơn hàng trong tháng hiện tại
+  const orderCurrentMonth = await Order.find({
+    deleted: false,
+    createdAt: {
+      $gte: new Date(currentYear, currentMonth - 1, 1),
+      $lt: new Date(currentYear, currentMonth, 1),
+    },
+  });
+
+  // Truy vấn đơn hàng trong tháng trước
+  const orderPreviousMonth = await Order.find({
+    deleted: false,
+    createdAt: {
+      $gte: new Date(previousYear, previousMonth - 1, 1),
+      $lt: new Date(previousYear, previousMonth, 1),
+    },
+  });
+
+  // Tạo mảng doanh thu theo từng ngày
+  const dataMonthCurrent = [];
+  const dataMonthPrevious = [];
+  for (const day of arrayDay) {
+    // Tính doanh thu theo ngày của tháng hiện tại
+    let revenueCurrent = 0;
+    for (const order of orderCurrentMonth) {
+      const orderDate = new Date(order.createdAt).getDate();
+      if (orderDate === day) {
+        revenueCurrent += order.total;
+      }
+    }
+    dataMonthCurrent.push(revenueCurrent);
+
+    // Tính doanh thu theo ngày của tháng trước
+    let revenuePrevious = 0;
+    for (const order of orderPreviousMonth) {
+      const orderDate = new Date(order.createdAt).getDate();
+      if (orderDate === day) {
+        revenuePrevious += order.total;
+      }
+    }
+    dataMonthPrevious.push(revenuePrevious);
+  }
+
+  res.json({
+    code: "success",
+    message: "Thành công!",
+    dataMonthCurrent: dataMonthCurrent,
+    dataMonthPrevious: dataMonthPrevious
   });
 };
