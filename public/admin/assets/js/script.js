@@ -147,55 +147,122 @@ if (listFilepondImageMulti.length > 0) {
 }
 // End Filepond Image Multi
 
-// Chart 1
+// Chart 1 (Biểu đồ doanh thu)
+const drawChart = (dateFilter) => {
+  // Lấy ra ngày hiện tại
+  const now = dateFilter;
+
+  // Lấy ra thông tin tháng này
+  const currentMonth = now.getMonth() + 1;
+  const currentYear = now.getFullYear();
+
+  // Lấy ra thông tin tháng trước
+  const previousMonthDate = new Date(currentYear, now.getMonth() - 1, 1);
+  const previousMonth = previousMonthDate.getMonth() + 1;
+  const previousYear = previousMonthDate.getFullYear();
+
+  // Lấy ra tổng số ngày
+  const daysInCurrentMonth = new Date(currentYear, currentMonth, 0).getDate();
+  const daysInPreviousMonth = new Date(
+    previousYear,
+    previousMonth,
+    0
+  ).getDate();
+  const days =
+    daysInCurrentMonth > daysInPreviousMonth
+      ? daysInCurrentMonth
+      : daysInPreviousMonth;
+  const arrayDay = [];
+  for (let i = 1; i <= days; i++) {
+    arrayDay.push(i);
+  }
+
+  const dataFinal = {
+    currentMonth: currentMonth,
+    currentYear: currentYear,
+    previousMonth: previousMonth,
+    previousYear: previousYear,
+    arrayDay: arrayDay,
+  };
+
+  fetch(`/${pathAdmin}/dashboard/revenue-chart`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataFinal),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.code === "success") {
+        const stringCanvas = `<canvas></canvas>`;
+        const parentChart = document.querySelector(".section-2 .inner-chart");
+        parentChart.innerHTML = stringCanvas;
+        const canvas = parentChart.querySelector("canvas");
+
+        new Chart(canvas, {
+          type: "line",
+          data: {
+            labels: arrayDay,
+            datasets: [
+              {
+                label: `Tháng ${currentMonth}/${currentYear}`,
+                data: data.dataMonthCurrent,
+                borderColor: "#36A2EB",
+                borderWidth: 1.5,
+              },
+              {
+                label: `Tháng ${previousMonth}/${previousYear}`,
+                data: data.dataMonthPrevious,
+                borderColor: "#FF7D98",
+                borderWidth: 1.5,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+            },
+            scales: {
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Ngày",
+                },
+              },
+              y: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Doanh thu (VNĐ)",
+                },
+              },
+            },
+            maintainAspectRatio: false,
+          },
+        });
+      }
+    });
+};
+
 const char1 = document.querySelector("#chart1");
 if (char1) {
-  new Chart(char1, {
-    type: "line",
-    data: {
-      labels: ["01", "02", "03", "04", "05"],
-      datasets: [
-        {
-          label: "Tháng 5/2025",
-          data: ["500000", "2000000", "1200000", "1400000", "400000"],
-          borderColor: "#36A2EB",
-          borderWidth: 1.5,
-        },
-        {
-          label: "Tháng 6/2025",
-          data: ["800000", "1600000", "1800000", "900000", "1000000"],
-          borderColor: "#FF7D98",
-          borderWidth: 1.5,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: "bottom",
-        },
-      },
-      scales: {
-        x: {
-          display: true,
-          title: {
-            display: true,
-            text: "Ngày",
-          },
-        },
-        y: {
-          display: true,
-          title: {
-            display: true,
-            text: "Doanh thu (VNĐ)",
-          },
-        },
-      },
-      maintainAspectRatio: false,
-    },
+  const now = new Date();
+  drawChart(now);
+
+  const inputFilterMonth = document.querySelector("[filter-month]");
+  inputFilterMonth.value = now.toISOString().slice(0, 7);
+
+  inputFilterMonth.addEventListener("change", () => {
+    const value = inputFilterMonth.value;
+    const dateFilter = new Date(value);
+    drawChart(dateFilter);
   });
 }
-// End Chart 1
+// End Chart 1 (Biểu đồ doanh thu)
 
 // Category Create Form
 const categoryCreateForm = document.querySelector("#category-create-form");
