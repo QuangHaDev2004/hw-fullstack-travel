@@ -73,6 +73,15 @@ block main
                   i.fa-solid.fa-check
                 label.inner-label(for="methodMoney") Thanh toán tiền mặt khi đi tour
               .inner-item
+                input#methodZaloPay.custom-check(
+                  value="zalopay" 
+                  name="method" 
+                  type="radio"
+                  )
+                label.custom-icon-checkbox(for="methodZaloPay")
+                  i.fa-solid.fa-check
+                label.inner-label(for="methodZaloPay") ZaloPay
+              .inner-item
                 input#methodMomo.custom-check(
                   value="momo" 
                   name="method" 
