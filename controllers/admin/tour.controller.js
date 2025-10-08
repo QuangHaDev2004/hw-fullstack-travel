@@ -181,13 +181,13 @@ module.exports.createPost = async (req, res) => {
     : req.body.priceBaby;
 
   if (
-    req.body.priceAdult <= req.body.priceNewAdult ||
-    req.body.priceChildren <= req.body.priceNewChildren ||
-    req.body.priceBaby <= req.body.priceNewBaby
+    req.body.priceAdult < req.body.priceNewAdult ||
+    req.body.priceChildren < req.body.priceNewChildren ||
+    req.body.priceBaby < req.body.priceNewBaby
   ) {
     res.json({
       code: "error",
-      message: "Giá mới phải nhỏ hơn giá cũ!",
+      message: "Giá mới phải nhỏ hơn hoặc bằng giá cũ!",
     });
     return;
   }
@@ -298,13 +298,13 @@ module.exports.editPatch = async (req, res) => {
       : req.body.priceBaby;
 
     if (
-      req.body.priceAdult <= req.body.priceNewAdult ||
-      req.body.priceChildren <= req.body.priceNewChildren ||
-      req.body.priceBaby <= req.body.priceNewBaby
+      req.body.priceAdult < req.body.priceNewAdult ||
+      req.body.priceChildren < req.body.priceNewChildren ||
+      req.body.priceBaby < req.body.priceNewBaby
     ) {
       res.json({
         code: "error",
-        message: "Giá mới phải nhỏ hơn giá cũ!",
+        message: "Giá mới phải nhỏ hơn hoặc bằng giá cũ!",
       });
       return;
     }

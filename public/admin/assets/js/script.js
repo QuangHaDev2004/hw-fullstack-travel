@@ -390,6 +390,7 @@ if (tourCreateForm) {
     digitGroupSeparator: ".",
     decimalCharacter: ",",
     decimalPlaces: 0,
+    modifyValueOnWheel: false,
   };
 
   document.querySelectorAll(".auto-money").forEach((input) => {
@@ -516,6 +517,7 @@ if (tourEditForm) {
     digitGroupSeparator: ".",
     decimalCharacter: ",",
     decimalPlaces: 0,
+    modifyValueOnWheel: false,
   };
 
   document.querySelectorAll(".auto-money").forEach((input) => {
